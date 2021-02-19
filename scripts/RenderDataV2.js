@@ -21,10 +21,11 @@ class Flow{
         if(!response.error){
             emailID = response.email;
             console.log("Email id of user is " + emailID);
+            console.log(localStorage.getItem(emailID+'UserSpreadsheetID'));
         }
-        
         await this.renderLoginForm(event);
         await this.renderSignUpForm(event);
+        
     }
     static async renderLoginForm(event){
         event.preventDefault();
