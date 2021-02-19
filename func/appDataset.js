@@ -50,7 +50,7 @@ var LoginSchema = {
         },
         form:{
             'name':'form',
-            'id':'form',
+            'id':'loginform',
             'onsubmit':'Flow.submitLoginForm(event);',
             'elements':[
                 {

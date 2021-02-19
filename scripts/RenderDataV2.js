@@ -8,7 +8,6 @@ var info = {
         }
     },
 }
-var url = info['spreadsheet']['url'];
 var header = info['spreadsheet']['headers'];
 var userToken,emailID;
 var systemDataSheet = '1PDvlaFdYJW6CW3TAxgxbqxCa3nFKr-Xi4c33eLlB24I';
@@ -23,83 +22,139 @@ class Flow{
             emailID = response.email;
             console.log("Email id of user is " + emailID);
         }
-        if(localStorage.getItem(emailID+'UserSpreadsheetID')  !== null){
-             this.renderLoginForm(event);
-        }else{
-            console.log(SignUpSchema);
-            var json2Array = mutate.Obj2(SignUpSchema ,[]);
-            console.log("The 2D Array :- "+ json2Array);
-            var array2JSON = mutate.arr2Object(json2Array,json2Array[0],{});
-            console.log("The JSON from 2D array :- ");
-            console.log(json2Array);
-            var outputE = new Entity(array2JSON, document.getElementById('loadform'));
-            console.log("outputElement", outputE)
-             this.renderSignUpForm(event);
-         }
+        
+        await this.renderLoginForm(event);
+        await this.renderSignUpForm(event);
     }
     static async renderLoginForm(event){
         event.preventDefault();
         console.log("Rendering Login form");
-        if(localStorage.getItem('SignUpForm') === null){
-            var range = 'Views&Form!A13:N21';
-            var renderUrl = url + '/'+ systemDataSheet +'/values/' + range +':append?valueInputOption=USER_ENTERED';
-            var response1 = await HttpService.fetchRequest(renderUrl,HttpService.requestBuilder("GET",header));
-            console.log(response1);
-            var array2JSON = mutate.arr2Object(response1.values,response1.values[0],{});
-            console.log(array2JSON);
-            localStorage.setItem('LoginForm',array2JSON);
-        }
-        var loginForm = new Entity(localStorage.getItem('LoginForm'),document.getElementById('loadform'))
+        var loginForm = new Entity(LoginSchema,document.getElementById('load'))
         console.log(loginForm);
     }
     static async renderSignUpForm(event){
         console.log("Rendering SignUp form");
         event.preventDefault();
-        if(localStorage.getItem('SignUpForm') === null){
-            var range = 'Views&Form!A2:N10';
-            var renderUrl = url + '/'+ systemDataSheet +'/values/' + range +':append?valueInputOption=USER_ENTERED';
-            var response1 =  await HttpService.fetchRequest(renderUrl,HttpService.requestBuilder("GET",header));
-            console.log(response1);
-            var array2JSON = mutate.arr2Object(response1.values,response1.values[0],{});
-            console.log(array2JSON);
-            localStorage.setItem('SignUpForm',array2JSON);
-        }
-        var signupform = new Entity(localStorage.getItem('SignUpForm'),document.getElementById('load'))
+        var signupform = new Entity(SignUpSchema,document.getElementById('loadform'))
         console.log(signupform);
     }
     static async submitSignUpForm(event){
-        // var response1 = await Operations
-        // var row = Spreadsheet.
-        var emailID = document.getElementById('emailid');
-        var username = document.getElementById('username');
-        var password = document.getElementById('password');
-        var arr = [[emailID,username,password]];
-        console.log(arr);
         event.preventDefault();
+        if(localStorage.getItem(emailID+'UserSpreadsheetID') !== undefined || localStorage.getItem(emailID+'UserSpreadsheetID') === null)
+                await Credentials.actions(event,"CREATE");
+        var json = {
+            "credentials":{
+                'emailID':document.getElementById('emailid').value,
+                'username':document.getElementById('username').value,
+                'password':document.getElementById('password').value
+            }
+        }
+        var output = mutate.Obj2(json, []);
+        console.log(output);
+        Credentials.actions(event,"SIGNUP",output);
     }
     static async submitLoginForm(event){
         event.preventDefault();
+        var output = [document.getElementById('Remailid').value,document.getElementById('Rpassword').value];
+        Credentials.actions(event,"LOGIN",output);
     }
 }
-class Spreadsheet{
-    static async Operations(event,type,url,header,data,range){
-        event.preventDefault();var response;
-        if(range !== undefined && arr !== undefined){
-            var body = {
-                "range":range,
-                "majorDimension":"ROWS",
-                "values":data
+class Credentials{
+    static async actions(event,type,output){
+        event.preventDefault();var body,response;
+        var url = info['spreadsheet']['url'];
+        switch(type){
+            case "CREATE":{
+                body = {
+                    "properties":{
+                        "title":'DataSheet'
+                    }, 
+                }
+                response = await HttpService.fetchRequest(url,HttpService.requestBuilder("POST",header,JSON.stringify(body)));
+                if(!response.error){
+                    var url3 = url + '/' + response.spreadsheetId + ':batchUpdate';
+                    var body2 = {
+                        "requests":[{
+                                addSheet: {
+                                  properties: {
+                                    title: "Sheet2",
+                                  }
+                                }
+                        }]
+                    }
+                    var response2 = await HttpService.fetchRequest(url3,HttpService.requestBuilder("POST",header,JSON.stringify(body2)));
+                    console.log(response2);
+                }
+                localStorage.setItem(emailID+'UserSpreadsheetID', response.spreadsheetId);
+                break;
             }
-            response = await HttpService.fetchRequest(url,HttpService.requestBuilder(type,header,body));
-        }else if(range !== undefined){
-            var body = {
-                "properties":{
-                    "title":data
-                },  
+            case "SIGNUP":{
+                console.log("Array values:->" + output);
+                var url1 = url + '/'+  localStorage.getItem(emailID+'UserSpreadsheetID') +'/values/Sheet1!A1:J1000';
+                var data = await HttpService.fetchRequest(url1,HttpService.requestBuilder("GET",header));
+                var range ,array;
+                if(!data.values && !data.error){
+                    range = "Sheet1!A1:" + arr[output[0].length -1] + (output.length);
+                    array = output;
+                }else if(!data.error){
+                    if(data.values.filter(e=> e[6] === output[1][6]).length > 0){
+                        alert('Email id already exists');
+                        break;
+                    }
+                    var id = data.values[0].length + 1;
+                    range = "Sheet1!A" + (data.values.length + 1) + ":" + arr[output[0].length -1]+ id;
+                    array = [output[1]];
+                }
+                url = url +'/'+localStorage.getItem(emailID+'UserSpreadsheetID')+'/values/' + range +':append?valueInputOption=USER_ENTERED';
+                body = {
+                    "range":range,
+                    "majorDimension":"ROWS",
+                    "values":array
+                }
+                response =await HttpService.fetchRequest(url,HttpService.requestBuilder("POST",header,JSON.stringify(body))); 
+                if(!response.error)
+                    alert('Registered successfully');
+                break;
             }
-            response = await HttpService.fetchRequest(url,HttpService.requestBuilder(type,header,body));
-        }else{
-            response = await HttpService.fetchRequest(url,HttpService.requestBuilder(type,header));
+            case "LOGIN":{
+                    url = url + '/'+localStorage.getItem(emailID+'UserSpreadsheetID') +'/values/Sheet1!A1:J1000';
+                    response =await HttpService.fetchRequest(url,HttpService.requestBuilder("GET",header));
+                    console.log(response.values);
+                    if(!response.values)
+                        alert('No Users exist');
+                    else{
+                        var range,update,row;
+                        var email = response.values.filter(e=>e[6] === output[0]);
+                        if(email.length === 0){
+                            alert("User doesn't exist with this Email-id");
+                        }else{
+                            console.log("header" + header);
+                             var url2 = info['spreadsheet']['url'] +'/' + localStorage.getItem(emailID+'UserSpreadsheetID') + '/values/Sheet2!A1:C1000';
+                             var response1 = await HttpService.fetchRequest(url2,HttpService.requestBuilder("GET",header));
+                             if(response1.values === undefined)
+                                row = 1;
+                            else
+                                row = response1.values.length + 1;
+                             range = 'Sheet2!A' + row + ':C' + row;
+                            if(response.values.filter(e=>e[6] === output[0] && e[8] === output[1]).length > 0){
+                                alert('Correct Credentials :-)');
+                                 update = [[output[0],"Successful Attempt",new Date()]];
+                             }else{
+                                 alert('Wrong Password .Try Again !');
+                                 update = [[output[0],"Failed Attempt",new Date()]];
+                             }
+                             var uri = info['spreadsheet']['url'] +'/'+ localStorage.getItem(emailID+'UserSpreadsheetID') +'/values/' + range +':append?valueInputOption=USER_ENTERED';
+                             body = {
+                                 "range":range,
+                                 "majorDimension":"ROWS",
+                                 "values":update
+                             }
+                             var response3 =await HttpService.fetchRequest(uri,HttpService.requestBuilder("POST",header,JSON.stringify(body))); 
+                             console.log("Response 2 of Login:->" + response3);
+                        }
+                    }
+                    break;
+            }
         }
         return response;
     }
