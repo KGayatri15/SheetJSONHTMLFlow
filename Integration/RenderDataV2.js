@@ -10,7 +10,7 @@ var info = {
 }
 var sysHeader = info['spreadsheet']['headers'];
 var userHeader = info['spreadsheet']['headers'];
-var emailID,login = false;
+var emailID;
 var systemDataSheet = '1PDvlaFdYJW6CW3TAxgxbqxCa3nFKr-Xi4c33eLlB24I';
 var key = 'AIzaSyCw0qzjxyZFZuLrvcVPsHv0vqTin9nVugc';
 class Flow{
@@ -23,8 +23,19 @@ class Flow{
             console.log("Email id of user is " + emailID);
             console.log(localStorage.getItem(emailID+'UserSpreadsheetID'));
         }
-    await this.renderLoginForm(event);
-    await this.renderSignUpForm(event);
+    if(localStorage.getItem('LoggedIn') === "true" && localStorage.getItem(emailID+'UserSpreadsheetID')!== null){
+        document.getElementById('note').innerText = "Wait for few seconds... You are being redirected to your dashboard";
+        await Credentials.actions(event,"REDIRECTING");
+        if(localStorage.getItem('UrlLink') === null){
+            localStorage.setItem('UrlLink',' https://docs.google.com/spreadsheets/d/'+localStorage.getItem(emailID+'UserSpreadsheetID')+'/edit#gid=0');
+        }
+        window.location.href = 'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5.html';//'http://127.0.0.1:5500/indexActionSpace_V5.html'; 
+    }else{
+        document.getElementById('note').innerText = "If you don't have an account... Sign Up Now :-).Once you register then Login";
+        await this.renderLoginForm(event);
+        await this.renderSignUpForm(event);
+    }
+   
         
     }
     static async renderLoginForm(event){
@@ -83,15 +94,16 @@ class Flow{
         }
         var output = mutate.Obj2(json, []);
         console.log(output);
-         Credentials.actions(event,"SIGNUP",output);
+        await Credentials.actions(event,"SIGNUP",output);
     }
     static async submitLoginForm(event){
         event.preventDefault();
         var output = [document.getElementById('Remailid').value,document.getElementById('Rpassword').value];
         var response = await Credentials.actions(event,"LOGIN",output);
-        if(login === true&& !response.error){
+        console.log(localStorage.getItem('LoggedIn'));
+        if(localStorage.getItem('LoggedIn') === "true" && !response.error){
             console.log("Perfect login");
-            window.location.href = 'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5.html';
+            window.location.href = 'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5.html';//'http://127.0.0.1:5500/indexActionSpace_V5.html';
         }
     }
     
@@ -123,6 +135,7 @@ class Credentials{
                     console.log(response2);
                 }
                 localStorage.setItem(emailID+'UserSpreadsheetID', response.spreadsheetId);
+                localStorage.setItem('UrlLink',response.spreadsheetUrl);
                 break;
             }
             case "SIGNUP":{
@@ -175,7 +188,7 @@ class Credentials{
                              range = 'Sheet2!A' + row + ':C' + row;
                             if(data.values.filter(e=>e[0] === output[0] && e[2] === output[1]).length > 0){
                                 alert('Correct Credentials :-)');
-                                login = true;
+                                localStorage.setItem('LoggedIn',true);
                                  update = [[output[0],"Successful Attempt",new Date()]];
                              }else{
                                  alert('Wrong Password .Try Again !');
@@ -192,6 +205,21 @@ class Credentials{
                         }
                     }
                     break;
+            }
+            case 'REDIRECTING':{
+                var url2 = info['spreadsheet']['url'] +'/' + localStorage.getItem(emailID+'UserSpreadsheetID') + '/values/Sheet2!A1:B1000';
+                var response1 = await HttpService.fetchRequest(url2,HttpService.requestBuilder("GET",userHeader));
+                if(!response1.error)
+                   row = response1.values.length + 1;
+                var range = 'Sheet2!A' + row + ':C' + row;
+                var uri = info['spreadsheet']['url'] +'/'+ localStorage.getItem(emailID+'UserSpreadsheetID') +'/values/' + range +':append?valueInputOption=USER_ENTERED';
+                body = {
+                    "range":range,
+                     "majorDimension":"ROWS",
+                     "values":[[emailID,"Successful Attempt",new Date()]]
+                }
+                response =await HttpService.fetchRequest(uri,HttpService.requestBuilder("POST",userHeader,JSON.stringify(body))); 
+                console.log("Response of redirecting:->" + response);
             }
         }
         return response;

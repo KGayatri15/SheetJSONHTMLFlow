@@ -62,6 +62,8 @@ class ActionEvent {
 async function loadActionSpace(){
 var actionSpaceElement = document.getElementById('actionSpace#1');
 console.log(actionSpaceElement);
+document.getElementById('link').setAttribute('href',localStorage.getItem('UrlLink'));
+document.getElementById('link').innerHTML = localStorage.getItem('UrlLink');
 var response =await Flow.renderActionSpace();
 console.log(response);
 const actionSpaceApp = new ActionController(response.actionSpace, new ActionView(response.basiclayout, actionSpaceElement), new ActionEvent(actionSpaceElement));
