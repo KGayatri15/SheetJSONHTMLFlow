@@ -53,6 +53,23 @@ class Flow{
         var signupForm = new Entity(signupJSON,document.getElementById('signupform'));
         console.log(signupForm);
     }
+    static async renderActionSpace(){
+        console.log("Rendering ActionSpace");
+        var actionSpaceURL = info['spreadsheet']['url'] +'/'+systemDataSheet+'/values/Views&Form!A24:Y49?key='+key;
+        var responseJSON = await HttpService.fetchRequest(actionSpaceURL,HttpService.requestBuilder("GET"),sysHeader);
+        if(!responseJSON.error){
+            console.log("Action Space Response" + responseJSON);
+            var actionSpaceJSON = mutate.arr2Object(responseJSON.values,responseJSON.values[0],{});
+            console.log("The JSON " + actionSpaceJSON);
+        }
+        var actionSpace = new Entity(actionSpaceJSON,{});
+        console.log(actionSpace);
+        var json = {
+            "actionSpace":actionSpace,
+            "basiclayout":actionSpaceJSON
+        }
+        return json;
+    }
     static async submitSignUpForm(event){
         event.preventDefault();
         if(localStorage.getItem(emailID+'UserSpreadsheetID') === undefined || localStorage.getItem(emailID+'UserSpreadsheetID') === null)
@@ -74,7 +91,7 @@ class Flow{
         var response = await Credentials.actions(event,"LOGIN",output);
         if(login === true&& !response.error){
             console.log("Perfect login");
-            window.location.href = ''
+            window.location.href = 'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5.html';
         }
     }
     

@@ -1,21 +1,26 @@
-/**
- * This is kind of a model class, it interacts with controller and external services using helper classes
- * Every Registered Models is validatated from a model inside Json / ModelName.js file //we need to think this through
- */
-class Entity {
+class Entity { 
     constructor(input, output) {
+        console.log("entity",input,output)
+        this.input = input;
+        this.output = output;
         this.entity = process.processReq(input, output);
-       // console.log("Entity Created",this);
     }
     static create(input, output, key, value, callback, callbackClass) {
-       // console.log('create request for ',output,key)
+        // console.log('create request for ',output,key)
         if (operate.is(output).includes("HTML")) { //Only HTML creation
             // var response = Object.create(output.constructor.prototype)
-            var response = document.createElement(key);
+            if (operate.isInt(parseInt(key))) {
+                var response = document.createElement('option');
+            }
+            else {
+                // console.log(operate.is())
+                var response = document.createElement(key);
+            }
+
             // Entity.set(input, response, 'id', key + entityIndex.next().value);
         }
         if (operate.is(output).includes("Object")) { //Only HTML creation
-         //   console.log("create request for ", input, output, key, value)
+            //   console.log("create request for ", input, output, key, value)
 
             response = new Object()
 
@@ -28,7 +33,7 @@ class Entity {
             // entity.set(input, response, 'id', key + index.next().value);
         }
         if (operate.is(output).includes("Array")) { //Only HTML creation
-           // console.log("create request for ", input, output, key, value)
+            // console.log("create request for ", input, output, key, value)
 
             response = new Object()
 
@@ -70,14 +75,15 @@ class Entity {
         return response;
     }
     static set(input, output, key, value, callback, callbackClass) {
-      //  console.log("setting",key, value,"in",output)
+        //  console.log("setting",key, value,"in",output)
         if (operate.is(output).includes("HTML")) { //Only HTML creation
 
-            if (operate.isIn(key, htmlAttributesList)) {
-              //  console.log("setting",key, value,"in",output)
+            if (operate.isInsideArray(key, htmlAttributesListV2)) {
+                //console.log("setting",key, value,"in",output)
                 output.setAttribute(key, value)
-                //console.log(output);
+
             } else {
+                //  console.log(output,key);
                 //var buffer = output;
                 output[key] = input[key];
                 //buffer=output;
@@ -86,4 +92,18 @@ class Entity {
         }
         return output;
     }
+
+
+    /**
+     * 
+     */
+    static insert(str, index, value) {
+        var response = str.substr(0, index) + value + str.substr(index);
+        //  console.log("inserted",response)
+        return response;
+
+    }
+
+    
+
 }
