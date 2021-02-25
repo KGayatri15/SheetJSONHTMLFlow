@@ -1,4 +1,5 @@
 function getEntityType(entity) {
+    console.log("Entity" + entity);
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
 }
 var row = new Array('ehhid', 'd', 'parent', 'entity', "typeOf", "path");
