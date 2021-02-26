@@ -2,10 +2,18 @@
 <html>
     <head>
         <title>Action Space Editor</title>
+        <meta name="theme-color" content ="#f1f5f9"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="manifest" href="manifest.json"/>
+        <link rel="stylesheet" href="beauty/index.css"/>
+        <script type="text/javascript" src="connect.js"></script>
         <script type="text/javascript" src="Integration/HttpService.js"></script>
         <script type="text/javascript" src="Integration/Authorization.js"></script>
     </head>
     <body>
-        <button onclick="Authorization.oAuth(event,'json')"><h2>SignIn with Google</h2></button>
+        <button onclick="window.location.href = 'signup.html'" class="signup btn">SignUp with ehh</button>
+        <button class="google btn" onclick="Authorization.oAuth(event,'json')">
+        <i class="fa fa-google fa-fw"></i> Login with Google+
+        </button>
     </body>
 </html>

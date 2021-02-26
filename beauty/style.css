@@ -72,15 +72,14 @@ ehh{
   top: 0;
   left: 0;
   display: grid;
-  padding-left: 5%;
+  padding-left: 3%;
   grid-template-rows:  1fr auto;
-  z-index: 250;
-  height: 100vh;
+  z-index: 200;
+  height: 80vh;
  width: 100vw;
 }
 
 content{ 
-  padding-top: 5%;
   padding-left: 5%;
  position: relative;
  display: grid;

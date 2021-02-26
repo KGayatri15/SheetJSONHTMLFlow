@@ -2,19 +2,29 @@
 <html>
     <head>
         <title>Action Space Editor</title>
-        <script type="text/javascript" src="form/sysdataSet.js"></script>
-        <script type="text/javascript" src="function/actionEntity.js"></script> 
+        <link rel="stylesheet" href="beauty/signin.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script type="text/javascript" src="form/sysDataSet.js"></script>
+        <script type="text/javascript" src="function/allMerged_V5.js"></script>
         <script type="text/javascript" src="function/actionHelpers.js"></script>
-        <script type="text/javascript" src="function/everyOperation.js"></script>
         <script type="text/javascript" src="function/mutate.js"></script>
         <script type="text/javascript" src = "Integration/Authorization.js"></script>
         <script type="text/javascript" src = "Integration/RenderDataV3.js"></script>
         <script type="text/javascript" src = "Integration/Authorization.js"></script>
         <script type="text/javascript" src = "Integration/HttpService.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
-    <body onload="Flow.loadData(event);">
-        <p id = "note"></p>
-        <div id="signupform"></div>
+        <body onload="Flow.loadData(event);">
+        <div class="container" id="note">
+            <form class="modal-content" onsubmit="Flow.submitLoginForm(event);">
+                <div class="container">
+                  <h1>Sign In</h1>
+                  <input type="text" placeholder="Username" id="username" required>
+                  <input type="password" placeholder="Enter Password" id="password" minlength="5" required>
+                    <input type="submit" class="signin" value="Sign In"/>
+                </div>
+              </form>
+        </div>
         <br>
     </body>
 </html>

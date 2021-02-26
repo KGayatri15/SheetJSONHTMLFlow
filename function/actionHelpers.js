@@ -28,7 +28,7 @@ class process {
             //console.log("found",key,input[key])
             if (operate.is(value) === 'Object') {
                 // console.log("Object",output);
-                var buffer = Entity.create(input, output, key);
+                var buffer = Entity.create(input, output, value.name);
                 process.iterateObj(input[key], buffer, key, value)
                 Entity.append(buffer, output);
             } else if (operate.is(value) === 'Array') {
@@ -81,23 +81,41 @@ class process {
         return response;
     }
     static act(callbackClass,method, a, b, c, d,) {
-      //  console.log(callbackClass, method, a, b, c, d)
-        //eval(callbackClass.callback(a, b))
-        var response = callbackClass[method](a, b, c, d);
+        console.log(callbackClass, method, a, b, c, d)
+       // eval(callbackClass.callback(a, b))
+//        var response = callbackClass[method](a);
         console.log("act response",response)
         return response;
     }
     
+    
 
 }
+
+
+
+// Query for all available fonts and log metadata.
+// const fonts = navigator.fonts.query();
+// try {
+//   for await (const metadata of fonts) {
+//     console.log(`${metadata.family} (${metadata.fullName})`);
+//   }
+// } catch (err) {
+//   console.error(err);
+// }
 
 class conductor {
     //this function calls a callback function with a and b parameter. Conducted Routes have to be registered before else will throw error.
     //  on param = [ anyEvent ]
   
     //    //arr.every(callback(element[, index[, array]])[, thisArg])
-    static onEvery1(a, b, callbacks) { return callbacks.every(function (callback) { return operate[callback](a, b); }); }
-
+    static every1(methods, arg1) {
+        var self = this;
+        return methods.every(function (method) {
+        //    console.log(method.method, arg1, method.arguments)
+            return operate[method.method](arg1, method.arguments);
+        });
+    }
 
     static conductForEachFlow(a, b, options) {
 
@@ -125,7 +143,10 @@ class operate {
      * @param {*} argB  is required to be not empty
      * 
      */
-    static isInsideArray(argA, argB) { return argB.indexOf(argA) > -1 ? true : false; }
+    static isInsideArray(argA, argB) {
+       // console.log("IsInside", argA, argB);
+        return argB.indexOf(argA) > -1 ? true : false;
+    }
     //curently works only for string numbers
     static isEqualStrict(argA, argB) { return argA === argB ? true : false; }
     //for array's one sided value existence check, return true if each element of a is present in b
@@ -204,7 +225,7 @@ class operate {
 }
 
 var reqest = {
-    method: 'get',// [ get,set,create,put,delete]
+    method: 'get',// [ get,set,create,put,delete,filter, iterate,]
     entity: {
         entityIdentifier: '	ObjectID',
         entityModel: 'document',

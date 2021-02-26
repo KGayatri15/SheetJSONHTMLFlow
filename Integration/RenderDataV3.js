@@ -24,49 +24,14 @@ class Flow{
             console.log("Email id of user is " + emailID);
     }
     if(localStorage.getItem('UserSpreadsheetID'+emailID)!== null){
-        document.getElementById('note').innerText = 'Wait for few seconds....Yu are soon directed to a page';
+        document.getElementById('note').innerHTML = '<<h1>Wait for few seconds....You are directed to your dashboard page</h1>';
         var response = await Credentials.actions(event,"REDIRECTING");
-       
         if(!response.error){
-            window.location.href = 'http://127.0.0.1:5500/indexActionSpace_V5.html';//'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5.html';
-        }else{
-            Flow.renderSignUpForm(event);     
+            window.location.href = 'http://127.0.0.1:5500/indexActionSpace_V5Treeview.html';//'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5Treeview.html';
         }
-    }else{
-        Flow.renderSignUpForm(event);
     }
     }
-    static async renderSignUpForm(event){
-        document.getElementById('note').innerText = "If you don't have an account.Sign Up now !";
-        event.preventDefault();
-        var signupUrl = info['spreadsheet']['url'] +'/'+systemDataSheet+'/values/Views&Form!A2:N9?key='+key;
-        var responseJSON = await HttpService.fetchRequest(signupUrl,HttpService.requestBuilder("GET"),sysHeader);
-        if(!responseJSON.error){
-            console.log("Login Response" + responseJSON);
-            var signupJSON = mutate.arr2Object(responseJSON.values,responseJSON.values[0],{});
-            console.log("The JSON " + signupJSON);
-        }
-        var signupForm = new Entity(signupJSON,document.getElementById('signupform'));
-        console.log(signupForm);
-    }
-    static async renderActionSpace(){
-        console.log("Rendering ActionSpace");
-        var actionSpaceURL = info['spreadsheet']['url'] +'/'+systemDataSheet+'/values/Views&Form!A23:Y49?key='+key;
-        var responseJSON = await HttpService.fetchRequest(actionSpaceURL,HttpService.requestBuilder("GET"),sysHeader);
-        if(!responseJSON.error){
-            console.log("Action Space Response" + responseJSON);
-            var actionSpaceJSON = mutate.arr2Object(responseJSON.values,responseJSON.values[0],{});
-            console.log("The JSON " + actionSpaceJSON);
-        }
-        var actionSpace = new Entity(actionSpaceJSON,{});
-        console.log(actionSpace);
-        var json = {
-            "actionSpace":actionSpace,
-            "basiclayout":actionSpaceJSON
-        }
-        return json;
-    }
-    static async submitSignUpForm(event){
+    static async submitLoginForm(event){
         event.preventDefault();
         if(localStorage.getItem('UserSpreadsheetID'+emailID) === undefined || localStorage.getItem('UserSpreadsheetID'+emailID) === null)
                 await Credentials.actions(event,"CREATE");
@@ -81,9 +46,9 @@ class Flow{
         console.log(JSON.stringify(json));
         var output = mutate.Obj2(json, []);
         console.log(output);
-        var response = await Credentials.actions(event,"SIGNUP",output);
+        var response = await Credentials.actions(event,"SIGNIN",output);
         if(!response.error){
-            window.location.href = 'http://127.0.0.1:5500/indexActionSpace_V5.html';//'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5.html';
+            window.location.href = 'http://127.0.0.1:5500/indexActionSpace_V5Treeview.html';//'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5Treeview.html';
         }
     }
     
@@ -118,7 +83,7 @@ class Credentials{
                 localStorage.setItem('UrlLink',response.spreadsheetUrl);
                 break;
             }
-            case "SIGNUP":{
+            case "SIGNIN":{
                 var url1 = url + '/'+  localStorage.getItem('UserSpreadsheetID'+emailID) +'/values/Sheet1!G1:H1000';
                 var data = await HttpService.fetchRequest(url1,HttpService.requestBuilder("GET",userHeader));
                 var range ,array;
@@ -152,21 +117,26 @@ class Credentials{
                 var data = await HttpService.fetchRequest(url1,HttpService.requestBuilder("GET",userHeader));
                 console.log(emailID + ":data:->"+data);
                 if(data.values.filter(e=> e[0] === emailID).length > 0){
-                    var url2 = info['spreadsheet']['url'] +'/' + localStorage.getItem('UserSpreadsheetID'+emailID) + '/values/Sheet2!A1:B1000';
-                    var response2 = await HttpService.fetchRequest(url2,HttpService.requestBuilder("GET",userHeader));
-                    var row = 1;
-                    if(!response2.error){
-                        if(response2.values)
-                            row = response2.values.length + 1;
-                        var range = 'Sheet2!A' + row + ':C' + row;
-                        var uri = info['spreadsheet']['url'] +'/'+ localStorage.getItem('UserSpreadsheetID'+emailID) +'/values/' + range +':append?valueInputOption=USER_ENTERED';
-                        body = {
-                        "range":range,
-                        "majorDimension":"ROWS",
-                        "values":[[emailID,"Successful Attempt",new Date()]]
-                        }
-                        response =await HttpService.fetchRequest(uri,HttpService.requestBuilder("POST",userHeader,JSON.stringify(body))); 
+                   response = data;
+                }
+                break;
+            }
+            case 'LOGGED IN':{
+                var url2 = info['spreadsheet']['url'] +'/' + localStorage.getItem('UserSpreadsheetID'+emailID) + '/values/Sheet2!A1:B1000';
+                var response2 = await HttpService.fetchRequest(url2,HttpService.requestBuilder("GET",userHeader));
+                var row = 1;
+                if(!response2.error){
+                    if(response2.values)
+                        row = response2.values.length + 1;
+                    var range = 'Sheet2!A' + row + ':C' + row;
+                    localStorage.setItem('Row',row);
+                    var uri = info['spreadsheet']['url'] +'/'+ localStorage.getItem('UserSpreadsheetID'+emailID) +'/values/' + range +':append?valueInputOption=USER_ENTERED';
+                    body = {
+                    "range":range,
+                    "majorDimension":"ROWS",
+                    "values":[[emailID,"Successful Attempt",new Date()]]
                     }
+                    response =await HttpService.fetchRequest(uri,HttpService.requestBuilder("POST",userHeader,JSON.stringify(body))); 
                 }
                 break;
             }
