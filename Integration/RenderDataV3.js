@@ -124,7 +124,9 @@ class Credentials{
                 break;
             }
             case 'LOGGED IN':{
-                var url2 = info['spreadsheet']['url'] +'/' + localStorage.getItem('UserSpreadsheetID'+emailID) + '/values/Sheet2!A1:B1000';
+                console.log('Logged In');
+                console.log(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')));
+                var url2 = info['spreadsheet']['url'] +'/' + localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')) + '/values/Sheet2!A1:B1000';
                 if(!userHeader.hasOwnProperty('Authorization')){
                     userHeader['Authorization'] = localStorage.getItem('Authorization');
                 }
@@ -136,7 +138,7 @@ class Credentials{
                         row = response2.values.length + 1;
                     var range = 'Sheet2!A' + row + ':C' + row;
                     localStorage.setItem('Row',row);
-                    var uri = info['spreadsheet']['url'] +'/'+ localStorage.getItem('UserSpreadsheetID'+emailID) +'/values/' + range +':append?valueInputOption=USER_ENTERED';
+                    var uri = info['spreadsheet']['url'] +'/'+ localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')) +'/values/' + range +':append?valueInputOption=USER_ENTERED';
                     body = {
                     "range":range,
                     "majorDimension":"ROWS",
@@ -151,7 +153,7 @@ class Credentials{
                     userHeader['Authorization'] = localStorage.getItem('Authorization');
                 }
                 var range = 'Sheet2!D'+localStorage.getItem('Row');
-                url = url + '/ '+  localStorage.getItem('UserSpreadsheetID'+emailID) +'/values/' + range +':append?valueInputOption=USER_ENTERED';
+                url = url + '/ '+  localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')) +'/values/' + range +':append?valueInputOption=USER_ENTERED';
                 body = {
                     "range":range,
                     "majorDimension":"ROWS",
