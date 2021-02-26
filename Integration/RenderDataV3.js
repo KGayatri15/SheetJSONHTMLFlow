@@ -21,13 +21,15 @@ class Flow{
     var getEmail = await HttpService.fetchRequest('https://www.googleapis.com/oauth2/v2/userinfo',HttpService.requestBuilder("GET",userHeader));
     if(!getEmail.error){
             emailID = getEmail.email;
+            localStorage.setItem('emailID' , emailID);
+            localStorage.setItem('Authorization',userHeader['Authorization']);
             console.log("Email id of user is " + emailID);
     }
     if(localStorage.getItem('UserSpreadsheetID'+emailID)!== null){
         document.getElementById('note').innerHTML = '<<h1>Wait for few seconds....You are directed to your dashboard page</h1>';
         var response = await Credentials.actions(event,"REDIRECTING");
         if(!response.error){
-            window.location.href = 'http://127.0.0.1:5500/indexActionSpace_V5Treeview.html';//'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5Treeview.html';
+            window.location.href = 'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5Treeview.html';//'http://127.0.0.1:5500/indexActionSpace_V5Treeview.html';
         }
     }
     }
@@ -48,7 +50,7 @@ class Flow{
         console.log(output);
         var response = await Credentials.actions(event,"SIGNIN",output);
         if(!response.error){
-            window.location.href = 'http://127.0.0.1:5500/indexActionSpace_V5Treeview.html';//'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5Treeview.html';
+            window.location.href = 'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5Treeview.html';//'http://127.0.0.1:5500/indexActionSpace_V5Treeview.html';
         }
     }
     
@@ -123,7 +125,11 @@ class Credentials{
             }
             case 'LOGGED IN':{
                 var url2 = info['spreadsheet']['url'] +'/' + localStorage.getItem('UserSpreadsheetID'+emailID) + '/values/Sheet2!A1:B1000';
+                if(!userHeader.hasOwnProperty('Authorization')){
+                    userHeader['Authorization'] = localStorage.getItem('Authorization');
+                }
                 var response2 = await HttpService.fetchRequest(url2,HttpService.requestBuilder("GET",userHeader));
+                console.log("Response2 :-> "+response2);
                 var row = 1;
                 if(!response2.error){
                     if(response2.values)
@@ -134,11 +140,24 @@ class Credentials{
                     body = {
                     "range":range,
                     "majorDimension":"ROWS",
-                    "values":[[emailID,"Successful Attempt",new Date()]]
+                    "values":[[localStorage.getItem('emailID'),"Successful Attempt",new Date()]]
                     }
                     response =await HttpService.fetchRequest(uri,HttpService.requestBuilder("POST",userHeader,JSON.stringify(body))); 
                 }
                 break;
+            }
+            case 'LOG OUT':{
+                if(!userHeader.hasOwnProperty('Authorization')){
+                    userHeader['Authorization'] = localStorage.getItem('Authorization');
+                }
+                var range = 'Sheet2!D'+localStorage.getItem('Row');
+                url = url + '/ '+  localStorage.getItem('UserSpreadsheetID'+emailID) +'/values/' + range +':append?valueInputOption=USER_ENTERED';
+                body = {
+                    "range":range,
+                    "majorDimension":"ROWS",
+                    "values":[[new Date()]]
+                }
+                response = HttpService.fetchRequest(url,HttpService.requestBuilder("POST",userHeader,JSON.stringify(body)));
             }
         }
         return response;
