@@ -276,50 +276,52 @@ var headerModelSchemaV1 = {
 }
 
 var iconBar = {
-    'name': "iconBar",
+   // 'name': "iconBar",
    // 'style':"visibility:hidden",
-    'id': 'iconBar',
-    'class': "material-icons",
-    'textContent': 'drag_indicator',
+  //  'id': 'iconBar',
+  //  'class': "material-icons",
+  //  'textContent': 'drag_indicator',
     "iconBarTools":[
     {
         'name': 'button',
         'class': "material-icons",
-        'href': '#create',
-        'textContent': 'create',
+        'id': "add",
+        'innerText': "add",
+        'data-command': `[{"command":"new","entity": "actionContent","value":"innerHTML"}]`,
     },
     {
         'name': 'button',
-        'href': '#people',
+        'id': "save",
         'class': "material-icons",
-        'textContent': 'inventory_2'
+        'innerText': "save",
+        'data-command': '[{"command":"save","entity": "actionContent","value":"innerHTML","name":"actionContent.firstSibling.getAttribute("id")"}]',
     },
     {
         'name': 'button',
         'href': '#setting',
         'class': "material-icons",
         'textContent': 'save'
-        },
-        {
-            'name': 'button',
-            'class': "material-icons",
-            'textContent': 'share',
+    },
+    {
+        'name': 'button',
+        'class': "material-icons",
+        'textContent': 'share',
 
-        },
-        {
-            'name': 'button',
-            'class': "material-icons",
-            'textContent': 'delete',
+    },
+    {
+        'name': 'button',
+        'id': "delete",
+        'class': 'material-icons',
+        'innerText': "delete"
 
-        }
+    }
     ]
 }
 
 var richTextBar = {
-    'name': "div",
-    'id': 'richTextBar',
-    'class': "material-icons",
-    'textContent': 'add',
+      'name': "div",
+    //   'id': 'richTextBar',
+    // 'class': "material-icons",
     "iconBarTools": [
         {
             'name': 'button',
@@ -398,7 +400,9 @@ var actionSpaceModel = {
             'id': "editor",
             //'contentEditable':'true',
             "ol": [
-                {   'id':'contentBlock',
+                {  
+                    'name':'contentBlock',
+                    'id':'contentBlock',
                     'textContent': actionStoryTemplate
                 },
 ],      

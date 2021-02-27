@@ -245,7 +245,6 @@ class ActionController extends ActionEvent {
 
     }
     onKeyPress(entity) {
-        
         console.log("key pressed")
         var currentSelection = window.getSelection();     
         var focusText = currentSelection.anchorNode.data;
@@ -253,7 +252,6 @@ class ActionController extends ActionEvent {
         var focusEntityInnerText = entity.target.innerText; // Rendered Text
         // console.log("focusEntityInnerText", currentSelection);
         var currentCaret = currentSelection.anchorOffset;
-
         if (entity.key == 'Enter') {
             return;
         }
@@ -262,10 +260,6 @@ class ActionController extends ActionEvent {
         var response = currentSelection.anchorNode.data.substr(0, currentSelection.anchorOffset) + entity.key + currentSelection.anchorNode.data.substr(currentSelection.anchorOffset);
        currentSelection.anchorNode.data = response;
        Caret.moveCaret(window, currentCaret +1);
-     
-
-
-
     }
     onKeyUp(entity) { 
         console.log("key was up")
@@ -278,11 +272,11 @@ class ActionController extends ActionEvent {
          * check if the target entity has any click or data - command set, if yes, then process it.
          */
 
-        
+        console.log("Clicked" + event.target.hasAttribute('data-command'));
         if (event.target.hasAttribute("data-command")) { 
             var dataCommandT = event.target.getAttribute('data-command');
             var commandJSOn = JSON.parse(dataCommandT);
-            console.log(commandJSOn)
+            console.log( "Command "+ JSON.stringify(commandJSOn))
            // var entityName = document.getElementById(commandJSOn[0].entity).getAttribute(commandJSOn[0].identifier);
 
             switch (commandJSOn[0].command) {
@@ -387,10 +381,14 @@ class ActionController extends ActionEvent {
     }
     new1(event) { 
         var dataCommandT = event.target.getAttribute('data-command');
+        console.log("New One");
         var commandJSOn = JSON.parse(dataCommandT);
-        var entity = document.getElementsByTagName('actioncontent')[0];
-         new Entity(actionStoryTemplate, entity);
-        entity.previousElementSibling.innerText = actionStoryTemplate.name;
+        //var item = document.getElementsByTagName('actionstorytemplate');
+        var entity = document.getElementsByTagName('block')[0];
+        new Entity(actionUserContent, entity);
+        var name = document.getElementById('loadedRouteTitle');
+        name.innerText = actionStoryTemplate.name;
+        //entity.previousElementSibling.innerText = actionStoryTemplate.name;
        
       //  entity.previousElementSibling.innertext = actionStoryTemplate.name;
 
