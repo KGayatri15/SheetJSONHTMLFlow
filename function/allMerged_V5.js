@@ -383,20 +383,17 @@ class ActionController extends ActionEvent {
     }
     new1(event) { 
         console.log("New One");
-        var item = document.getElementById('editor');
-        console.log("Data" + document.getElementById('editor').childNodes[1].innerHTML);
-        var entity = document.createElement('ol');
-        new Entity(actionUserContent,entity);
-        var name = document.getElementById('loadedRouteTitle');
-        name.innerText = actionStoryTemplate.name;
-        item.replaceChild(entity , item.childNodes[1]);
+     //   var item = document.getElementById('editor');
+    //    var newentity = document.createElement('ol');
+    //    new Entity(actionUserContent,newentity);
+        this.view.updateTitle(actionStoryTemplate.name);
+        this.view.updateText(actionUserContent[0]['innerHTML']);
+    //    item.replaceChild(newentity , item.childNodes[1]);
     }
     save(event) { 
-        var entity = document.getElementsByTagName('block')[0];
-        console.log('Value' + entity.innerHTML);
-        var entityName = document.getElementById('loadedRouteTitle').innerText;
+        var entityName = this.view.getTitle();
         console.log(entityName);
-        var entityValue = entity.innerHTML;
+        var entityValue = this.view.getText();
         StorageHelper.saveToStorage(entityName, entityValue);
     }
     load(event) {
@@ -404,8 +401,8 @@ class ActionController extends ActionEvent {
         const entitytValue = StorageHelper.getFromStorage(entityName);
         console.log(entityName + ":::::"+entitytValue);
         if(entitytValue !== null){
-            document.getElementById('loadedRouteTitle').innerText = entityName;
-           document.getElementsByTagName('block')[0].innerHTML = entitytValue;
+           this.view.updateTitle(entityName);
+           this.view.updateText(entitytValue);
            console.log("Loaded successfully");
         }else{
             alert(entityName + " doesn't exist");
@@ -445,28 +442,36 @@ class ActionView {
     updateView(event,key,value) {
       
     }
-
+    updateTitle(name){
+        document.getElementById('loadedRouteTitle').innerText = name;  
+    }
+    getTitle(){
+        return document.getElementById('loadedRouteTitle').innerText;
+    }
+    updateText(data){
+        document.getElementsByTagName('block')[0].innerHTML = data;
+    }
+    getText(){
+        return document.getElementsByTagName('block')[0].innerHTML;
+    }
 }
 class StorageHelper {
     constructor(entity) { 
-      //  this.entity = getEntityFromStorage()
        StorageHelper.saveToStorage(entity.name, entity);    //Can we store Objects  
         this.entity = this.getStorage();
-      //  console.log("Storage >>>>>",this.getStorage);
     }
      static saveToStorage(key, data) {
-      //  console.log("I was called", key)
-        // data=JSON.stringify(data)
-       //  console.log(actionStorageInstance);
          localStorage.setItem(key, JSON.stringify(data));    
     }
 
     static getFromStorage(key) {
-        let data = localStorage.getItem(key)
-        return JSON.parse(data);
-    }
-    getStorage() { 
-        return window.localStorage;  
+        if(key){
+            let data = localStorage.getItem(key)
+            return JSON.parse(data);
+        }else{
+            return window.localStorage;  
+        }
+       
     }
     static removeFromStorage(key){
         localStorage.removeItem(key);

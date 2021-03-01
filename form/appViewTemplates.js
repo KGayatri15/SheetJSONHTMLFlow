@@ -328,18 +328,15 @@ var richTextBar = {
         {
             'name': 'button',
             'class': "material-icons",
-            'href': '#title',
             'textContent': 'notes',
         },
         {
             'name': 'button',
-            'href': '#text_format',
             'class': "material-icons",
             'textContent': 'title'
         },
         {
             'name': 'button',
-            'href': '#insert_photo',
             'class': "material-icons",
             'textContent': 'insert_photo'
         },
@@ -352,7 +349,7 @@ var richTextBar = {
           {
             'name': 'button',
             'class': "material-icons",
-              'textContent': 'attach_file',
+            'textContent': 'attach_file',
 
         },
         {
@@ -373,12 +370,6 @@ var richTextBar = {
             'textContent': 'grid_4x4',
 
         },
-        {
-            'name': 'button',
-            'class': "material-icons",
-            'textContent': 'grid_4x4',
-
-        }
     ]
 }
 
