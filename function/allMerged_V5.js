@@ -265,20 +265,16 @@ class ActionController extends ActionEvent {
         console.log("key was up")
     }
     onClick(event) {
-       
-       
         //   console.log("clicked On", entity.target)
         /**
          * check if the target entity has any click or data - command set, if yes, then process it.
          */
-
         console.log("Clicked" + event.target.hasAttribute('data-command'));
         if (event.target.hasAttribute("data-command")) { 
             var dataCommandT = event.target.getAttribute('data-command');
+            console.log(dataCommandT);
             var commandJSOn = JSON.parse(dataCommandT);
-            console.log( "Command "+ JSON.stringify(commandJSOn))
-           // var entityName = document.getElementById(commandJSOn[0].entity).getAttribute(commandJSOn[0].identifier);
-
+            console.log( "Command "+ JSON.stringify(commandJSOn));
             switch (commandJSOn[0].command) {
                 case 'new':
                     this.new1(event);
@@ -288,10 +284,16 @@ class ActionController extends ActionEvent {
                     this.save(event);
                     //console.log("selectstart", event.type, event.target)
                     break;
-                case 'load':
+                case 'cloud':
                     //  this.emit('keypress', event)
                     this.load(event)
                     // console.log("keypress", event.type, event.target)
+                    break;
+                case 'download':
+                    this.download(event)
+                    break;
+                case 'delete':
+                    this.delete(event)
                     break;
                 case 'keyup':
                     this.onKeyUp(event)
@@ -380,58 +382,59 @@ class ActionController extends ActionEvent {
         }
     }
     new1(event) { 
-        var dataCommandT = event.target.getAttribute('data-command');
         console.log("New One");
-        var commandJSOn = JSON.parse(dataCommandT);
-        //var item = document.getElementsByTagName('actionstorytemplate');
-        var entity = document.getElementsByTagName('block')[0];
-        new Entity(actionUserContent, entity);
+        var item = document.getElementById('editor');
+        console.log("Data" + document.getElementById('editor').childNodes[1].innerHTML);
+        var entity = document.createElement('ol');
+        new Entity(actionUserContent,entity);
         var name = document.getElementById('loadedRouteTitle');
         name.innerText = actionStoryTemplate.name;
-        //entity.previousElementSibling.innerText = actionStoryTemplate.name;
-       
-      //  entity.previousElementSibling.innertext = actionStoryTemplate.name;
-
+        item.replaceChild(entity , item.childNodes[1]);
     }
     save(event) { 
-
-    //    var dataCommandT = event.target.getAttribute('data-command');
-      //  var commandJSOn = JSON.parse(dataCommandT);
-        var entity = document.getElementsByTagName('actioncontent')[0];
-        //new Entity(actionStoryTemplate, entity);
-       // entity.previousElementSibling.innerText = actionStoryTemplate.name;
-        var entityName = entity.previousElementSibling.innerText;
-        console.log(entityName)
-        var entityValue =
-        {
-            name: entityName,
-            id: entity.getAttribute('id'),
-            'innerHtml': entity.innerHTML
-        };
+        var entity = document.getElementsByTagName('block')[0];
+        console.log('Value' + entity.innerHTML);
+        var entityName = document.getElementById('loadedRouteTitle').innerText;
+        console.log(entityName);
+        var entityValue = entity.innerHTML;
         StorageHelper.saveToStorage(entityName, entityValue);
-
-
     }
-    load(event) { 
-        
-        var dataCommandT = event.target.getAttribute('data-command');
-        var commandJSOn = JSON.parse(dataCommandT);
-        var entity = document.getElementsByTagName('actioncontent')[0];
-        var entitytValue = StorageHelper.getFromStorage(event.target.getAttribute('name'));
-        console.log("entitytValue",entitytValue)
-        var newEntity = new Entity(entitytValue, entity);
-        console.log("newEntity", newEntity);
-     //   entity.innerHTML = JSON.stringify(entitytValue);
-      //  entity.previousElementSibling.innerText = actionStoryTemplate.name;
-       // var entity = document.getElementsByTagName('actioncontent')[0].innerHTML = entitytValue;
-
-       // console.log(entity)
-
-        //new Entity(actionStoryTemplate, entity);
-        //entity.previousElementSibling.innerText = actionStoryTemplate.name;
-
+    load(event) {
+        const entityName = window.prompt('Enter name of the Action Story you want to load','');
+        const entitytValue = StorageHelper.getFromStorage(entityName);
+        console.log(entityName + ":::::"+entitytValue);
+        if(entitytValue !== null){
+            document.getElementById('loadedRouteTitle').innerText = entityName;
+           document.getElementsByTagName('block')[0].innerHTML = entitytValue;
+           console.log("Loaded successfully");
+        }else{
+            alert(entityName + " doesn't exist");
+        }
     }
-
+    delete(event){
+        const entityName = window.prompt('Enter name of the Action Story you want to delete','');
+        console.log("entityName:- " + entityName);
+        const entitytValue = StorageHelper.getFromStorage(entityName);
+        console.log(entityName + ":::::"+entitytValue);
+        if(entitytValue !== null){
+            StorageHelper.removeFromStorage(entityName);
+           console.log("Deleted successfully");
+        }else{
+            alert(entityName + " doesn't exist");
+        }
+    }
+    download(event){
+        const entityName = window.prompt('Enter name of the Action Story you want to download','');
+        console.log("entityName:- " + entityName);
+        const entitytValue = StorageHelper.getFromStorage(entityName);
+        console.log(entityName + ":::::"+entitytValue);
+        if(entitytValue !== null){
+            StorageHelper.export(entityName,entitytValue);
+           console.log("Downloaded successfully");
+        }else{
+            alert(entityName + " doesn't exist");
+        }
+    }
 }
 class ActionView {
     constructor(entity, element) {
@@ -465,7 +468,9 @@ class StorageHelper {
     getStorage() { 
         return window.localStorage;  
     }
-    
+    static removeFromStorage(key){
+        localStorage.removeItem(key);
+    }
 
     static clearStorage() {
         localStorage.clear()

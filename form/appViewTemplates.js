@@ -291,29 +291,31 @@ var iconBar = {
     },
     {
         'name': 'button',
+        'class': "material-icons",
         'id': "save",
-        'class': "material-icons",
         'innerText': "save",
-        'data-command': '[{"command":"save","entity": "actionContent","value":"innerHTML","name":"actionContent.firstSibling.getAttribute("id")"}]',
+        'data-command': `[{"command":"save","entity": "actionContent","value":"innerHTML","name":"loadedRouteTitle"}]`,
     },
     {
         'name': 'button',
-        'href': '#setting',
-        'class': "material-icons",
-        'textContent': 'save'
+        'id': "cloud",
+        'class': 'material-icons',
+        'innerText': "cloud",
+        'data-command': `[{"command":"cloud"}]`
     },
     {
         'name': 'button',
-        'class': "material-icons",
-        'textContent': 'share',
-
+        'id': "download",
+        'class': 'material-icons',
+        'innerText': "download",
+        'data-command': `[{"command":"download"}]`
     },
     {
         'name': 'button',
         'id': "delete",
         'class': 'material-icons',
-        'innerText': "delete"
-
+        'innerText': "delete",
+        'data-command': '[{"command":"delete"}]'
     }
     ]
 }
