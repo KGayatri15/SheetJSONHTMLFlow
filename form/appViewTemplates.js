@@ -177,42 +177,6 @@ var actionStoryTemplate = {
      contentEditable: true
 }
 
-var HorizonticalMenuTemplateSchema = {
-    'menu': {
-        "name": "topmenu",
-        'id':"topmenu",
-        "li": [
-            {'name': 'a',
-                'href': '#action',  
-                'textContent': 'action',
-            },
-            {
-                'name': 'a',
-                'href': '#people',
-                'textContent': 'People'
-            },
-            {
-                'name': 'a',
-                'href': '#setting',
-                'textContent': 'setting'
-            },
-            {
-                'name': 'a',
-                'href': '#about',
-                'textContent': 'about',
-              
-            },
-              {
-                  'name': 'button',
-                 'class': "material-icons",
-                  'textContent': 'more_vert',
-
-            }
-        ]
-       
-    }
-
-}
 var headerModelSchemaV1 = {
     header: {
         'name': 'ul',
@@ -402,6 +366,43 @@ var actionSpaceModel = {
         },
        //bottom bar like textNote to be added.
     }
+}
+
+var HorizonticalMenuTemplateSchema = {
+        'menu': {
+            "name": "topmenu",
+            'id':"topmenu",
+            "li": [
+                {'name': 'a',
+                    'href': '#action',  
+                    'textContent': 'action',
+                },
+                {
+                    'name': 'a',
+                    'href': '#people',
+                    'textContent': 'People'
+                },
+                {
+                    'name': 'a',
+                    'href': '#setting',
+                    'textContent': 'setting'
+                },
+                {
+                    'name': 'a',
+                    'href': '#about',
+                    'textContent': 'about',
+                  
+                },
+                  {
+                      'name': 'button',
+                     'class': "material-icons",
+                      'textContent': 'more_vert',
+    
+                }
+            ]
+           
+        }
+    
     }
 var sidebar = {
     'iconBar': {
@@ -568,6 +569,6 @@ var richtextToolBarButtonModel = [
         ]
     }
 
-    ]
+]
 
 

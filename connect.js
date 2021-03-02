@@ -4,6 +4,6 @@ if("serviceWorker" in navigator){
         console.log("Service Worker Registration :-"+reg);
     })
     .catch(err=>{
-        console.log("Service Worker Registration Failed due to "+err);
+        console.log("Service Worker Registration Failed due to "+ err);
     })
 }
