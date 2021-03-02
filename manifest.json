@@ -1,7 +1,7 @@
 {
     "name":"Everything Happens Here",
     "short_name":"EHH",
-    "start_url":"http://127.0.0.1:5500",
+    "start_url":"https://kgayatri15.github.io/SheetJSONHTMLFlow/",
     "background_color":"#f1f5f9",
     "theme_color":"#f1f5f9",
     "display":"standalone"
