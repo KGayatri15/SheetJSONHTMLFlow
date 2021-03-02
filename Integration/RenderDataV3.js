@@ -25,7 +25,8 @@ class Flow{
             localStorage.setItem('Authorization',userHeader['Authorization']);
             console.log("Email id of user is " + emailID);
     }
-    if(localStorage.getItem('UserSpreadsheetID'+emailID)!== null){
+    console.log(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')));
+    if(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID'))!== null){
         document.getElementById('note').innerHTML = '<h1>Wait for few seconds....You are directed to your dashboard page</h1>';
         var response = await Credentials.actions(event,"REDIRECTING");
         if(!response.error){
