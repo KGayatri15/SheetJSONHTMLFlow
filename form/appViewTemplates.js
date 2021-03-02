@@ -279,7 +279,14 @@ var iconBar = {
         'id': "delete",
         'class': 'material-icons',
         'innerText': "delete",
-        'data-command': '[{"command":"delete"}]'
+        'data-command': `[{"command":"delete"}]`
+    },
+    {
+        'name':'button',
+        'id':'logout',
+        'class':'material-icons',
+        'innerText':"logout",
+        'data-command':`[{"command":"logout"}]`
     }
     ]
 }

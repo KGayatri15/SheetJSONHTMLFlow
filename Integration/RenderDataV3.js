@@ -29,7 +29,7 @@ class Flow{
         document.getElementById('note').innerHTML = '<<h1>Wait for few seconds....You are directed to your dashboard page</h1>';
         var response = await Credentials.actions(event,"REDIRECTING");
         if(!response.error){
-            window.location.href = 'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5Treeview.html';//'http://127.0.0.1:5500/indexActionSpace_V5Treeview.html';
+            window.location.href = 'indexActionSpace_V5Treeview.html';
         }
     }
     }
@@ -50,7 +50,7 @@ class Flow{
         console.log(output);
         var response = await Credentials.actions(event,"SIGNIN",output);
         if(!response.error){
-            window.location.href = 'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5Treeview.html';//'http://127.0.0.1:5500/indexActionSpace_V5Treeview.html';
+            window.location.href = 'indexActionSpace_V5Treeview.html';
         }
     }
     
@@ -148,16 +148,17 @@ class Credentials{
                 }
                 break;
             }
-            case 'LOG OUT':{
+            case 'LOGOUT':{
                 if(!userHeader.hasOwnProperty('Authorization')){
                     userHeader['Authorization'] = localStorage.getItem('Authorization');
                 }
-                var range = 'Sheet2!D'+localStorage.getItem('Row');
-                url = url + '/ '+  localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')) +'/values/' + range +':append?valueInputOption=USER_ENTERED';
+                console.log("Row is : " + localStorage.getItem('Row'));
+                var range = 'Sheet2!D'+localStorage.getItem('Row') + ':E'+localStorage.getItem('Row');
+                url = url + '/'+  localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')) +'/values/' + range +':append?valueInputOption=USER_ENTERED';
                 body = {
                     "range":range,
                     "majorDimension":"ROWS",
-                    "values":[[new Date()]]
+                    "values":[[new Date(),'']]
                 }
                 response = HttpService.fetchRequest(url,HttpService.requestBuilder("POST",userHeader,JSON.stringify(body)));
             }

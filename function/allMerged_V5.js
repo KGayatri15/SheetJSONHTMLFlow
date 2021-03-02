@@ -295,6 +295,9 @@ class ActionController extends ActionEvent {
                 case 'delete':
                     this.delete(event)
                     break;
+                case 'logout':
+                    this.logout(event)
+                    break;
                 case 'keyup':
                     this.onKeyUp(event)
                     //  console.log("message", event.type, event.target)
@@ -431,6 +434,17 @@ class ActionController extends ActionEvent {
         }else{
             alert(entityName + " doesn't exist");
         }
+    }
+    async logout(event){
+    event.preventDefault();
+    if(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')) !== null){
+        var response = await Credentials.actions(event,"LOGOUT");
+        if(!response.error){
+            console.log("You have been logged out successfully");
+            
+        }
+    }
+    window.location.href = './'; 
     }
 }
 class ActionView {
