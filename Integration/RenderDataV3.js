@@ -26,7 +26,7 @@ class Flow{
             console.log("Email id of user is " + emailID);
     }
     if(localStorage.getItem('UserSpreadsheetID'+emailID)!== null){
-        document.getElementById('note').innerHTML = '<<h1>Wait for few seconds....You are directed to your dashboard page</h1>';
+        document.getElementById('note').innerHTML = '<h1>Wait for few seconds....You are directed to your dashboard page</h1>';
         var response = await Credentials.actions(event,"REDIRECTING");
         if(!response.error){
             window.location.href = 'indexActionSpace_V5Treeview.html';
