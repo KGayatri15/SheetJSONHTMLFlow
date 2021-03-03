@@ -8,53 +8,33 @@ var info = {
         }
     },
 }
-var sysHeader = info['spreadsheet']['headers'];
 var userHeader = info['spreadsheet']['headers'];
 var emailID;
-var systemDataSheet = '1PDvlaFdYJW6CW3TAxgxbqxCa3nFKr-Xi4c33eLlB24I';
-var key = 'AIzaSyCw0qzjxyZFZuLrvcVPsHv0vqTin9nVugc';
 class Flow{
     static async loadData(event){
-    
     event.preventDefault();
     userHeader['Authorization'] = Authorization.authToken(window.location.href);
-    var getEmail = await HttpService.fetchRequest('https://www.googleapis.com/oauth2/v2/userinfo',HttpService.requestBuilder("GET",userHeader));
-    if(!getEmail.error){
-            emailID = getEmail.email;
+    var getEmail = await HttpService.fetchRequest( 'https://www.googleapis.com/oauth2/v2/userinfo',HttpService.requestBuilder("GET",userHeader));
+     if(!getEmail.error){
+             emailID = getEmail.email;
             localStorage.setItem('emailID' , emailID);
             localStorage.setItem('Authorization',userHeader['Authorization']);
-            console.log("Email id of user is " + emailID);
     }
     console.log(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')));
+    document.getElementById('note').innerHTML = '<h1>You are being directed to the dashboard,Thank You for your patience !</h1>';
+    var response;
     if(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID'))!== null){
-        document.getElementById('note').innerHTML = '<h1>Wait for few seconds....You are directed to your dashboard page</h1>';
-        var response = await Credentials.actions(event,"REDIRECTING");
-        if(!response.error){
-            window.location.href = 'indexActionSpace_V5Treeview.html';
-        }
+        response = await Credentials.actions(event,"REDIRECTING");
+    }else{
+        var response1 = await Credentials.actions(event,"CREATE");
+        if(!response1.error)
+            response = await Credentials.actions(event,"SIGNIN",[[localStorage.getItem('emailID'),'Login with Google']]);
+    }
+    if(!response.error){
+        localStorage.setItem('LoginEhhGoogle'+localStorage.getItem('emailID') ,true);
+        window.location.href = './indexActionSpace_V5Treeview.html';
     }
     }
-    static async submitLoginForm(event){
-        event.preventDefault();
-        if(localStorage.getItem('UserSpreadsheetID'+emailID) === undefined || localStorage.getItem('UserSpreadsheetID'+emailID) === null)
-                await Credentials.actions(event,"CREATE");
-        console.log('emailID',emailID);
-        var json = {
-                    "credentials":{
-                        'emailID':emailID,
-                        'username':document.getElementById('username').value,
-                        'password':document.getElementById('password').value
-                    }
-        }
-        console.log(JSON.stringify(json));
-        var output = mutate.Obj2(json, []);
-        console.log(output);
-        var response = await Credentials.actions(event,"SIGNIN",output);
-        if(!response.error){
-            window.location.href = 'indexActionSpace_V5Treeview.html';
-        }
-    }
-    
 }
 class Credentials{
     static async actions(event,type,output){
@@ -87,28 +67,12 @@ class Credentials{
                 break;
             }
             case "SIGNIN":{
-                var url1 = url + '/'+  localStorage.getItem('UserSpreadsheetID'+emailID) +'/values/Sheet1!G1:H1000';
-                var data = await HttpService.fetchRequest(url1,HttpService.requestBuilder("GET",userHeader));
-                var range ,array;
-                if(!data.values && !data.error){
-                    range = "Sheet1!A1:" + arr[output[0].length -1] + (output.length);
-                    array = output;
-                }else if(!data.error){
-                    if(data.values.filter(e=> e[0] === output[1][6]).length > 0){
-                        alert('Email id already exists');
-                        break;
-                    }
-                    range = "Sheet1!A" + (data.values.length + 1) + ":" + arr[output[0].length -1]+ (data.values.length + 1);
-                    array = [output[1]];
-                }else{
-                    alert('Got an error. Try Once Again!');
-                    break;
-                }
+                var range = "Sheet1!A1:B1";
                 url = url +'/'+localStorage.getItem('UserSpreadsheetID'+emailID)+'/values/' + range +':append?valueInputOption=USER_ENTERED';
                 body = {
                     "range":range,
                     "majorDimension":"ROWS",
-                    "values":array
+                    "values":output
                 }
                 response =await HttpService.fetchRequest(url,HttpService.requestBuilder("POST",userHeader,JSON.stringify(body))); 
                 if(!response.error)

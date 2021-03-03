@@ -436,15 +436,21 @@ class ActionController extends ActionEvent {
         }
     }
     async logout(event){
+    console.log("Logout");
     event.preventDefault();
-    if(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')) !== null){
+    if(localStorage.getItem('LoginEhh'+localStorage.getItem('emailID')) === 'true'){
+        localStorage.removeItem('LoginEhh'+localStorage.getItem('emailID'));
+        alert('Logged out through ehh');
+    }else if(localStorage.getItem('LoginEhhGoogle'+localStorage.getItem('emailID')) === 'true'){
+        localStorage.removeItem('LoginEhhGoogle'+localStorage.getItem('emailID'));
         var response = await Credentials.actions(event,"LOGOUT");
         if(!response.error){
             console.log("You have been logged out successfully");
-            
         }
+        alert('Logged out through ehh Google');
     }
-    window.location.href = './'; 
+    localStorage.removeItem('emailID');
+    window.location.href = '../'; 
     }
 }
 class ActionView {

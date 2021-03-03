@@ -4,7 +4,8 @@
 
 
 
-window.onload = (event)=>{
+async function load(event){
+event.preventDefault();
 var actionSpaceElementInstanceIndom = document.getElementById('actionSpaceContainer')
 //console.log(HorizonticalMenuTemplateSchema,actionSpaceElementInstanceIndom)
 var newMenu = new Entity(headerModelSchemaV1,actionSpaceElementInstanceIndom);
@@ -17,7 +18,7 @@ var actionEventInstance = new ActionEvent(actionSpaceElementInstanceIndom,window
 var actionSpaceControllerInstance = new ActionController(actionSpace35,actionViewInstance,actionEventInstance); 
 
 //var autoSuggestCard = new Entity(itemListModelSchema, document.getElementById('editor'));
-if(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')) !== null){
-    Credentials.actions(event,'LOGGED IN');
+if(localStorage.getItem('LoginEhhGoogle'+localStorage.getItem('emailID')) === 'true'){
+   await Credentials.actions(event,'LOGGED IN');
 }
 }

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="beauty/signup.css"/>
-    <script type="text/javascript" src="route.js"></script>
+    <link rel="stylesheet" href="../beauty/signup.css"/>
   </head>
 <body>
 <div>
@@ -13,15 +12,15 @@
       <hr>
       <label for="email"><b>Email</b></label>
       <input type="email" placeholder="Enter Email" id="email" required>
-
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" id="username" required>
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" id="psw" minlength="5" required>
-      
       <label>
         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
       </label>
 
-      <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+      <p>Already have an account ?<a href="./signin.html" style="color:dodgerblue">Sign In</a>.</p>
 
       <div class="clearfix">
         <input type="reset" class="cancelbtn" value="Cancel"/>
@@ -35,11 +34,14 @@ function submitData(event){
     event.preventDefault();
     console.log(document.getElementById('email').value);
     var json = {
-        'Email-ID':document.getElementById('email').value,
+        'EmailID':document.getElementById('email').value,
         'Password':document.getElementById('psw').value,
+        'Username':document.getElementById('username').value
     };
-    alert(JSON.stringify(json));
-    window.location.href = 'https://kgayatri15.github.io/SheetJSONHTMLFlow/indexActionSpace_V5Treeview.html';//'http://127.0.0.1:5500/indexActionSpace_V5Treeview.html';
+    localStorage.setItem('Credentials',JSON.stringify(json));
+    localStorage.setItem('emailID',document.getElementById('email').value);
+    localStorage.setItem('LoginEhh'+localStorage.getItem('emailID'),true);
+    window.location.href = './indexActionSpace_V5Treeview.html';
 }
 </script>
 
