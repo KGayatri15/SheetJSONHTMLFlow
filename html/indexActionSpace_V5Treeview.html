@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../beauty/cssVer1.css">
+        <link rel="stylesheet" href="../beauty/autosync.css"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">           
         <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=Montserrat&family=Open+Sans&family=Poppins" rel="stylesheet">
     <title>Action Space Editor</title>
@@ -19,11 +20,35 @@
     <script type="text/javascript" src="../form/appDataSet.js"></script>
     <script type="text/javascript" src="../form/sysdataSet.js"></script>
     <script type="text/javascript" src="../function/actionHelpers.js"></script>
+    <script type="text/javascript" src="../function/mutate.js"></script>
     <script type="text/javascript" src="../function/allMerged_V5.js"></script>
     <script type="text/javascript" src="../function/actionSchema.js"></script>
     <script type="text/javascript" src="../function/indexActionSpace_V5Treeview.js"></script>
     <script type="text/javascript" src="../Integration/RenderDataV4.js"></script>
     <script type="text/javascript" src="../Integration/HttpService.js"></script>
+    <script type="text/javascript" src="../Integration/AutoSync.js"></script>
+    <div id="show" class="modal">
+    <form class="modal-content animate" onsubmit="Sync.get(event);">
+        <div class="container">
+            <h1>Get Data from Sheet</h1>
+            <label><b>File ID of Spreadsheet</b></label>
+            <input type="text" placeholder="Enter FileID of spreadsheet" id="fileID" required>
+            <label><b>Name of the Sheet</b></label>
+            <input type="text" placeholder="Enter Name of the Sheet" id="sheetName" required>
+            <label><b>Range</b></label>
+            <input type="text" placeholder="Enter Range" id="range" required>
+            <input type="submit" class="button btn" value="Submit"/>
+        </div>
+    </form>
+    <script>
+var modal = document.getElementById('show');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+    </script>
+    </div>
 </body>
 
 </html>

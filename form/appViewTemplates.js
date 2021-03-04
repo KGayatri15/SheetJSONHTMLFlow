@@ -229,6 +229,12 @@ var headerModelSchemaV1 = {
                     'class': "material-icons",
                     'textContent': 'more_vert',
 
+                }, 
+                {'name':'button',
+                'class':'button',
+                'onclick':"document.getElementById('show').style.display='block'",
+                'style':'width:15%;',
+                'innerHTML':'<h4>Get Data</h4>'
                 }
             ]
 

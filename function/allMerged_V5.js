@@ -257,9 +257,9 @@ class ActionController extends ActionEvent {
         }
 /// Directly entering the key In the view
         entity.preventDefault(entity);
-        var response = currentSelection.anchorNode.data.substr(0, currentSelection.anchorOffset) + entity.key + currentSelection.anchorNode.data.substr(currentSelection.anchorOffset);
-       currentSelection.anchorNode.data = response;
-       Caret.moveCaret(window, currentCaret +1);
+       var response = currentSelection.anchorNode.data.substr(0, currentSelection.anchorOffset) + entity.key + currentSelection.anchorNode.data.substr(currentSelection.anchorOffset);
+      currentSelection.anchorNode.data = response;
+      Caret.moveCaret(window, currentCaret +1);
     }
     onKeyUp(entity) { 
         console.log("key was up")
@@ -390,7 +390,8 @@ class ActionController extends ActionEvent {
     //    var newentity = document.createElement('ol');
     //    new Entity(actionUserContent,newentity);
         this.view.updateTitle(actionStoryTemplate.name);
-        this.view.updateText(actionUserContent[0]['innerHTML']);
+        ActionView.updateText(actionUserContent[0]['innerHTML']);
+    //    this.view.updateText(actionUserContent[0]['innerHTML']);
     //    item.replaceChild(newentity , item.childNodes[1]);
     }
     save(event) { 
@@ -405,7 +406,8 @@ class ActionController extends ActionEvent {
         console.log(entityName + ":::::"+entitytValue);
         if(entitytValue !== null){
            this.view.updateTitle(entityName);
-           this.view.updateText(entitytValue);
+           ActionView.updateText(entitytValue);
+        //   this.view.updateText(entitytValue);
            console.log("Loaded successfully");
         }else{
             alert(entityName + " doesn't exist");
@@ -468,7 +470,7 @@ class ActionView {
     getTitle(){
         return document.getElementById('loadedRouteTitle').innerText;
     }
-    updateText(data){
+    static updateText(data){
         document.getElementsByTagName('block')[0].innerHTML = data;
     }
     getText(){
