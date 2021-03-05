@@ -50,7 +50,7 @@ class Sync{
                     var response = await HttpService.fetchRequest(updateurl,HttpService.requestBuilder("PUT",header,JSON.stringify(body)));
                     if(!response.error){console.log("Updated Successfully");}
                 }
-              },120000);
+              },300000);
             // var div = document.createElement('div');
             // var data = new Entity(json,div);
             // ActionView.updateText(div.innerHTML);
