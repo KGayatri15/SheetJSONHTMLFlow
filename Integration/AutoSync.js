@@ -12,6 +12,17 @@ var url = data['spreadsheet']['url'];
 var header = data['spreadsheet']['headers'];
 header['Authorization'] = localStorage.getItem('Authorization');
 class Sync{
+    static array2D(event){
+        event.preventDefault();
+        var json = {
+            "ActionStory":{
+                "title": ActionView.getTitle(),
+                "ActionContent":ActionView.getText(),
+            }
+        }
+        var output = mutate.Obj2(json,[]);
+        return output;
+    }
     static async get(event){
         event.preventDefault();
         var range = document.getElementById('sheetName').value + "!" + document.getElementById('range').value;
@@ -23,9 +34,23 @@ class Sync{
              console.log(json);
              ActionView.updateTitle(json["ActionStory"]['title']);
              ActionView.updateText(json["ActionStory"]['ActionContent']);
-            //  setInterval(() => {
+             setInterval(async() => {
+                  console.log("Timeout");
             //      //update text and title
-            //  },300000);A5:H7
+                if(json["ActionStory"]['title'] === ActionView.getTitle() && json["ActionStory"]['ActionContent'] === ActionView.getText()){
+                    console.log("Update not needed");
+                }else{
+                    var output = Sync.array2D(event);
+                    var updateurl = geturl + '?valueInputOption=USER_ENTERED';
+                    var body = {
+                        "range":range,
+                        "majorDimension":"ROWS",
+                        "values":output
+                    }
+                    var response = await HttpService.fetchRequest(updateurl,HttpService.requestBuilder("PUT",header,JSON.stringify(body)));
+                    if(!response.error){console.log("Updated Successfully");}
+                }
+              },120000);
             // var div = document.createElement('div');
             // var data = new Entity(json,div);
             // ActionView.updateText(div.innerHTML);
@@ -38,13 +63,7 @@ class Sync{
         var geturl = url + document.getElementById('file-id').value +'/values/' + document.getElementById('sheet_Name').value ;
         var response = await HttpService.fetchRequest(geturl,HttpService.requestBuilder("GET",header));
         if(!response.error){
-            var json = {
-                "ActionStory":{
-                    "title": ActionView.getTitle(),
-                    "ActionContent":ActionView.getText(),
-                }
-            }
-            var output = mutate.Obj2(json,[]);
+            var output = Sync.array2D(event);
             var row = response.values.length + 2;
             var range = document.getElementById('sheet_Name').value + "!A" + row  + ":" +  arr[output[0].length -1] + (output.length + row);
             console.log("Range:- " + range);
