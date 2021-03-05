@@ -18,7 +18,4 @@ var actionEventInstance = new ActionEvent(actionSpaceElementInstanceIndom,window
 var actionSpaceControllerInstance = new ActionController(actionSpace35,actionViewInstance,actionEventInstance); 
 
 //var autoSuggestCard = new Entity(itemListModelSchema, document.getElementById('editor'));
-if(localStorage.getItem('LoginEhhGoogle'+localStorage.getItem('emailID')) === 'true'){
-   await Credentials.actions(event,'LOGGED IN');
-}
 }

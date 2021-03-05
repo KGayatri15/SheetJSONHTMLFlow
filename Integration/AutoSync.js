@@ -19,11 +19,46 @@ class Sync{
         var response = await HttpService.fetchRequest(geturl,HttpService.requestBuilder("GET",header)); 
         console.log("response :- " + response);
         if(!response.error){
-            var json = mutate.arr2Object(response.values ,response.values[0],{});
-            console.log(json);
-            var div = document.createElement('div');
-            var data = new Entity(json,div);
-            ActionView.updateText(div.innerHTML);
+             var json = mutate.arr2Object(response.values ,response.values[0],{});
+             console.log(json);
+             ActionView.updateTitle(json["ActionStory"]['title']);
+             ActionView.updateText(json["ActionStory"]['ActionContent']);
+            //  setInterval(() => {
+            //      //update text and title
+            //  },300000);A5:H7
+            // var div = document.createElement('div');
+            // var data = new Entity(json,div);
+            // ActionView.updateText(div.innerHTML);
+            
         }
+
+    }
+    static async send(event){
+        event.preventDefault();
+        var geturl = url + document.getElementById('file-id').value +'/values/' + document.getElementById('sheet_Name').value ;
+        var response = await HttpService.fetchRequest(geturl,HttpService.requestBuilder("GET",header));
+        if(!response.error){
+            var json = {
+                "ActionStory":{
+                    "title": ActionView.getTitle(),
+                    "ActionContent":ActionView.getText(),
+                }
+            }
+            var output = mutate.Obj2(json,[]);
+            var row = response.values.length + 2;
+            var range = document.getElementById('sheet_Name').value + "!A" + row  + ":" +  arr[output[0].length -1] + (output.length + row);
+            console.log("Range:- " + range);
+            var posturl = url +  document.getElementById('file-id').value +'/values/' + range + ':append?valueInputOption=USER_ENTERED';
+            var body = {
+                "range":range,
+                "majorDimension":"ROWS",
+                "values":output
+            }
+            var response2 = await HttpService.fetchRequest(posturl,HttpService.requestBuilder("POST",header,JSON.stringify(body)));
+            if(!response2.error){
+                alert('Sent Data successfully');
+            }
+        }
+       
     }
 }

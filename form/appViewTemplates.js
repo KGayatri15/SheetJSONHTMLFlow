@@ -230,11 +230,19 @@ var headerModelSchemaV1 = {
                     'textContent': 'more_vert',
 
                 }, 
-                {'name':'button',
+                {
+                'name':'button',
                 'class':'button',
-                'onclick':"document.getElementById('show').style.display='block'",
+                'onclick':"document.getElementById('get').style.display='block'",
                 'style':'width:15%;',
                 'innerHTML':'<h4>Get Data</h4>'
+                },
+                {
+                'name':'button',
+                'class':'button',
+                 'onclick':"document.getElementById('send').style.display='block'",
+                'style':'width:15%;',
+                'innerHTML':'<h4>Send Data</h4>'
                 }
             ]
 

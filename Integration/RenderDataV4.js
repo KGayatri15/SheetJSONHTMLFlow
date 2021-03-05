@@ -24,7 +24,7 @@ class Flow{
     document.getElementById('note').innerHTML = '<h1>You are being directed to the dashboard,Thank You for your patience !</h1>';
     var response;
     if(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID'))!== null){
-        response = await Credentials.actions(event,"REDIRECTING");
+        response = await Credentials.actions(event,"LOGGED IN");
     }else{
         var response1 = await Credentials.actions(event,"CREATE");
         if(!response1.error)
@@ -79,19 +79,10 @@ class Credentials{
                     alert('Registered successfully');
                 break;
             }
-            case 'REDIRECTING':{
-                var url1 = url + '/'+  localStorage.getItem('UserSpreadsheetID'+emailID) +'/values/Sheet1!G1:H1000';
-                var data = await HttpService.fetchRequest(url1,HttpService.requestBuilder("GET",userHeader));
-                console.log(emailID + ":data:->"+data);
-                if(data.values.filter(e=> e[0] === emailID).length > 0){
-                   response = data;
-                }
-                break;
-            }
             case 'LOGGED IN':{
                 console.log('Logged In');
                 console.log(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')));
-                var url2 = info['spreadsheet']['url'] +'/' + localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')) + '/values/Sheet2!A1:B1000';
+                var url2 = info['spreadsheet']['url'] +'/' + localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')) + '/values/Sheet2';
                 if(!userHeader.hasOwnProperty('Authorization')){
                     userHeader['Authorization'] = localStorage.getItem('Authorization');
                 }

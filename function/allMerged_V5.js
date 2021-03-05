@@ -389,15 +389,15 @@ class ActionController extends ActionEvent {
      //   var item = document.getElementById('editor');
     //    var newentity = document.createElement('ol');
     //    new Entity(actionUserContent,newentity);
-        this.view.updateTitle(actionStoryTemplate.name);
+        ActionView.updateTitle(actionStoryTemplate.name);
         ActionView.updateText(actionUserContent[0]['innerHTML']);
     //    this.view.updateText(actionUserContent[0]['innerHTML']);
     //    item.replaceChild(newentity , item.childNodes[1]);
     }
     save(event) { 
-        var entityName = this.view.getTitle();
+        var entityName = ActionView.getTitle();
         console.log(entityName);
-        var entityValue = this.view.getText();
+        var entityValue = ActionView.getText();
         StorageHelper.saveToStorage(entityName, entityValue);
     }
     load(event) {
@@ -405,7 +405,7 @@ class ActionController extends ActionEvent {
         const entitytValue = StorageHelper.getFromStorage(entityName);
         console.log(entityName + ":::::"+entitytValue);
         if(entitytValue !== null){
-           this.view.updateTitle(entityName);
+           ActionView.updateTitle(entityName);
            ActionView.updateText(entitytValue);
         //   this.view.updateText(entitytValue);
            console.log("Loaded successfully");
@@ -464,16 +464,16 @@ class ActionView {
     updateView(event,key,value) {
       
     }
-    updateTitle(name){
+    static updateTitle(name){
         document.getElementById('loadedRouteTitle').innerText = name;  
     }
-    getTitle(){
+    static getTitle(){
         return document.getElementById('loadedRouteTitle').innerText;
     }
     static updateText(data){
         document.getElementsByTagName('block')[0].innerHTML = data;
     }
-    getText(){
+    static getText(){
         return document.getElementsByTagName('block')[0].innerHTML;
     }
 }

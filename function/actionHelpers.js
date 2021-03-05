@@ -12,6 +12,7 @@
 class process {
     static processReq(input, output, key, value) {
      //   console.log(input, output)
+     console.log(operate.is(input) + " :->   ");
         if (operate.is(input) === 'Object') {
             var buffer = process.iterateObj(input, output, key);
         } else if (operate.is(input) === 'Array') {

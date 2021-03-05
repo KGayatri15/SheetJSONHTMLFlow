@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../Integration/RenderDataV4.js"></script>
     <script type="text/javascript" src="../Integration/HttpService.js"></script>
     <script type="text/javascript" src="../Integration/AutoSync.js"></script>
-    <div id="show" class="modal">
+    <div id="get" class="modal">
     <form class="modal-content animate" onsubmit="Sync.get(event);">
         <div class="container">
             <h1>Get Data from Sheet</h1>
@@ -37,14 +37,28 @@
             <input type="text" placeholder="Enter Name of the Sheet" id="sheetName" required>
             <label><b>Range</b></label>
             <input type="text" placeholder="Enter Range" id="range" required>
-            <input type="submit" class="button btn" value="Submit"/>
+            <input type="submit" class="button btn" value="Get"/>
         </div>
     </form>
+    </div>
+    <div id="send" class="modal">
+        <form class="modal-content animate" onsubmit="Sync.send(event);">
+            <h1>Send Data to Sheet</h1>
+            <label><b>File ID of Spreadsheet</b></label>
+            <input type="text" placeholder="Enter FileID of spreadsheet" id="file-id" required>
+            <label><b>Name of the Sheet</b></label>
+            <input type="text" placeholder="Enter Name of the Sheet" id="sheet_Name" required>
+            <input type="submit" class="button btn" value="Send"/>
+        </form>
+    </div>
     <script>
-var modal = document.getElementById('show');
+var modal1 = document.getElementById('get');
+var modal2 = document.getElementById('send');
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == modal1) {
+        modal1.style.display = "none";
+    }else if(event.target == modal2){
+        modal2.style.display = "none";
     }
 }
     </script>
