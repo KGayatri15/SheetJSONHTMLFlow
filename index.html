@@ -5,8 +5,10 @@
         <meta name="theme-color" content ="#f1f5f9"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="beauty/index.css"/>
-        <script type="text/javascript" src="Integration/HttpService.js"></script>
-        <script type="text/javascript" src="Integration/Authorization.js"></script>
+        <link rel="manifest" href="manifest.json"/>
+        <script type="text/javascript" src="function/registerServiceWorker.js"></script>
+        <script type="text/javascript" src="function/HttpService.js"></script>
+        <script type="text/javascript" src="function/Authorization.js"></script>
     </head>
     <body onload="check(event);">
         <button onclick = "window.location.href='./html/signup.html';" class="ehh btn">SignUp with ehh</button>

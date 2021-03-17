@@ -1,5 +1,5 @@
 if("serviceWorker" in navigator){
-    navigator.serviceWorker.register("sw_CachedSite.js")
+    navigator.serviceWorker.register("function/sw_CachedSite.js")
     .then(reg =>{
         console.log("Service Worker Registration :-"+reg);
     })

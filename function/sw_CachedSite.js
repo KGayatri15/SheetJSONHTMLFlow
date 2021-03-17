@@ -1,10 +1,10 @@
-var cacheName = 'static'
-var cacheAssets = [
-    'index.html',
-    '/beauty/index.css',
-    'Integration/HttpService.js',
-    '/Integration/Authorization.js'
-]
+var cacheName = 'static';
+// var cacheAssets = [
+//     'index.html',
+//     '/beauty/index.css',
+//     'Integration/HttpService.js',
+//     '/Integration/Authorization.js'
+// ]
 self.addEventListener("install",e=>{
     console.log("Install !");
 });
