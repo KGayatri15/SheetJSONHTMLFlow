@@ -12,6 +12,7 @@
     <title>Action Space Editor</title>
 </head>
 <body onload="load(event);">
+    <div class="loader"></div>
     <script type="text/javascript" src="../form/actionContent_UserData.js"></script>
     <script type="text/javascript" src="../form/appViewTemplates.js"></script>
     <script type="text/javascript" src="../form/actionContent_UserData.js"></script>
@@ -57,13 +58,7 @@
     <script>
 var modal1 = document.getElementById('get');
 var modal2 = document.getElementById('send');
-window.onclick = function(event) {
-    if (event.target == modal1) {
-        modal1.style.display = "none";
-    }else if(event.target == modal2){
-        modal2.style.display = "none";
-    }
-}
+window.onclick = ActionView.modal(event);
     </script>
     </div>
 </body>

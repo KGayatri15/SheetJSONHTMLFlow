@@ -470,6 +470,18 @@ class ActionView {
     updateView(event,key,value) {
       
     }
+    static preLoader(){
+        document.querySelector('.loader').style.visibility = "visible";
+        document.querySelector('actionSpaceHolderElement').style.visibility = "hidden";
+    }
+    static show(){
+        document.querySelector('.loader').style.visibility = "hidden";
+        document.querySelector('actionSpaceHolderElement').style.visibility = "visible";
+    }
+    static modal(event){
+        console.log(event.target);
+        document.getElementById(event.target.getAttribute("id")).style.display = "none";
+    }
     static updateTitle(name){
         document.getElementById('loadedRouteTitle').innerText = name;  
     }
@@ -483,7 +495,7 @@ class ActionView {
         document.getElementsByTagName('block')[0].innerText = data;
     }
     static getText(){
-        return document.getElementsByTagName('block')[0].innerHTML;
+        return document.getElementsByTagName('block')[0].innerText;
     }
 }
 class StorageHelper {

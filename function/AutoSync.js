@@ -24,7 +24,9 @@ class Sync{
         return output;
     }
     static async get(event){
+        ActionView.modal(event);
         event.preventDefault();
+        ActionView.preLoader();
         var range = document.getElementById('sheetName').value + "!" + document.getElementById('range').value;
         var geturl = url + document.getElementById('fileID').value +'/values/' + range;
         var response = await HttpService.fetchRequest(geturl,HttpService.requestBuilder("GET",header)); 
@@ -56,10 +58,12 @@ class Sync{
             // ActionView.updateText(div.innerHTML);
             
         }
-
+        ActionView.show();
     }
     static async send(event){
+        ActionView.modal(event);
         event.preventDefault();
+        ActionView.preLoader();
         var geturl = url + document.getElementById('file-id').value +'/values/' + document.getElementById('sheet_Name').value ;
         var response = await HttpService.fetchRequest(geturl,HttpService.requestBuilder("GET",header));
         if(!response.error){
@@ -78,6 +82,6 @@ class Sync{
                 alert('Sent Data successfully');
             }
         }
-       
+        ActionView.show();
     }
 }

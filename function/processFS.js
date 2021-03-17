@@ -87,6 +87,7 @@ class processFS{
     static async OpenDirectory(event){
         event.preventDefault();
         const dirHandle = await window.showDirectoryPicker();
+        ActionView.preLoader();
         var dirID = processFS.uid();
         await indexDB.set(dirID, dirHandle);
         var input = JSON.parse(JSON.stringify(directoryJSON));
@@ -94,6 +95,7 @@ class processFS{
         var json = await processFS.jsonForDirectory(input['li']['list'] ,dirID);
         console.log(input);
         var data = new Entity(input, document.getElementById('workspace'));
+        ActionView.show();
         var carets = document.querySelectorAll('.caret');
         carets.forEach(caret =>{
             caret.onclick = async function(event) {
