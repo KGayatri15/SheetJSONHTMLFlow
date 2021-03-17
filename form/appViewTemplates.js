@@ -182,6 +182,7 @@ var headerModelSchemaV1 = {
         'name': 'ul',
         'desc': 'This is a horizontical bar, more functionality of this bar to be added',
         'id': 'header',
+        'class':'header',
         //  'innerText':"header",
         'brand': {
             'name': 'span',
@@ -224,32 +225,68 @@ var headerModelSchemaV1 = {
                     'textContent': 'about',
 
                 },
-                {
-                    'name': 'button',
-                    'class': "material-icons",
-                    'textContent': 'more_vert',
+                // {
+                //     'name': 'button',
+                //     'class': "material-icons",
+                //     'textContent': 'more_vert',
 
-                }, 
-                {
-                'name':'button',
-                'class':'button',
-                'onclick':"document.getElementById('get').style.display='block'",
-                'style':'width:15%;',
-                'innerHTML':'<h4>Get Data</h4>'
-                },
-                {
-                'name':'button',
-                'class':'button',
-                 'onclick':"document.getElementById('send').style.display='block'",
-                'style':'width:15%;',
-                'innerHTML':'<h4>Send Data</h4>'
-                }
+                // }, 
             ]
 
+        },
+        'br1':{
+            'name':'br',
+        },
+        'sheet':{
+            'name':'GoogleSheet',
+            'innerText':'Google Sheet :- ',
+            'getData': {
+                'name':'button',
+                // 'class':'button',
+                'onclick':"document.getElementById('get').style.display='block'",
+               // 'style':'width:10%;',
+                'innerText':'Get Data'
+            },
+            'setData':{
+                'name':'button',
+                // 'class':'button',
+                 'onclick':"document.getElementById('send').style.display='block'",
+               // 'style':'width:10%;',
+                'innerText':'Send Data'
+            }
+        },
+        'br2':{
+            'name':'br',
+        },
+        'File System':{
+            'name':'FileSystem',
+            'innerText':'Local File System :-',
+            'OpenDirectory':{
+                'name':'button',
+                'innerText':'Open a Directory',
+                'onclick':'processFS.OpenDirectory(event);'
+            },
+            'New':{
+                'name':'button',
+                'innerText':'New',
+                'onclick':'processFS.NewFile(event);'
+            },
+            'Open':{
+                'name':'button',
+                'innerText':'Open a File(Ctrl + O)',
+                'onclick':'processFS.readFile(event);'
+            },
+            'Save':{
+                'name':'button',
+                'innerText':'Save (Ctrl + S)',
+                'onclick':'processFS.saveFile(event);'
+            },
+            'Save As':{
+                'name':'button',
+                'innerText':'Save as(F12)',
+                'onclick':'processFS.saveAsFile(event);'
+            }
         }
-
-
-
     }
 }
 
@@ -363,6 +400,7 @@ var actionSpaceModel = {
         //RouteNavBar to be added.
         name: "section",
         id: "actionSpace",
+        'class':'editor',
         'iconBar': iconBar,
         "loadedRouteTitle": {
             "name": "div",
@@ -373,7 +411,7 @@ var actionSpaceModel = {
      //   'textContent': "yo",
        // 'toolbar': iconBar,
         'editor': {
-            'richTextBar': richTextBar,
+            // 'richTextBar': richTextBar,
             'name': 'div',
             'id': "editor",
             //'contentEditable':'true',
@@ -519,6 +557,56 @@ var hotKeyAutoSuggestItemViewSchema = [
         'textContent': 'List Item Content',
     },
 ]
+
+var sidebarJSON = {
+    // 'sidebar':{
+        'name':'div',
+        'class':'row',
+        'menu':{
+            'name':'div',
+            'class':'sidebar col-md-4',
+            'frontEnd':{
+                'name':'ul',
+                'id':'frontEnd',
+                'workspace':{
+                        'name':'li',
+                        'span':{
+                            'name':'span',
+                            'class':'caret',
+                            'innerText':'Workspace'
+                        },
+                        'list':{
+                            'name':'ul',
+                            'class':'nested',
+                            'id':'workspace',
+                        }
+                }
+            }
+        }
+  //  }
+};
+var directoryJSON = {
+    'li':{
+    'name':'li',
+    'span':{
+        'name':'span',
+        'class':'caret',
+        'innerText':'', //inner Text will be included
+    },
+    'list':{
+        'name':'ul',
+        'class':'nested',
+        'id':'' //id - Unique ID with which directory handle of this folder can ke retrieved from indexDB
+    }
+    }
+}
+var fileJSON = {
+    'name':'li',
+    'id':'', //id - Unique ID with which file handle of this file retrieved from indexDB
+     'class':'file',//used for opening file
+     'innerText':''
+     //innerText - name of the file
+}
 
 var richtextToolBarButtonModel = [
         {

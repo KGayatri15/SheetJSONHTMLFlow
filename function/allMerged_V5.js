@@ -479,6 +479,9 @@ class ActionView {
     static updateText(data){
         document.getElementsByTagName('block')[0].innerHTML = data;
     }
+    static updateInnerText(data){
+        document.getElementsByTagName('block')[0].innerText = data;
+    }
     static getText(){
         return document.getElementsByTagName('block')[0].innerHTML;
     }

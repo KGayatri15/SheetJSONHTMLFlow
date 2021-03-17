@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../beauty/cssVer1.css">
         <link rel="stylesheet" href="../beauty/autosync.css"/>
+        <link rel="stylesheet" href="../beauty/sidebar.css"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">           
         <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=Montserrat&family=Open+Sans&family=Poppins" rel="stylesheet">
     <title>Action Space Editor</title>
 </head>
 <body onload="load(event);">
-    <actionSpaceHolderElement id ='actionSpaceContainer'>
-    </actionSpaceHolderElement>
     <script type="text/javascript" src="../form/actionContent_UserData.js"></script>
     <script type="text/javascript" src="../form/appViewTemplates.js"></script>
     <script type="text/javascript" src="../form/actionContent_UserData.js"></script>
@@ -23,10 +22,14 @@
     <script type="text/javascript" src="../function/mutate.js"></script>
     <script type="text/javascript" src="../function/allMerged_V5.js"></script>
     <script type="text/javascript" src="../function/actionSchema.js"></script>
+    <script type="text/javascript" src="../function/shortcut.js"></script>
+    <script type="text/javascript" src="../function/processFS.js"></script>
+    <script type="text/javascript" src="../function/indexDB.js"></script>
     <script type="text/javascript" src="../function/indexActionSpace_V5Treeview.js"></script>
     <script type="text/javascript" src="../Integration/RenderDataV4.js"></script>
     <script type="text/javascript" src="../Integration/HttpService.js"></script>
     <script type="text/javascript" src="../Integration/AutoSync.js"></script>
+    <actionSpaceHolderElement id ='actionSpaceContainer'></actionSpaceHolderElement>
     <div id="get" class="modal">
     <form class="modal-content animate" onsubmit="Sync.get(event);">
         <div class="container">

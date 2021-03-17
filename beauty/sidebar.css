@@ -1,0 +1,66 @@
+.header{grid-area:head;}
+.sidebar{grid-area: sidebar;}
+.editor{grid-area: editor;}
+actionSpaceHolderElement{
+  display: grid;
+  grid-template-areas:
+      'head head head head head'
+    'sidebar editor editor editor editor'
+    'sidebar editor editor editor editor'
+    'sidebar editor editor editor editor';
+  grid-gap:5px;
+}
+#frontEnd .caret {
+    position: relative;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#frontEnd .caret-down {
+    position: relative;
+}
+
+#frontEnd .caret:before {
+    content: '\25B8';
+    display: inline-block;
+    font-size: 17px;
+}
+
+#frontEnd .caret-down:before {
+    content: '\25B8';
+    display: inline-block;
+    font-size: 17px;
+    transform: rotate(90deg)
+}
+
+#frontEnd ul {
+    list-style: none;
+    border-left: 1px solid black;
+    padding: 0;
+    margin: 0;
+    padding-left: 35px;
+}
+
+#frontEnd ul li {
+    position: relative;
+    text-transform: capitalize;
+}
+
+#frontEnd ul li:before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: -35px;
+    background: black;
+    height: 1px;
+    width: 32px;
+}
+
+.nested {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
