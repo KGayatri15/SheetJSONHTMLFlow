@@ -24,8 +24,9 @@ class Sync{
         return output;
     }
     static async get(event){
-        ActionView.modal(event);
         event.preventDefault();
+        console.log("Async get");
+        ActionView.modal(event);
         ActionView.preLoader();
         var range = document.getElementById('sheetName').value + "!" + document.getElementById('range').value;
         var geturl = url + document.getElementById('fileID').value +'/values/' + range;
@@ -61,8 +62,9 @@ class Sync{
         ActionView.show();
     }
     static async send(event){
-        ActionView.modal(event);
         event.preventDefault();
+        console.log("Async send");
+        ActionView.modal(event);
         ActionView.preLoader();
         var geturl = url + document.getElementById('file-id').value +'/values/' + document.getElementById('sheet_Name').value ;
         var response = await HttpService.fetchRequest(geturl,HttpService.requestBuilder("GET",header));

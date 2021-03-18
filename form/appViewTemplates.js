@@ -419,7 +419,7 @@ var actionSpaceModel = {
                 {  
                     'name':'contentBlock',
                     'id':'contentBlock',
-                    'textContent': actionStoryTemplate
+                    'textContent': actionStoryTemplate.innerHTML
                 },
 ],      
         },

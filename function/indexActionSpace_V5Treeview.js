@@ -25,13 +25,16 @@ Shortcut.add('F12',processFS.saveAsFile);
 Shortcut.add('Ctrl+O',processFS.readFile);
 setInterval(async()=>{
   if(localStorage.getItem('ActiveFile') !== ActionView.getText()){
-    await localStorage.setItem('ActiveFile',ActionView.getText);
-    await localStorage.setItem('ActiveFileName',ActionView.getTitle());
+    await localStorage.setItem('ActiveFile',ActionView.getText());
     console.log('Updated Active File');
+  }
+  if(localStorage.getItem('ActiveFileName') !== ActionView.getTitle()){
+    await localStorage.setItem('ActiveFileName',ActionView.getTitle());
   }
 },9000);
 var data = localStorage.getItem('ActiveFileName');
-if(data)
+if(data){
   ActionView.updateText(localStorage.getItem('ActiveFile'));
   ActionView.updateTitle(localStorage.getItem('ActiveFileName'));
+}
 }

@@ -479,8 +479,14 @@ class ActionView {
         document.querySelector('actionSpaceHolderElement').style.visibility = "visible";
     }
     static modal(event){
-        console.log(event.target);
-        document.getElementById(event.target.getAttribute("id")).style.display = "none";
+        event.preventDefault();
+        var modal1 = document.getElementById('get');
+        var modal2 = document.getElementById('send');
+        if(event.target === modal1){
+            modal1.style.display = "none";
+        }else if(event.target === modal2){
+            modal1.style.display = "none";
+        }
     }
     static updateTitle(name){
         document.getElementById('loadedRouteTitle').innerText = name;  
