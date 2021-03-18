@@ -63,7 +63,7 @@ class processFS{
         }
         console.log(fileHandle);
         var file = await fileHandle.getFile();var contents;
-        if(file['name'].includes('.json') || file['name'].includes('.txt')|| file['name'].includes('.html')|| file['name'].includes('.js')||file['name'].includes('.pdf')){
+        if(file['name'].includes('.json') || file['name'].includes('.txt')|| file['name'].includes('.html')|| file['name'].includes('.js')){
             contents = await file.text();
             ActionView.updateTitle(file['name']);
             ActionView.updateInnerText(contents);
@@ -76,7 +76,8 @@ class processFS{
             image.title = file.name;
             image.src = reader.result;
             ActionView.updateTitle(file['name']);
-            ActionView.updateText(image);
+            console.log(image);
+            ActionView.displayImage(image);
           }, false);
             reader.readAsDataURL(file);
         }else{

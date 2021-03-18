@@ -503,6 +503,11 @@ class ActionView {
     static getText(){
         return document.getElementsByTagName('block')[0].innerText;
     }
+    static displayImage(data){
+        var block = document.getElementsByTagName('block')[0];
+        block.innerHTML = '';
+        block.append(data);
+    }
 }
 class StorageHelper {
     constructor(entity) { 
