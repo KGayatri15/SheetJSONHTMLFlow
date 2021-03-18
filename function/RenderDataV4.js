@@ -21,7 +21,6 @@ class Flow{
             localStorage.setItem('Authorization',userHeader['Authorization']);
     }
     console.log(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')));
-    document.getElementById('note').innerHTML = '<h1>You are being directed to the dashboard,Thank You for your patience !</h1>';
     var response;
     if(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID'))!== null){
         response = await Credentials.actions(event,"LOGGED IN");

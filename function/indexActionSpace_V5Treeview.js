@@ -6,6 +6,7 @@
 
 async function load(event){
 event.preventDefault();
+ActionView.preLoader();
 var actionSpaceElementInstanceIndom = document.getElementById('actionSpaceContainer')
 //console.log(HorizonticalMenuTemplateSchema,actionSpaceElementInstanceIndom)
 var header = new Entity(headerModelSchemaV1,actionSpaceElementInstanceIndom);
@@ -37,4 +38,5 @@ if(data){
   ActionView.updateText(localStorage.getItem('ActiveFile'));
   ActionView.updateTitle(localStorage.getItem('ActiveFileName'));
 }
+ActionView.show();
 }
