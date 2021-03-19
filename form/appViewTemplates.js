@@ -330,7 +330,7 @@ var basicLayout = {
 var actionStoryTemplate = {
     "name": 'actionStoryTemplate_title',
     "id": 'actionStoryTemplate',
-    innerHTML: actionUserContent[0],
+    innerHTML: actionUserContent,
     //textContent: "this is a template actionStory",
     class: 'editable actionContent',
     'before': 'name',
