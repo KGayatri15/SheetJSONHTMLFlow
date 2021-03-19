@@ -13,6 +13,7 @@
 </head>
 <body onload="load(event);">
     <div class="loader"></div>
+    <actionSpaceHolderElement id ='actionSpaceContainer'></actionSpaceHolderElement>
     <script type="text/javascript" src="../form/actionContent_UserData.js"></script>
     <script type="text/javascript" src="../form/appViewTemplates.js"></script>
     <script type="text/javascript" src="../form/actionContent_UserData.js"></script>
@@ -30,10 +31,9 @@
     <script type="text/javascript" src="../function/RenderDataV4.js"></script>
     <script type="text/javascript" src="../function/HttpService.js"></script>
     <script type="text/javascript" src="../function/AutoSync.js"></script>
-    <actionSpaceHolderElement id ='actionSpaceContainer'></actionSpaceHolderElement>
     <div id="get" class="modal">
     <form class="modal-content animate" onsubmit="Sync.get(event);">
-        <div class="container">
+        <!-- <div class="container"> -->
             <h1>Get Data from Sheet</h1>
             <label><b>File ID of Spreadsheet</b></label>
             <input type="text" placeholder="Enter FileID of spreadsheet" id="fileID" required>
@@ -42,7 +42,7 @@
             <label><b>Range</b></label>
             <input type="text" placeholder="Enter Range" id="range" required>
             <input type="submit" class="button btn" value="Get"/>
-        </div>
+        <!-- </div> -->
     </form>
     </div>
     <div id="send" class="modal">
@@ -52,7 +52,7 @@
             <input type="text" placeholder="Enter FileID of spreadsheet" id="file-id" required>
             <label><b>Name of the Sheet</b></label>
             <input type="text" placeholder="Enter Name of the Sheet" id="sheet_Name" required>
-            <input type="submit" class="button btn" value="Send"/>
+            <input type="submit" class="button btn" value="Send" />
         </form>
     </div>
     <script>

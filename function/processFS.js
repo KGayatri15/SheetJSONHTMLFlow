@@ -2,10 +2,12 @@ var fileHandle;
 const pickerOpts = {
     types: [
       {
-        description: '.txt,.html,.js,.json,.csv,.xml,.xlsx,.jpg,jpeg,.png',
+        description: '.txt,.html,.js,.json,.csv,.xml,.xlsx,.jpg,.jpeg,.png,.mp4',
         accept: {
-          'text/*':['.txt','.html','.json','.js'],
-          'image/*':['.jpg','.jpeg','.png']
+          'text/*':['.txt','.html','.json','.js','.xml','.csv'],
+          'image/*':['.jpg','.jpeg','.png'],
+          'video/*':['.mp4'],
+          'application/*':['vnd.ms-excel','vnd.openxmlformats-officedocument.spreadsheetml.sheet']
         }
       },
     ],
@@ -63,23 +65,31 @@ class processFS{
         }
         console.log(fileHandle);
         var file = await fileHandle.getFile();var contents;
-        if(file['name'].includes('.json') || file['name'].includes('.txt')|| file['name'].includes('.html')|| file['name'].includes('.js')){
+        if(file['name'].includes('.json') || file['name'].includes('.txt')|| file['name'].includes('.html')|| file['name'].includes('.js')||file['name'].includes('.xml')){
             contents = await file.text();
             ActionView.updateTitle(file['name']);
             ActionView.updateInnerText(contents);
-        }else if(file['name'].includes('.xml') || file['name'].includes('.xlsx')|| file['name'].includes('.csv')){
+        }else if(file['name'].includes('.xlx') || file['name'].includes('.xlsx')|| file['name'].includes('.csv')){
             console.log("Work In Progress");
         }else if(file['type'].includes('image') ||file['name'].includes('.JPG') ||file['name'].includes('.JPEG') ||file['name'].includes('.PNG')){
            var reader = new FileReader();
            reader.addEventListener("load", function () {
             var image = new Image();
             image.title = file.name;
+            image.width = '460';image.height = '380';
             image.src = reader.result;
             ActionView.updateTitle(file['name']);
-            console.log(image);
             ActionView.displayImage(image);
           }, false);
             reader.readAsDataURL(file);
+        }else if(file['name'].includes('mp4')){
+            var reader = new FileReader();
+            reader.addEventListener("load", function () {
+             var html = '<video src="' + reader.result + '" width="460" height="380" controls></video>'
+             ActionView.updateTitle(file['name']);
+             ActionView.updateText(html);
+           }, false);
+           reader.readAsDataURL(file);
         }else{
             console.log("Not supported");
         }
