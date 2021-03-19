@@ -9,16 +9,18 @@
         <script type="text/javascript" src="function/registerServiceWorker.js"></script>
         <script type="text/javascript" src="function/HttpService.js"></script>
         <script type="text/javascript" src="function/Authorization.js"></script>
+        <script type="text/javascript" src="function/allMerged_V5.js"></script>
+        <script type="text/javascript" src="function/actionHelpers.js"></script>
+        <script type="text/javascript" src="form/appViewTemplates.js"></script>
+        <script type="text/javascript" src="form/actionContent_UserData.js"></script>
+        <script type="text/javascript" src="form/sysDataSet.js"></script>
     </head>
     <body onload="check(event);">
-        <button onclick = "window.location.href='./html/signup.html';" class="ehh btn">SignUp with ehh</button>
-        <button onclick = "window.location.href='./html/signin.html';" class="ehh btn">Sign In ehh</button>
-        <button class="google btn" onclick="Authorization.oAuth(event,'json')">
-        <i class="fa fa-google fa-fw"></i> Sign In with Google+
-        </button>
     </body>
     <script>
         function check(event){
+            event.preventDefault();
+            var buttons = new Entity(indexJSON,document.getElementsByTagName('body')[0]);
             if(localStorage.getItem('LoginEhh'+localStorage.getItem('emailID')) === 'true' ||localStorage.getItem('LoginEhhGoogle'+localStorage.getItem('emailID')) === 'true'){
                 console.log("Logged In");
                 window.location.href = './html/indexActionSpace_V5Treeview.html';

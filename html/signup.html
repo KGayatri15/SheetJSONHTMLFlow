@@ -2,9 +2,14 @@
 <html>
   <head>
     <link rel="stylesheet" href="../beauty/signup.css"/>
+    <script type="text/javascript" src="../function/allMerged_V5.js"></script>
+    <script type="text/javascript" src="../function/actionHelpers.js"></script>
+    <script type="text/javascript" src="../form/appViewTemplates.js"></script>
+    <script type="text/javascript" src="../form/sysDataSet.js"></script>
+    <script type="text/javascript" src="../form/actionContent_UserData.js"></script>
   </head>
 <body>
-<div>
+<!-- <div>
   <form class="modal-content" onsubmit="submitData(event);">
     <div class="container">
       <h1>Sign Up</h1>
@@ -28,8 +33,12 @@
       </div>
     </div>
   </form>
-</div>
+</div> -->
 <script>
+  window.onload = (event)=>{
+            event.preventDefault();
+            var form = new Entity(SignUpJSON,document.getElementsByTagName('body')[0]);
+        }
 function submitData(event){
     event.preventDefault();
     console.log(document.getElementById('email').value);

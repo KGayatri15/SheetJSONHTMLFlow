@@ -1,3 +1,163 @@
+var SignUpJSON = {
+    'name':'form',
+    'class':'modal-content',
+    'onsubmit':"submitData(event);",
+    'container':{
+        'name':'div',
+        'class':'container',
+        'h1':{
+            'name':'h1',
+            'innerText':'Sign Up',
+        },
+        'p1':{
+            'name':'p',
+            'innerText':'Please fill in this form to create an account.',
+        },
+        'hr':{'name':'hr'},
+        'labelEmail':{
+            'name':'label',
+            'for':'email',
+            'innerHTML':'<b>Email</b>',
+        },
+        'inputEmail':{
+            'name':'input',
+            'type':'email',
+            'id':'email',
+            'required':'true',
+            'placeholder':'Enter Email',
+        },
+        'labelUsername':{
+            'name':'label',
+            'for':'username',
+            'innerHTML':'<b>Username</b>',
+        },
+        'inputUsername':{
+            'name':'input',
+            'type':'text',
+            'id':'username',
+            'required':'true',
+            'placeholder':'Enter Username',
+        },
+        'labelPsw':{
+            'name':'label',
+            'for':'psw',
+            'innerHTML':'<b>Password</b>',
+        },
+        'inputPasw':{
+            'name':'input',
+            'type':'password',
+            'id':'psw',
+            'required':'true',
+            'minlength':'5',
+            'placeholder':'Enter Password',
+        },
+        'label':{
+            'name':'label',
+            'checkbox':{
+                'name':'input',
+                'type':'checkbox',
+                'checked':'checked',
+                'style':'margin-bottom:15px',
+                'innerText':'Remember me'
+            }
+        },
+        'p2':{
+            'name':'p',
+            'innerText':'Already have an account ?',
+            'a':{
+                'name':'a',
+                'href':'./signin.html',
+                'style':'color:dodgerblue',
+                'innerText':'Sign In'
+            }
+        },
+        'clearfix':{
+            'name':'div',
+            'class':'clearfix',
+            'reset':{
+                'name':'input',
+                'type':'reset',
+                'class':'cancelbtn',
+                'value':'Cancel'
+            },
+            'submit':{
+                'name':'input',
+                'type':'submit',
+                'class':'signupbtn',
+                'value':'Sign Up'
+            }
+        }
+    }
+}
+var SignInJSON = {
+    'name':'form',
+    'class':'modal-content',
+    'onsubmit':"login(event);",
+    'container':{
+        'name':'div',
+        'class':'container',
+        'h1':{
+            'name':'h1',
+            'innerText':'Sign In',
+        },
+        'inputEmail':{
+            'name':'input',
+            'type':'text',
+            'id':'email',
+            'required':'true',
+            'placeholder':'Enter Username / Email',
+        },
+        'inputPassword':{
+            'name':'input',
+            'type':'password',
+            'id':'password',
+            'required':'true',
+            'minlength':'5',
+            'placeholder':'Enter Password',
+        },
+        'submit':{
+            'name':'input',
+            'type':'submit',
+            'class':'signin',
+            'value':'Sign In'
+        },
+        'p2':{
+            'name':'p',
+            'innerText':'Already have an account ?',
+            'a':{
+                'name':'a',
+                'href':'./signup.html',
+                'style':'color:dodgerblue',
+                'innerText':'Sign Up'
+            }
+        },
+    }
+}
+var indexJSON = {
+    'name':'div',
+    'signup':{
+        'name':'button',
+        'onclick':"window.location.href='./html/signup.html';",
+        'class':'ehh btn',
+        'innerText':'SignUp with ehh'
+    },
+    'signin':{
+        'name':'button',
+        'onclick':"window.location.href='./html/signin.html';",
+        'class':'ehh btn',
+        'innerText':'Sign In ehh'
+    },
+    'google':{
+        'name':'button',
+        'onclick':"Authorization.oAuth(event,'json');",
+        'class':'google btn',
+        'i':{
+            'name':'i',
+             'class':'fa fa-google fa-fw'
+        },
+        'innerText':'Sign In with Google+'
+    }
+}
 var basicLayout = {
     actionSpace: {
         name: 'div',
@@ -136,12 +296,12 @@ var basicLayout = {
                 {
                     actionContentTitle: {
                         name: 'div',
-                        innerText: actionStorySample.name,
+//                        innerText: actionStorySample.name,
 
                     },
                     name: 'actionStory',
                     'class': 'actionStory',
-                    'actionContent': actionStorySample,
+  //                  'actionContent': actionStorySample,
                     // mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
                     //  output: ['self', 'output'],
                     state: 'idle', //['selectable','selected','editable','inEdit','draggable','inDrag','locked','hidden']
@@ -170,7 +330,7 @@ var basicLayout = {
 var actionStoryTemplate = {
     "name": 'actionStoryTemplate_title',
     "id": 'actionStoryTemplate',
-    innerHTML: actionUserContent,
+    innerHTML: actionUserContent[0],
     //textContent: "this is a template actionStory",
     class: 'editable actionContent',
     'before': 'name',

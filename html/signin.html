@@ -4,19 +4,19 @@
         <title>Sign In</title>
         <link rel="stylesheet" href="../beauty/signin.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script type="text/javascript" src="../function/allMerged_V5.js"></script>
+        <script type="text/javascript" src="../function/actionHelpers.js"></script>
+        <script type="text/javascript" src="../form/appViewTemplates.js"></script>
+        <script type="text/javascript" src="../form/sysDataSet.js"></script>
+        <script type="text/javascript" src="../form/actionContent_UserData.js"></script>
     </head>
     <body>
-        <form class="modal-content" onsubmit="login(event);">
-            <div class="container">
-              <h1>Sign In</h1>
-              <input type="text" placeholder="Enter Username / Email" id="text" required>
-              <input type="password" placeholder="Enter Password" id="password" minlength="5" required>
-              <input type="submit" class="signin" value="Sign In"/>
-              <p>Don't have an account ?<a href="./signup.html" style="color:dodgerblue">Sign Up now</a>.</p>
-            </div>
-          </form>
     </body>
     <script>
+        window.onload = (event)=>{
+            event.preventDefault();
+            var form = new Entity(SignInJSON,document.getElementsByTagName('body')[0]);
+        }
         function login(event){
             event.preventDefault();
             var credentials = localStorage.getItem('Credentials');
