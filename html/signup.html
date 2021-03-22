@@ -13,19 +13,27 @@
   const scriptURL = 'https://script.google.com/macros/s/AKfycbwhMHmo6DoQDHcXQhsQ-QtG60ZZNdylybDzVL2aa1L96QCs2GgpF48EPM89Qmm8BPDEbw/exec';
   window.onload = (event)=>{
             event.preventDefault();
+            fetch(scriptURL)
+            .then(res =>{
+              console.log(res);
+            })
+            .catch(err =>{console.log(err)})
             var form = new Entity(SignUpJSON,document.getElementsByTagName('body')[0]);
   }
 function submitData(event){
     event.preventDefault();
-    console.log()
     var json = {
         'EmailId':document.getElementById('email').value,
         'Password':document.getElementById('psw').value,
         'Username':document.getElementById('username').value
     };
     console.log(json);
-    fetch(scriptURL,{method:'POST',body:json})
-    .then(res => console.log(res.json()))
+    fetch(scriptURL,{method:'POST',body:JSON.stringify(json)})
+    .then(res => {
+      console.log(res);
+      return JSON.parse(res);
+    })
+    .then((res)=>console.log(res))
     .catch(err=>console.log(err));
     // localStorage.setItem('LoginEhh'+localStorage.getItem('emailID'),true);
     // window.location.href = './indexActionSpace_V5Treeview.html';
