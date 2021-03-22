@@ -10,19 +10,12 @@
   </head>
 <body>
 <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbzIqxvsZoB8ATFb_sAdaP3I4WvBZH7cJTJQqsR5y05bX6R5YffUsXsVU9tJvOnwHwhMig/exec';
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwfDv5y9elBrAOqV8f2bwNDRVTc2cYpj9sHUFJ-z1n2-jGWmA1K0x3wIDmWX6t1w3xFPw/exec';
   window.onload = async(event)=>{
             event.preventDefault();
-            await fetch(scriptURL)
-            .then(res =>{
-              console.log("Status:- " + res.status);
-              return res.text();
-            })
-            .then(res=>console.log(res))
-            .catch(err =>{console.log(err)})
             var form = new Entity(SignUpJSON,document.getElementsByTagName('body')[0]);
   }
-function submitData(event){
+async function submitData(event){
     event.preventDefault();
     var json = {
         'EmailId':document.getElementById('email').value,
@@ -30,15 +23,29 @@ function submitData(event){
         'Username':document.getElementById('username').value
     };
     console.log(json);
-    fetch(scriptURL,{method:'POST',body:JSON.stringify(json)})
+    await fetch(scriptURL,{method:'POST',body:JSON.stringify(json)})
     .then(res => {
-      console.log("Status :- " + res.status);
+      console.log("Status of Sign Up POST request:- " + res.status);
       return res.text();
     })
-    .then((res)=>console.log(res))
+    .then((res)=>{
+      var response = JSON.parse(res);
+      if(response.result == 'success'){
+         console.log('Registered Successfully');
+         localStorage.setItem('LoginEhh'+document.getElementById('email').value,true);
+         window.location.href = './indexActionSpace_V5Treeview.html';
+      }else if(response.result == 'failed'){
+        console.log('User already exists Sign In to your account');
+        window.location.href = './signin.html';
+      }else{
+        console.log('Encountered an error.Try Again..Thank You for your patience !');
+      }
+    })
     .catch(err=>console.log(err));
-    // localStorage.setItem('LoginEhh'+localStorage.getItem('emailID'),true);
-    // window.location.href = './indexActionSpace_V5Treeview.html';
+    document.getElementById('email').value = '';
+    document.getElementById('psw').value = '';
+    document.getElementById('username').value = '';
+
 }
 </script>
 

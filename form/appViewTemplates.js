@@ -92,6 +92,7 @@ var SignUpJSON = {
 }
 }
 var SignInJSON = {
+    'form':{
     'name':'form',
     'class':'modal-content',
     'onsubmit':"login(event);",
@@ -107,7 +108,7 @@ var SignInJSON = {
             'type':'text',
             'id':'email',
             'required':'true',
-            'placeholder':'Enter Username / Email',
+            'placeholder':'Enter Email',
         },
         'inputPassword':{
             'name':'input',
@@ -133,6 +134,7 @@ var SignInJSON = {
                 'innerText':'Sign Up'
             }
         },
+    }
     }
 }
 var indexJSON = {

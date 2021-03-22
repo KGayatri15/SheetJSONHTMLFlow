@@ -13,29 +13,35 @@
     <body>
     </body>
     <script>
+     const scriptURL = 'https://script.google.com/macros/s/AKfycbwfDv5y9elBrAOqV8f2bwNDRVTc2cYpj9sHUFJ-z1n2-jGWmA1K0x3wIDmWX6t1w3xFPw/exec';
         window.onload = (event)=>{
             event.preventDefault();
             var form = new Entity(SignInJSON,document.getElementsByTagName('body')[0]);
         }
-        function login(event){
+        async function login(event){
             event.preventDefault();
-            var credentials = localStorage.getItem('Credentials');
-            if(credentials==null){
-                alert("You don't have an account with ehh Redirecting to Sign Up Page");
-                window.location.href = './signup.html';
-            }else{
-                var json = JSON.parse(credentials);
-                if(json['Password'] === document.getElementById('password').value &&(json['Username'] === document.getElementById('text').value ||json['EmailID'] === document.getElementById('text').value)){
-                    alert('Correct credentials');
-                    localStorage.setItem('emailID',json['EmailID']);
-                    localStorage.setItem('LoginEhh'+localStorage.getItem('emailID'),true);
+            var url = scriptURL + '?EmailId='+document.getElementById('email').value + '&Password='+document.getElementById('password').value ;
+            await fetch(url)
+            .then(res =>{
+              console.log("Status of Sign In GET request:- " + res.status);
+              return res.text();
+            })
+            .then(res=>{
+                console.log(res);
+                var response = JSON.parse(res);
+                if(response.result == 'success'){
+                    alert(response.output);
+                    localStorage.setItem('LoginEhh'+document.getElementById('email').value,true);
                     window.location.href = './indexActionSpace_V5Treeview.html';
+                }else if(response.result == 'failed'){
+                    alert(response.output);
                 }else{
-                    alert("Wrong Credentials");
-                    document.getElementById('text').value = '';
-                    document.getElementById('password').value = '';
+                    alert('Encountered an error.Try Again..Thank You for your patience !');
                 }
-            }
+            })
+            .catch(err =>{console.log(err)})
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
         }
     </script>
 </html>
