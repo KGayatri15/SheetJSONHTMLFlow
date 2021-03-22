@@ -1,4 +1,5 @@
 var SignUpJSON = {
+    'form':{
     'name':'form',
     'class':'modal-content',
     'onsubmit':"submitData(event);",
@@ -74,20 +75,21 @@ var SignUpJSON = {
         'clearfix':{
             'name':'div',
             'class':'clearfix',
+            'submit':{
+                'name':'input',
+                'type':'submit',
+                'class':'signupbtn',
+                'value':'Sign Up'
+            },
             'reset':{
                 'name':'input',
                 'type':'reset',
                 'class':'cancelbtn',
                 'value':'Cancel'
             },
-            'submit':{
-                'name':'input',
-                'type':'submit',
-                'class':'signupbtn',
-                'value':'Sign Up'
-            }
         }
     }
+}
 }
 var SignInJSON = {
     'name':'form',
