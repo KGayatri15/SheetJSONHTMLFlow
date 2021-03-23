@@ -7,16 +7,27 @@
         <script type="text/javascript" src="../function/allMerged_V5.js"></script>
         <script type="text/javascript" src="../function/actionHelpers.js"></script>
         <script type="text/javascript" src="../form/sysDataSet.js"></script>
-        <script type="text/javascript" src="../form/actionContent_UserData.js"></script>
-        <script type="text/javascript" src="../form/appViewTemplates.js"></script>
+        <script type="text/javascript" src="../function/mutate.js"></script>
     </head>
     <body>
     </body>
     <script>
-     const scriptURL = 'https://script.google.com/macros/s/AKfycbwfDv5y9elBrAOqV8f2bwNDRVTc2cYpj9sHUFJ-z1n2-jGWmA1K0x3wIDmWX6t1w3xFPw/exec';
-        window.onload = (event)=>{
+     const scriptURL =  'https://script.google.com/macros/s/AKfycbx-oLKqh-VhkR9PmQ7RsRGMN0_NyvpfNtU_obcoOZQkofcSAbMpDv5BshgwWUB2uLttGg/exec';
+        window.onload = async(event)=>{
             event.preventDefault();
-            var form = new Entity(SignInJSON,document.getElementsByTagName('body')[0]);
+            event.preventDefault();
+            var url = scriptURL + '?form=signin';
+            await fetch(url)
+            .then(res =>{ return res.text();})
+            .then(res=>{
+                console.log(res);
+                var response = JSON.parse(res);
+                if(response.result == 'success'){
+                  var json = mutate.arr2Object(response.output,response.output[0],{});
+                  var form = new Entity(json,document.getElementsByTagName('body')[0]);
+                }
+            })
+            .catch(err =>{console.log(err)})
         }
         async function login(event){
             event.preventDefault();
