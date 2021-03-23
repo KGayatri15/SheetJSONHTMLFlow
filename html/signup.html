@@ -1,63 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>SignUp</title>
     <link rel="stylesheet" href="../beauty/signup.css"/>
     <script type="text/javascript" src="../function/allMerged_V5.js"></script>
     <script type="text/javascript" src="../function/actionHelpers.js"></script>
     <script type="text/javascript" src="../form/sysDataSet.js"></script>
     <script type="text/javascript" src="../function/mutate.js"></script>
+    <script type="text/javascript" src = "../function/HttpService.js"></script>
+    <script type="text/javascript" src="../function/ASC_Credentials.js"></script>
   </head>
-<body>
-<script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbx-oLKqh-VhkR9PmQ7RsRGMN0_NyvpfNtU_obcoOZQkofcSAbMpDv5BshgwWUB2uLttGg/exec';
-  window.onload = async(event)=>{
-            event.preventDefault();
-            var url = scriptURL + '?form=signup';
-            await fetch(url)
-            .then(res =>{ return res.text();})
-            .then(res=>{
-                var response = JSON.parse(res);
-                if(response.result == 'success'){
-                  var json = mutate.arr2Object(response.output,response.output[0],{});
-                  console.log(json);
-                  var form = new Entity(json,document.getElementsByTagName('body')[0]);
-                }
-            })
-            .catch(err =>{console.log(err)})
-  }
-async function submitData(event){
-    event.preventDefault();
-    var json = {
-        'EmailId':document.getElementById('email').value,
-        'Password':document.getElementById('psw').value,
-        'Username':document.getElementById('username').value
-    };
-    console.log(json);
-    await fetch(scriptURL,{method:'POST',body:JSON.stringify(json)})
-    .then(res => {
-      console.log("Status of Sign Up POST request:- " + res.status);
-      return res.text();
-    })
-    .then((res)=>{
-      var response = JSON.parse(res);
-      if(response.result == 'success'){
-         console.log('Registered Successfully');
-         localStorage.setItem('LoginEhh'+document.getElementById('email').value,true);
-         window.location.href = './indexActionSpace_V5Treeview.html';
-      }else if(response.result == 'failed'){
-        console.log('User already exists Sign In to your account');
-        window.location.href = './signin.html';
-      }else{
-        console.log('Encountered an error.Try Again..Thank You for your patience !');
-      }
-    })
-    .catch(err=>console.log(err));
-    document.getElementById('email').value = '';
-    document.getElementById('psw').value = '';
-    document.getElementById('username').value = '';
-
-}
-</script>
-
+<body onload="ASC_Credentials.LoadData(event);">
 </body>
 </html>

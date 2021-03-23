@@ -29,16 +29,4 @@ var actionUserContent = [
         <br>https://htmldom.dev/make-a-resizable-element/
         <br>https://htmldom.dev/create-resizable-split-views/`
         }
-
         ]
-
-// const sampleNote0 = {
-//     id: uuid(),
-//     text: `# Scratchpad The easiest note to find.`,
-//     category: '',
-//     scratchpad: true,
-//     class:'richText',
-//     favorite: false,
-//     created: dayjs().format(),
-//     lastUpdated: dayjs().format(),
-// }

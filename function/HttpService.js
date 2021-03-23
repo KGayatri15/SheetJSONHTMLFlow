@@ -10,12 +10,11 @@ class HttpService{
         var request = {
             method:method,
             cache: 'no-cache',
-            headers:headers,
         }
+        if(headers !== undefined)
+            request['headers'] = headers;
         if(body !== undefined)
-                request['body'] = body;              
-            request['body'] = body;
-                request['body'] = body;              
+            request['body'] = body;                       
         return request;
     }
     static async FileUpload(file) {
@@ -39,7 +38,7 @@ class HttpService{
         };
           reader.onerror = error => reject(error);
         });
-      }
+    }
     static async fetchRequest(url,request){
     var res;
     console.log("URL :-" + url);
@@ -56,7 +55,6 @@ class HttpService{
             })
             .catch(err=>{
                 console.log("Failed to make a request due to " + err);
-                new Error(err);
             })
     return res;
     }

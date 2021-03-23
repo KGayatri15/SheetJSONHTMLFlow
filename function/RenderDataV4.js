@@ -10,32 +10,30 @@ var info = {
 }
 var userHeader = info['spreadsheet']['headers'];
 var emailID;
-class Flow{
-    static async loadData(event){
-    event.preventDefault();
-    userHeader['Authorization'] = Authorization.authToken(window.location.href);
-    var getEmail = await HttpService.fetchRequest( 'https://www.googleapis.com/oauth2/v2/userinfo',HttpService.requestBuilder("GET",userHeader));
-     if(!getEmail.error){
-             emailID = getEmail.email;
-            localStorage.setItem('emailID' , emailID);
-            localStorage.setItem('Authorization',userHeader['Authorization']);
-    }
-    console.log(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')));
-    var response;
-    if(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID'))!== null){
-        response = await Credentials.actions(event,"LOGGED IN");
-    }else{
-        var response1 = await Credentials.actions(event,"CREATE");
-        if(!response1.error)
-            response = await Credentials.actions(event,"SIGNIN",[[localStorage.getItem('emailID'),'Login with Google']]);
-    }
-    if(!response.error){
-        localStorage.setItem('LoginEhhGoogle'+localStorage.getItem('emailID') ,true);
-        window.location.href = './indexActionSpace_V5Treeview.html';
-    }
-    }
-}
 class Credentials{
+    static async loadData(event){
+        event.preventDefault();
+        userHeader['Authorization'] = Authorization.authToken(window.location.href);
+        var getEmail = await HttpService.fetchRequest( 'https://www.googleapis.com/oauth2/v2/userinfo',HttpService.requestBuilder("GET",userHeader));
+         if(!getEmail.error){
+                 emailID = getEmail.email;
+                localStorage.setItem('emailID' , emailID);
+                localStorage.setItem('Authorization',userHeader['Authorization']);
+        }
+        console.log(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID')));
+        var response;
+        if(localStorage.getItem('UserSpreadsheetID'+localStorage.getItem('emailID'))!== null){
+            response = await Credentials.actions(event,"LOGGED IN");
+        }else{
+            var response1 = await Credentials.actions(event,"CREATE");
+            if(!response1.error)
+                response = await Credentials.actions(event,"SIGNIN",[[localStorage.getItem('emailID'),'Login with Google']]);
+        }
+        if(!response.error){
+            localStorage.setItem('LoginEhhGoogle'+localStorage.getItem('emailID') ,true);
+            window.location.href = './indexActionSpace_V5Treeview.html';
+        }
+        }
     static async actions(event,type,output){
         event.preventDefault();var body,response;
         var url = info['spreadsheet']['url'];

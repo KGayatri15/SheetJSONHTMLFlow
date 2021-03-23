@@ -156,16 +156,3 @@ class mutate {
         return output;
       }
 }
-
-function start1() {
-   
-    console.log("Input:- Object To Array");
-    console.log(actionflowSample);
-    var outputArray = mutate.Obj2(actionflowSample, []);
-    console.log("output Array[Input:- Array To Object] ", outputArray);
-    document.getElementById('opArray').value = outputArray;
-    var outputJson = mutate.arr2Object(outputArray,outputArray[0] ,{});
-    console.log("Output :- Array To Object");
-    console.log(outputJson);
-    document.getElementById('opJSON').value = outputJson;
-}

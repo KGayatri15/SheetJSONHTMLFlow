@@ -1,58 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Sign In</title>
-        <link rel="stylesheet" href="../beauty/signin.css"/>
+        <title>SignIn</title>
+        <link rel="stylesheet" href="../beauty/signup.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script type="text/javascript" src="../function/allMerged_V5.js"></script>
         <script type="text/javascript" src="../function/actionHelpers.js"></script>
         <script type="text/javascript" src="../form/sysDataSet.js"></script>
         <script type="text/javascript" src="../function/mutate.js"></script>
+        <script type="text/javascript" src = "../function/HttpService.js"></script>
+        <script type="text/javascript" src="../function/ASC_Credentials.js"></script>
     </head>
-    <body>
+    <body onload="ASC_Credentials.LoadData(event);">
     </body>
-    <script>
-     const scriptURL =  'https://script.google.com/macros/s/AKfycbx-oLKqh-VhkR9PmQ7RsRGMN0_NyvpfNtU_obcoOZQkofcSAbMpDv5BshgwWUB2uLttGg/exec';
-        window.onload = async(event)=>{
-            event.preventDefault();
-            event.preventDefault();
-            var url = scriptURL + '?form=signin';
-            await fetch(url)
-            .then(res =>{ return res.text();})
-            .then(res=>{
-                console.log(res);
-                var response = JSON.parse(res);
-                if(response.result == 'success'){
-                  var json = mutate.arr2Object(response.output,response.output[0],{});
-                  var form = new Entity(json,document.getElementsByTagName('body')[0]);
-                }
-            })
-            .catch(err =>{console.log(err)})
-        }
-        async function login(event){
-            event.preventDefault();
-            var url = scriptURL + '?EmailId='+document.getElementById('email').value + '&Password='+document.getElementById('password').value ;
-            await fetch(url)
-            .then(res =>{
-              console.log("Status of Sign In GET request:- " + res.status);
-              return res.text();
-            })
-            .then(res=>{
-                console.log(res);
-                var response = JSON.parse(res);
-                if(response.result == 'success'){
-                    alert(response.output);
-                    localStorage.setItem('LoginEhh'+document.getElementById('email').value,true);
-                    window.location.href = './indexActionSpace_V5Treeview.html';
-                }else if(response.result == 'failed'){
-                    alert(response.output);
-                }else{
-                    alert('Encountered an error.Try Again..Thank You for your patience !');
-                }
-            })
-            .catch(err =>{console.log(err)})
-            document.getElementById('email').value = '';
-            document.getElementById('password').value = '';
-        }
-    </script>
 </html>
