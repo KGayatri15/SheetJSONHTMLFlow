@@ -54,7 +54,7 @@ var GetDataFromSheet = {
             'type':'submit',
             'class':'button btn',
             'value':'Get',
-            'data-command': `[{"command":"set",}]`,
+            'data-command': `[{"command":"get"}]`,
         },
     }
 }
@@ -100,7 +100,7 @@ var SendDataToSheet = {
             'type':'submit',
             'class':'button btn',
             'value':'Send',
-            'data-command': `[{"command":"set",}]`,
+            'data-command': `[{"command":"set"}]`,
         },
     }
 }
@@ -348,7 +348,7 @@ var headerModelSchemaV1 = {
             },
             'setData':{
                 'name':'button',
-                'data-command': `[{"command":"get","entity":"setForm"}]`,
+                'data-command': `[{"command":"view","entity":"setForm"}]`,
                 'innerText':'Send Data'
             }
         },

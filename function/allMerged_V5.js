@@ -273,7 +273,6 @@ class ActionController extends ActionEvent {
         console.log("key was up")
     }
     onClick(event) {
-        //   console.log("clicked On", entity.target)
         /**
          * check if the target entity has any click or data - command set, if yes, then process it.
          */
@@ -283,7 +282,6 @@ class ActionController extends ActionEvent {
             var commandJSOn = JSON.parse(dataCommandT);
  //           console.log( "Command "+ JSON.stringify(commandJSOn));
             switch (commandJSOn[0].command) {
-
 //sheet
                 case 'view':
                     ActionView.showModal(commandJSOn[0].entity);break;
@@ -325,61 +323,13 @@ class ActionController extends ActionEvent {
                     break;
                 default:
                 // console.log("I don't know such values",event.type);
-            }
-
-
-            
-           // this.save(event);
-            //console.log(entity.target.getAttribute('data'), typeof (json))
-         //   var dataCommandT = entity.target.data-command;
-           // var dataCommandT = entity.target.getAttribute('data-command');
-           // var commandJSOn = JSON.parse(dataCommandT);
-        //    window[commandArray[0].call];
-          //  console.log(commandJSOn)    
-
-            // if (commandJSOn[0].class) { 
-            //     console.log(commandJSOn)    
-            //     var actionClass =  'commandJSOn[0].class' ;
-            //     console.log(actionClass, typeof actionClass);
-            //     var actionMethod = commandJSOn[0].method;
-            //     console.log(actionMethod, typeof actionMethod);
-
-            //     var actionArg1 = commandJSOn[0].arg1;
-            //     console.log(actionArg1, typeof actionArg1);
-            //     var actionArguments = {
-            //        // actionClass.actionMethod.actionArg1.call()
-                    
-            //     }
-
-            //   //  var output = window[JSON.parse(actionArg1)]
-            //   //  console.log(output)
-
-            //    // var Action = process.act(actionClass, actionMethod, actionArg1, commandJSOn[0].arg2);
-            // }
-          //  
-           // dataCommandT.call();
-//            'data': `command `,
-  //              StorageHelper.saveToStorage(document.getElementById('actionContent').getAttribute('name'), document.getElementById('sampleNote#1').innerHTML)
-
-            //func.call([thisArg[, arg1, arg2, ...argN]])
+            }   
         }
         if (event.target.classList.contains('editable')) { 
            // console.log("clickedOn", entity.target.id, entity.target.classList.contains('editable')) // TO check if it's content
             event.target.setAttribute('contentEditable', 'true');
             //entity.target.setAttribute('State', "contentEditable");
         }
-
-      //  var currentSelection = window.getSelection();
-      //
-       // console.log(currentSelection);
-       // var focusText = currentSelection.anchorNode.data;
-      //  var focusTextEntity = entity.target.textContent; //Pure text
-       // var focusEntityInnerText = entity.target.innerText; // Rendered Text
-        // console.log("focusEntityInnerText", currentSelection);
-       // var currentCaret = currentSelection.anchorOffset;
-       
-//entity.target.setSelectionRange(currentSelection,0)
-
 
     }
     onMouseOver(event) { 
@@ -486,12 +436,12 @@ class ActionView {
     }
     static modal(event){
         event.preventDefault();
-        var modal1 = document.getElementById('get');
-        var modal2 = document.getElementById('set');
+        var modal1 = document.getElementById('getForm');
+        var modal2 = document.getElementById('setForm');
         if(event.target === modal1){
             modal1.style.display = "none";
         }else if(event.target === modal2){
-            modal1.style.display = "none";
+            modal2.style.display = "none";
         }
     }
     static show(){
