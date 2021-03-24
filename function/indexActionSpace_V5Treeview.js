@@ -19,7 +19,8 @@ var actionViewInstance = new ActionView(actionSpaceModel,actionSpaceElementInsta
 var actionEventInstance = new ActionEvent(actionSpaceElementInstanceIndom,window);
 var actionSpaceControllerInstance = new ActionController(actionSpace35,actionViewInstance,actionEventInstance); 
 //var autoSuggestCard = new Entity(itemListModelSchema, document.getElementById('editor'));
-
+var GetData = new Entity(GetDataFromSheet, document.getElementById('getForm'));
+var SendData = new Entity(SendDataToSheet, document.getElementById('setForm'));
 //Adding Shortcuts 
 Shortcut.add('Ctrl+S',processFS.saveFile);
 Shortcut.add('F12',processFS.saveAsFile);

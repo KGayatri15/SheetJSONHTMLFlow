@@ -1,3 +1,109 @@
+var GetDataFromSheet = {
+    'form':{
+        'name':'form',
+        'class':'modal-content animate',
+        'id':'get',
+        'h1':{
+            'name':'h1',
+            'innerText':'Get Data from Sheet'
+        },
+        'label1':{
+            'name':'label',
+            'b':{
+                'name':'b',
+                'innerText':'File ID of Spreadsheet'
+            }
+        },
+        'input1':{
+            'name':'input',
+            'type':'text',
+            'placeholder':'Enter FileID of spreadsheet',
+            'id':'fileID',
+            'required':'true'
+        },
+        'label2':{
+            'name':'label',
+            'b':{
+                'name':'b',
+                'innerText':'Name of the sheet'
+            }
+        },
+        'input2':{
+            'name':'input',
+            'type':'text',
+            'placeholder':'Enter Name of the Sheet',
+            'id':'sheetName',
+            'required':'true'
+        },
+        'label3':{
+            'name':'label',
+            'b':{
+                'name':'b',
+                'innerText':'Range'
+            }
+        },
+        'input3':{
+            'name':'input',
+            'type':'text',
+            'placeholder':'Enter Range',
+            'id':'range',
+            'required':'true'
+        },
+        'input4':{
+            'name':'input',
+            'type':'submit',
+            'class':'button btn',
+            'value':'Get',
+            'data-command': `[{"command":"set",}]`,
+        },
+    }
+}
+var SendDataToSheet = {
+    'form':{
+        'name':'form',
+        'class':'modal-content animate',
+        'id':'set',
+        'h1':{
+            'name':'h1',
+            'innerText':'Send Data to Sheet'
+        },
+        'label1':{
+            'name':'label',
+            'b':{
+                'name':'b',
+                'innerText':'File ID of Spreadsheet'
+            }
+        },
+        'input1':{
+            'name':'input',
+            'type':'text',
+            'placeholder':'Enter FileID of spreadsheet',
+            'id':'file-ID',
+            'required':'true'
+        },
+        'label2':{
+            'name':'label',
+            'b':{
+                'name':'b',
+                'innerText':'Name of the sheet'
+            }
+        },
+        'input2':{
+            'name':'input',
+            'type':'text',
+            'placeholder':'Enter Name of the Sheet',
+            'id':'sheet_Name',
+            'required':'true'
+        },
+        'input4':{
+            'name':'input',
+            'type':'submit',
+            'class':'button btn',
+            'value':'Send',
+            'data-command': `[{"command":"set",}]`,
+        },
+    }
+}
 var SignUpJSON = {
     'form':{
     'name':'form',
@@ -237,16 +343,12 @@ var headerModelSchemaV1 = {
             'innerText':'Google Sheet :- ',
             'getData': {
                 'name':'button',
-                // 'class':'button',
-                'onclick':"document.getElementById('get').style.display='block'",
-               // 'style':'width:10%;',
-                'innerText':'Get Data'
+                'innerText':'Get Data',
+                'data-command': `[{"command":"view","entity":"getForm"}]`,
             },
             'setData':{
                 'name':'button',
-                // 'class':'button',
-                 'onclick':"document.getElementById('send').style.display='block'",
-               // 'style':'width:10%;',
+                'data-command': `[{"command":"get","entity":"setForm"}]`,
                 'innerText':'Send Data'
             }
         },
@@ -259,27 +361,27 @@ var headerModelSchemaV1 = {
             'OpenDirectory':{
                 'name':'button',
                 'innerText':'Open a Directory',
-                'onclick':'processFS.OpenDirectory(event);'
+                'data-command': `[{"command":"FSOpenDirectory",}]`,
             },
             'New':{
                 'name':'button',
                 'innerText':'New',
-                'onclick':'processFS.NewFile(event);'
+                'data-command': `[{"command":"FSNew",}]`,
             },
             'Open':{
                 'name':'button',
                 'innerText':'Open a File(Ctrl + O)',
-                'onclick':'processFS.readFile(event);'
+                'data-command': `[{"command":"FSOpen",}]`,
             },
             'Save':{
                 'name':'button',
                 'innerText':'Save (Ctrl + S)',
-                'onclick':'processFS.saveFile(event);'
+                'data-command': `[{"command":"FS_Save",}]`,
             },
             'Save As':{
                 'name':'button',
                 'innerText':'Save as(F12)',
-                'onclick':'processFS.saveAsFile(event);'
+                'data-command': `[{"command":"FS_SaveAs",}]`,
             }
         }
     }

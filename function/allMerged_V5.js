@@ -214,6 +214,8 @@ class ActionController extends ActionEvent {
                 this.onClick(event);
                //  console.log("click", event.type, event.target)
                 break;
+            case 'submit':
+                this.onSubmit(event);
             case 'selectstart':
                 //console.log("selectstart", event.type, event.target)
                 break;
@@ -275,43 +277,48 @@ class ActionController extends ActionEvent {
         /**
          * check if the target entity has any click or data - command set, if yes, then process it.
          */
-        console.log("Clicked" + event.target.hasAttribute('data-command'));
         if (event.target.hasAttribute("data-command")) { 
             var dataCommandT = event.target.getAttribute('data-command');
             console.log(dataCommandT);
             var commandJSOn = JSON.parse(dataCommandT);
-            console.log( "Command "+ JSON.stringify(commandJSOn));
+ //           console.log( "Command "+ JSON.stringify(commandJSOn));
             switch (commandJSOn[0].command) {
+
+//sheet
+                case 'view':
+                    ActionView.showModal(commandJSOn[0].entity);break;
+                case 'get':
+                    Sync.get(event);break;    
+                case 'set':
+                    Sync.send(event);break;
+//File System
+                case 'FSOpenDirectory':
+                    processFS.OpenDirectory(event);break;
+                case 'FSNew':
+                    processFS.NewFile(event);break;
+                case 'FSOpen':
+                    processFS.readFile(event);break;
+                case 'FS_Save':
+                    processFS.saveFile(event);break;
+                case 'FS_SaveAs':
+                    processFS.saveAsFile(event);break;
+// local storage
                 case 'new':
-                    this.new1(event);
-                    //  console.log("new", event.type, event.target)
-                    break;
+                    this.new1(event);break;
                 case 'save':
-                    this.save(event);
-                    //console.log("selectstart", event.type, event.target)
-                    break;
+                    this.save(event);break;
                 case 'cloud':
-                    //  this.emit('keypress', event)
-                    this.load(event)
-                    // console.log("keypress", event.type, event.target)
-                    break;
+                    this.load(event);break;
                 case 'download':
-                    this.download(event)
-                    break;
+                    this.download(event);break;
                 case 'delete':
-                    this.delete(event)
-                    break;
+                    this.delete(event);break;
                 case 'logout':
-                    this.logout(event)
-                    break;
+                    this.logout(event);break;
                 case 'keyup':
-                    this.onKeyUp(event)
-                    //  console.log("message", event.type, event.target)
-                    break;
+                    this.onKeyUp(event);break;
                 case 'mouseover':
-                    this.onMouseOver(event);
-                    //console.log("mouseover", event.type, event.target)
-                    break;
+                    this.onMouseOver(event);break;
                 case 'storage':
                     console.log("storage", event.type, event.target)
                     console.log(Object.keys(actionStorageInstance.entity))
@@ -474,19 +481,22 @@ class ActionView {
         document.querySelector('.loader').style.visibility = "visible";
         document.querySelector('actionSpaceHolderElement').style.visibility = "hidden";
     }
-    static show(){
-        document.querySelector('.loader').style.visibility = "hidden";
-        document.querySelector('actionSpaceHolderElement').style.visibility = "visible";
+    static showModal(id){
+        document.getElementById(id).style.display = 'block';
     }
     static modal(event){
         event.preventDefault();
         var modal1 = document.getElementById('get');
-        var modal2 = document.getElementById('send');
+        var modal2 = document.getElementById('set');
         if(event.target === modal1){
             modal1.style.display = "none";
         }else if(event.target === modal2){
             modal1.style.display = "none";
         }
+    }
+    static show(){
+        document.querySelector('.loader').style.visibility = "hidden";
+        document.querySelector('actionSpaceHolderElement').style.visibility = "visible";
     }
     static updateTitle(name){
         document.getElementById('loadedRouteTitle').innerText = name;  
