@@ -3,6 +3,8 @@ var GetDataFromSheet = {
         'name':'form',
         'class':'modal-content animate',
         'id':'get',
+        'onsubmit':'alert("You are with us");',
+        'data-command': `[{"command":"get"}]`,
         'h1':{
             'name':'h1',
             'innerText':'Get Data from Sheet'
@@ -19,7 +21,7 @@ var GetDataFromSheet = {
             'type':'text',
             'placeholder':'Enter FileID of spreadsheet',
             'id':'fileID',
-            'required':'true'
+            'required':true
         },
         'label2':{
             'name':'label',
@@ -33,7 +35,7 @@ var GetDataFromSheet = {
             'type':'text',
             'placeholder':'Enter Name of the Sheet',
             'id':'sheetName',
-            'required':'true'
+            'required':true
         },
         'label3':{
             'name':'label',
@@ -47,14 +49,13 @@ var GetDataFromSheet = {
             'type':'text',
             'placeholder':'Enter Range',
             'id':'range',
-            'required':'true'
+            'required':true
         },
         'input4':{
             'name':'input',
             'type':'submit',
             'class':'button btn',
             'value':'Get',
-            'data-command': `[{"command":"get"}]`,
         },
     }
 }
@@ -63,6 +64,8 @@ var SendDataToSheet = {
         'name':'form',
         'class':'modal-content animate',
         'id':'set',
+        'onsubmit':'Sync.send(event);',
+        'data-command': `[{"command":"set"}]`,
         'h1':{
             'name':'h1',
             'innerText':'Send Data to Sheet'
@@ -96,11 +99,10 @@ var SendDataToSheet = {
             'required':'true'
         },
         'input4':{
-            'name':'input',
+            'name':'button',
             'type':'submit',
             'class':'button btn',
             'value':'Send',
-            'data-command': `[{"command":"set"}]`,
         },
     }
 }
@@ -108,7 +110,6 @@ var SignUpJSON = {
     'form':{
     'name':'form',
     'class':'modal-content',
-    'onsubmit':"submitData(event);",
     'container':{
         'name':'div',
         'class':'container',
@@ -248,19 +249,20 @@ var indexJSON = {
     'signup':{
         'name':'button',
         'onclick':"window.location.href='./html/signup.html';",
-        'class':'ehh btn',
+        'class':'button btn',
         'innerText':'SignUp with ehh'
     },
     'signin':{
         'name':'button',
         'onclick':"window.location.href='./html/signin.html';",
-        'class':'ehh btn',
+        'class':'button btn',
         'innerText':'Sign In ehh'
     },
     'google':{
         'name':'button',
         'onclick':"Authorization.oAuth(event,'json');",
-        'class':'google btn',
+        'class':'button btn',
+        'style':'background-color: #dd4b39;',
         'i':{
             'name':'i',
              'class':'fa fa-google fa-fw'
@@ -361,27 +363,27 @@ var headerModelSchemaV1 = {
             'OpenDirectory':{
                 'name':'button',
                 'innerText':'Open a Directory',
-                'data-command': `[{"command":"FSOpenDirectory",}]`,
+                'data-command': `[{"command":"FSOpenDirectory"}]`,
             },
             'New':{
                 'name':'button',
                 'innerText':'New',
-                'data-command': `[{"command":"FSNew",}]`,
+                'data-command': `[{"command":"FSNew"}]`,
             },
             'Open':{
                 'name':'button',
                 'innerText':'Open a File(Ctrl + O)',
-                'data-command': `[{"command":"FSOpen",}]`,
+                'data-command': `[{"command":"FSOpen"}]`,
             },
             'Save':{
                 'name':'button',
                 'innerText':'Save (Ctrl + S)',
-                'data-command': `[{"command":"FS_Save",}]`,
+                'data-command': `[{"command":"FS_Save"}]`,
             },
             'Save As':{
                 'name':'button',
                 'innerText':'Save as(F12)',
-                'data-command': `[{"command":"FS_SaveAs",}]`,
+                'data-command': `[{"command":"FS_SaveAs"}]`,
             }
         }
     }
@@ -591,6 +593,7 @@ var directoryJSON = {
         'name':'span',
         'class':'caret',
         'innerText':'', //inner Text will be included
+        'data-command': `[{"command":"caret"}]`,
     },
     'list':{
         'name':'ul',
@@ -603,8 +606,9 @@ var fileJSON = {
     'name':'li',
     'id':'', //id - Unique ID with which file handle of this file retrieved from indexDB
      'class':'file',//used for opening file
-     'innerText':''
+     'innerText':'',
      //innerText - name of the file
+     'data-command': `[{"command":"file"}]`,
 }
 
 

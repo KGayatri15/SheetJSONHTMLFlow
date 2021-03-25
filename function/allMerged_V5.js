@@ -205,8 +205,24 @@ class ActionController extends ActionEvent {
         window.addEventListener('click', e => this.emit('handleEvent', e));
         window.addEventListener('keypress', e => this.emit('handleEvent', e));
         window.addEventListener('keyup', e => this.emit('handleEvent', e));
+        // var forms =  document.querySelectorAll('form');
+        // console.log("No of forms :- " + forms.length);
+        // forms.forEach(form =>{
+        //      form.addEventListener('onSubmit',this.formSubmit,false);
+        //  })
+        
     }
-
+    formSubmit(event){
+        if(!isValid)
+            event.preventDefault();
+        console.log('Target ID :- '+ e.getAttribute('id'));
+        switch(event.getAttribute('id')){
+            case 'get':
+                Sync.get(e);console.log(event.target);break;    
+            case 'set':
+                Sync.send(e);console.log(event.target);break;          
+        }
+    }
     handleEvent(event) {
        // console.log(event.type)
         switch (event.type) {
@@ -276,6 +292,7 @@ class ActionController extends ActionEvent {
         /**
          * check if the target entity has any click or data - command set, if yes, then process it.
          */
+        console.log( "Clicked" + event.target);
         if (event.target.hasAttribute("data-command")) { 
             var dataCommandT = event.target.getAttribute('data-command');
             console.log(dataCommandT);
@@ -286,9 +303,9 @@ class ActionController extends ActionEvent {
                 case 'view':
                     ActionView.showModal(commandJSOn[0].entity);break;
                 case 'get':
-                    Sync.get(event);break;    
+                    Sync.get(event);console.log(event.target);break;    
                 case 'set':
-                    Sync.send(event);break;
+                    Sync.send(event);console.log(event.target);break;
 //File System
                 case 'FSOpenDirectory':
                     processFS.OpenDirectory(event);break;
@@ -300,6 +317,10 @@ class ActionController extends ActionEvent {
                     processFS.saveFile(event);break;
                 case 'FS_SaveAs':
                     processFS.saveAsFile(event);break;
+                // case 'file':
+                //     this.file(event);break;
+                // case 'caret':
+                //     this.caret(event);break;
 // local storage
                 case 'new':
                     this.new1(event);break;

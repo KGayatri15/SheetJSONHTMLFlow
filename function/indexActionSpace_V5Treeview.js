@@ -7,6 +7,8 @@
 async function load(event){
 event.preventDefault();
 ActionView.preLoader();
+var GetData = new Entity(GetDataFromSheet, document.getElementById('getForm'));
+var SendData = new Entity(SendDataToSheet, document.getElementById('setForm'));
 var actionSpaceElementInstanceIndom = document.getElementById('actionSpaceContainer')
 //console.log(HorizonticalMenuTemplateSchema,actionSpaceElementInstanceIndom)
 var header = new Entity(headerModelSchemaV1,actionSpaceElementInstanceIndom);
@@ -19,8 +21,6 @@ var actionViewInstance = new ActionView(actionSpaceModel,actionSpaceElementInsta
 var actionEventInstance = new ActionEvent(actionSpaceElementInstanceIndom,window);
 var actionSpaceControllerInstance = new ActionController(actionSpace35,actionViewInstance,actionEventInstance); 
 //var autoSuggestCard = new Entity(itemListModelSchema, document.getElementById('editor'));
-var GetData = new Entity(GetDataFromSheet, document.getElementById('getForm'));
-var SendData = new Entity(SendDataToSheet, document.getElementById('setForm'));
 //Adding Shortcuts 
 Shortcut.add('Ctrl+S',processFS.saveFile);
 Shortcut.add('F12',processFS.saveAsFile);

@@ -7,7 +7,6 @@ const pickerOpts = {
           'text/*':['.txt','.html','.json','.js','.xml','.csv'],
           'image/*':['.jpg','.jpeg','.png'],
           'video/*':['.mp4'],
-          'application/*':['vnd.ms-excel','vnd.openxmlformats-officedocument.spreadsheetml.sheet']
         }
       },
     ],
