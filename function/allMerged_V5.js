@@ -299,6 +299,13 @@ class ActionController extends ActionEvent {
             var commandJSOn = JSON.parse(dataCommandT);
  //           console.log( "Command "+ JSON.stringify(commandJSOn));
             switch (commandJSOn[0].command) {
+//home page
+                case 'signup':
+                    window.location.href='./html/signup.html';break;
+                case 'signin':
+                    window.location.href='./html/signin.html';break;
+                case 'google':
+                    Authorization.oAuth(event,'json');break;
 //sheet
                 case 'view':
                     ActionView.showModal(commandJSOn[0].entity);break;

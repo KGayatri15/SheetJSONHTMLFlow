@@ -248,19 +248,19 @@ var indexJSON = {
     'name':'div',
     'signup':{
         'name':'button',
-        'onclick':"window.location.href='./html/signup.html';",
+        'data-command': `[{"command":"signup"}]`,
         'class':'button btn',
         'innerText':'SignUp with ehh'
     },
     'signin':{
         'name':'button',
-        'onclick':"window.location.href='./html/signin.html';",
+        'data-command': `[{"command":"signin"}]`,
         'class':'button btn',
         'innerText':'Sign In ehh'
     },
     'google':{
         'name':'button',
-        'onclick':"Authorization.oAuth(event,'json');",
+        'data-command': `[{"command":"google"}]`,
         'class':'button btn',
         'style':'background-color: #dd4b39;',
         'i':{

@@ -28,7 +28,11 @@
     <script>
         function check(event){
             event.preventDefault();
-            var buttons = new Entity(indexJSON,document.getElementsByTagName('body')[0]);
+            var body = document.getElementsByTagName('body')[0];
+            var HomePage = new Entity(indexJSON,{});
+            var HomePageViewInstance = new ActionView(indexJSON,body);
+            var HomePageEventInstance = new ActionEvent(body,window);
+            var HomePageControllerInstance = new ActionController(HomePage,HomePageViewInstance,HomePageEventInstance);
             if(localStorage.getItem('LoginEhh'+localStorage.getItem('emailID')) === 'true' ||localStorage.getItem('LoginEhhGoogle'+localStorage.getItem('emailID')) === 'true'){
                 console.log("Logged In");
                 window.location.href = './html/indexActionSpace_V5Treeview.html';
