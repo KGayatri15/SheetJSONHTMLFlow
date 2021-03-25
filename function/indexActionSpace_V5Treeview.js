@@ -12,7 +12,13 @@ var getData = new Entity(GetDataFromSheet,{});
 var getDataViewInstance = new ActionView(GetDataFromSheet , getForm);
 var getDataEventInstance = new ActionEvent(getForm,window);
 var getDataControllerInstance = new ActionController(GetDataFromSheet,getDataViewInstance,getDataEventInstance);
-var SendData = new Entity(SendDataToSheet, document.getElementById('setForm'));
+
+var setForm = document.getElementById('setForm');
+var sendData = new Entity(SendDataToSheet, {});
+var sendDataViewInstance = new ActionView(SendDataToSheet, setForm);
+var sendDataEventInstance = new ActionView(setForm, window);
+var sendDataControllerInstance = new ActionController(SendDataToSheet,sendDataViewInstance,sendDataEventInstance);
+
 var actionSpaceElementInstanceIndom = document.getElementById('actionSpaceContainer')
 //console.log(HorizonticalMenuTemplateSchema,actionSpaceElementInstanceIndom)
 var header = new Entity(headerModelSchemaV1,actionSpaceElementInstanceIndom);
