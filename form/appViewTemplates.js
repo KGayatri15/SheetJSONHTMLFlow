@@ -3,54 +3,53 @@ var GetDataFromSheet = {
         'name':'form',
         'class':'modal-content animate',
         'id':'get',
-        'data-command': `[{"command":"get"}]`,
         'h1':{
             'name':'h1',
             'innerText':'Get Data from Sheet'
         },
-        'label1':{
+        'labelFileID':{
             'name':'label',
             'b':{
                 'name':'b',
                 'innerText':'File ID of Spreadsheet'
             }
         },
-        'input1':{
+        'inputFileID':{
             'name':'input',
             'type':'text',
             'placeholder':'Enter FileID of spreadsheet',
             'id':'fileID',
             'required':true
         },
-        'label2':{
+        'labelName':{
             'name':'label',
             'b':{
                 'name':'b',
                 'innerText':'Name of the sheet'
             }
         },
-        'input2':{
+        'inputName':{
             'name':'input',
             'type':'text',
             'placeholder':'Enter Name of the Sheet',
             'id':'sheetName',
             'required':true
         },
-        'label3':{
+        'labelRange':{
             'name':'label',
             'b':{
                 'name':'b',
                 'innerText':'Range'
             }
         },
-        'input3':{
+        'inputRange':{
             'name':'input',
             'type':'text',
             'placeholder':'Enter Range',
             'id':'range',
             'required':true
         },
-        'input4':{
+        'submit':{
             'name':'input',
             'type':'submit',
             'class':'button btn',
@@ -63,8 +62,6 @@ var SendDataToSheet = {
         'name':'form',
         'class':'modal-content animate',
         'id':'set',
-        'onsubmit':'Sync.send(event);',
-        'data-command': `[{"command":"set"}]`,
         'h1':{
             'name':'h1',
             'innerText':'Send Data to Sheet'
@@ -98,7 +95,7 @@ var SendDataToSheet = {
             'required':'true'
         },
         'input4':{
-            'name':'button',
+            'name':'input',
             'type':'submit',
             'class':'button btn',
             'value':'Send',
@@ -570,6 +567,7 @@ var sidebarJSON = {
                         'span':{
                             'name':'span',
                             'class':'caret',
+                            'data-command': `[{"command":"caret"}]`,
                             'innerText':'Workspace'
                         },
                         'list':{

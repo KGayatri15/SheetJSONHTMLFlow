@@ -111,19 +111,11 @@ class processFS{
             caret.onclick = async function(event) {
                 event.preventDefault();
                 console.log(event.target.innerHTML);
+                console.log(this.classList);
                 this.classList.toggle('caret-down')
                 parent = this.parentElement;
                 parent.querySelector('.nested').classList.toggle('active')
             }
-        })
-        var files = document.querySelectorAll('.file');
-        files.forEach(file =>{
-            file.addEventListener('click',async function(event){
-                event.preventDefault();
-                console.log(event.target.getAttribute("id"));
-                var handleDirFile = await indexDB.get(event.target.getAttribute('id'));
-                processFS.Open(event,handleDirFile);
-            });
         })
     }
     static async jsonForDirectory(obj,parentID){

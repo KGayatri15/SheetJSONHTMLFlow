@@ -310,8 +310,8 @@ class ActionController extends ActionEvent {
                     processFS.saveFile(event);break;
                 case 'FS_SaveAs':
                     processFS.saveAsFile(event);break;
-                // case 'file':
-                //     this.file(event);break;
+                case 'file':
+                    this.file(event);break;
                 // case 'caret':
                 //     this.caret(event);break;
 // local storage
@@ -346,6 +346,18 @@ class ActionController extends ActionEvent {
         }
 
     }
+    async file(event){
+        event.preventDefault();
+        var handleDirFile = await indexDB.get(event.target.getAttribute('id'));
+        processFS.Open(event,handleDirFile);
+    }
+    // async caret(event){
+    //     event.preventDefault();
+    //     console.log('In caret' + event.target.classList);
+    //     event.target.classList.toggle('caret-down');
+    //     var parent = event.target.parentElement;
+    //     parent.querySelector('.nested').classList.toggle('active');
+    // }
     onMouseOver(event) { 
         if (event.target.id) { 
             event.target.setAttribute('State', "mouseover");          

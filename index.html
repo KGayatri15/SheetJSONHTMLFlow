@@ -19,6 +19,11 @@
     <script>
         function check(event){
             event.preventDefault();
+            var body = document.getElementsByTagName('body')[0];
+            var HomePage = new Entity(indexJSON,{});
+            var HomePageViewInstance = new ActionView(indexJSON,body);
+            var HomePageEventInstance = new ActionEvent(body,window);
+            var HomePageControllerInstance = new ActionController(HomePage,HomePageViewInstance,HomePageEventInstance);
             var buttons = new Entity(indexJSON,document.getElementsByTagName('body')[0]);
             if(localStorage.getItem('LoginEhh'+localStorage.getItem('emailID')) === 'true' ||localStorage.getItem('LoginEhhGoogle'+localStorage.getItem('emailID')) === 'true'){
                 console.log("Logged In");

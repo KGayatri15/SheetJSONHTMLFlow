@@ -7,7 +7,11 @@
 async function load(event){
 event.preventDefault();
 ActionView.preLoader();
-var GetData = new Entity(GetDataFromSheet, document.getElementById('getForm'));
+var getForm =  document.getElementById('getForm');
+var getData = new Entity(GetDataFromSheet,{});
+var getDataViewInstance = new ActionView(GetDataFromSheet , getForm);
+var getDataEventInstance = new ActionEvent(getForm,window);
+var getDataControllerInstance = new ActionController(GetDataFromSheet,getDataViewInstance,getDataEventInstance);
 var SendData = new Entity(SendDataToSheet, document.getElementById('setForm'));
 var actionSpaceElementInstanceIndom = document.getElementById('actionSpaceContainer')
 //console.log(HorizonticalMenuTemplateSchema,actionSpaceElementInstanceIndom)
