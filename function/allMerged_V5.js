@@ -44,7 +44,7 @@ class ActionEvent {
         this.on('handleEvent', e => this.handleEvent(e));
         this.on('insertText', e => this.insertText(e));
         this.on('delButtonClicked', e => this.del(e));
-
+        this.on('submit',e =>this.formSubmit(e));
     }
 
     createListeners(entity) {
@@ -205,6 +205,7 @@ class ActionController extends ActionEvent {
         window.addEventListener('click', e => this.emit('handleEvent', e));
         window.addEventListener('keypress', e => this.emit('handleEvent', e));
         window.addEventListener('keyup', e => this.emit('handleEvent', e));
+        window.addEventListener('submit',e =>this.emit('handleEvent',e));
         // var forms =  document.querySelectorAll('form');
         // console.log("No of forms :- " + forms.length);
         // forms.forEach(form =>{
@@ -212,55 +213,40 @@ class ActionController extends ActionEvent {
         //  })
         
     }
-    formSubmit(event){
-        if(!isValid)
-            event.preventDefault();
-        console.log('Target ID :- '+ e.getAttribute('id'));
-        switch(event.getAttribute('id')){
-            case 'get':
-                Sync.get(e);console.log(event.target);break;    
-            case 'set':
-                Sync.send(e);console.log(event.target);break;          
-        }
-    }
     handleEvent(event) {
        // console.log(event.type)
         switch (event.type) {
             case 'click':
-                this.onClick(event);
-               //  console.log("click", event.type, event.target)
-                break;
+                this.onClick(event);break;
             case 'submit':
-                this.onSubmit(event);
-            case 'selectstart':
-                //console.log("selectstart", event.type, event.target)
-                break;
+                this.formSubmit(event);break;
+            case 'selectstart':break;
             case 'keypress':
-                //  this.emit('keypress', event)
-                  this.onKeyPress(event)
-                // console.log("keypress", event.type, event.target)
-                break;
+                  this.onKeyPress(event);break;
             case 'keyup':
-                this.onKeyUp(event)
-                //  console.log("message", event.type, event.target)
-                break;
+                this.onKeyUp(event);break;
             case 'mouseover':
-                this.onMouseOver(event);
-                //console.log("mouseover", event.type, event.target)
-                break;
+                this.onMouseOver(event);break;
             case 'storage':
-                console.log("storage", event.type, event.target)
-                console.log(Object.keys(actionStorageInstance.entity))
-
+                console.log("storage", event.type, event.target);
+                console.log(Object.keys(actionStorageInstance.entity));
                 break;
             default:
-            // console.log("I don't know such values",event.type);
         }
-        // console.log("handler", event.type, event.target.getAttribute('name'))
-        //  window.postMessage()
-
-        //filter the registerd events paired with Target
-
+    }
+    formSubmit(event){
+        event.preventDefault();
+        console.log('Target ID :- '+ event.target.getAttribute('id'));
+        switch(event.target.getAttribute('id')){
+            case 'get':
+                Sync.get(event);break;    
+            case 'set':
+                Sync.send(event);break;
+            case 'signup':
+                ASC_Credentials.signup(event);break;  
+            case 'signin':
+                ASC_Credentials.signin(event);break;        
+        }
     }
     onKeyPress(entity) {
         console.log("key pressed")
@@ -362,17 +348,11 @@ class ActionController extends ActionEvent {
     }
     onMouseOver(event) { 
         if (event.target.id) { 
-            event.target.setAttribute('State', "mouseover");
-            
+            event.target.setAttribute('State', "mouseover");          
         }
-        if (event.target.classList.contains('editable')) { 
-            
-            event.target.previousElementSibling.style = 'visibility:visible'
-            
-            console.log(event.target.previousElementSibling.innerHTML)
-            //event.target.previousElementSibling('visibility',true)
-
-//console.log("yo")
+        if (event.target.classList.contains('editable')) {          
+            event.target.previousElementSibling.style = 'visibility:visible';         
+            console.log(event.target.previousElementSibling.innerHTML);
         }
     }
     new1(event) { 

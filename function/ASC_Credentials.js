@@ -6,7 +6,11 @@ class ASC_Credentials{
         var response = await HttpService.fetchRequest(HttpService.urlBuilder(scriptURL,params) ,HttpService.requestBuilder("GET"));
         if(response.result == 'success'){
                   var json = mutate.arr2Object(response.output,response.output[0],{});
-                  var form = new Entity(json,document.getElementsByTagName('body')[0]);
+                  var body = document.getElementsByTagName('body')[0];
+                  var form = new Entity(json,{});
+                  var formViewInstance = new ActionView(json,body);
+                  var formEventInstance = new ActionEvent(body,window);
+                  var formControllerInstance = new ActionController(form,formViewInstance,formEventInstance);
         }
     }
     static async signin(event){

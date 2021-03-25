@@ -3,7 +3,6 @@ var GetDataFromSheet = {
         'name':'form',
         'class':'modal-content animate',
         'id':'get',
-        'onsubmit':'alert("You are with us");',
         'data-command': `[{"command":"get"}]`,
         'h1':{
             'name':'h1',
@@ -110,6 +109,7 @@ var SignUpJSON = {
     'form':{
     'name':'form',
     'class':'modal-content',
+    'id':'signup',
     'container':{
         'name':'div',
         'class':'container',
@@ -202,7 +202,8 @@ var SignInJSON = {
     'form':{
     'name':'form',
     'class':'modal-content',
-    'onsubmit':"login(event);",
+    // 'onsubmit':"login(event);",
+    'id':'signin',
     'container':{
         'name':'div',
         'class':'container',
@@ -279,7 +280,6 @@ var actionStoryTemplate = {
     'before': 'name',
      contentEditable: true
 }
-
 var headerModelSchemaV1 = {
     header: {
         'name': 'ul',
@@ -388,7 +388,6 @@ var headerModelSchemaV1 = {
         }
     }
 }
-
 var iconBar = {
    // 'name': "iconBar",
    // 'style':"visibility:hidden",
@@ -440,7 +439,6 @@ var iconBar = {
     }
     ]
 }
-
 var richTextBar = {
       'name': "div",
     //   'id': 'richTextBar',
@@ -493,7 +491,6 @@ var richTextBar = {
         },
     ]
 }
-
 var actionSpaceModel = {
     'actionSpace': {
         //RouteNavBar to be added.
@@ -558,7 +555,6 @@ var sidebar = {
     }
 
 }
-
 var sidebarJSON = {
     // 'sidebar':{
         'name':'div',
@@ -610,5 +606,3 @@ var fileJSON = {
      //innerText - name of the file
      'data-command': `[{"command":"file"}]`,
 }
-
-
