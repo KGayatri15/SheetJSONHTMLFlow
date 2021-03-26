@@ -22,7 +22,8 @@ class ASC_Credentials{
         var response = await HttpService.fetchRequest(HttpService.urlBuilder(scriptURL,params),HttpService.requestBuilder("GET"));
         if(response.result == 'success'){
                 alert(response.output);
-                localStorage.setItem('LoginEhh'+document.getElementById('email').value,true);
+                localStorage.setItem('emailID',document.getElementById('email').value);
+                localStorage.setItem('LoginEhh'+localStorage.getItem('emailID'),true);
                 window.location.href = './indexActionSpace_V5Treeview.html';
         }else if(response.result == 'failed'){
                 alert(response.output);
@@ -41,14 +42,15 @@ class ASC_Credentials{
         };
         var response = await HttpService.fetchRequest(scriptURL,HttpService.requestBuilder("POST",undefined,JSON.stringify(json)));
         if(response.result == 'success'){
-             console.log('Registered Successfully');
-             localStorage.setItem('LoginEhh'+document.getElementById('email').value,true);
+             alert('Registered Successfully');
+             localStorage.setItem('emailID',document.getElementById('email').value);
+             localStorage.setItem('LoginEhh'+localStorage.getItem('emailID'),true);
              window.location.href = './indexActionSpace_V5Treeview.html';
           }else if(response.result == 'failed'){
-            console.log('User already exists Sign In to your account');
+            alert('User already exists Sign In to your account');
             window.location.href = './signin.html';
           }else{
-            console.log('Encountered an error.Try Again..Thank You for your patience !');
+            alert('Encountered an error.Try Again..Thank You for your patience !');
         }
         document.getElementById('email').value = '';
         document.getElementById('psw').value = '';
