@@ -36,8 +36,8 @@ Shortcut.add('Ctrl+S',processFS.saveFile);
 Shortcut.add('F12',processFS.saveAsFile);
 Shortcut.add('Ctrl+O',processFS.readFile);
 setInterval(async()=>{
-  if(localStorage.getItem('ActiveFile') !== ActionView.getText()){
-    await localStorage.setItem('ActiveFile',ActionView.getText());
+  if(localStorage.getItem('ActiveFile') !== ActionView.getinnerHTML()){
+    await localStorage.setItem('ActiveFile',ActionView.getinnerHTML());
     console.log('Updated Active File');
   }
   if(localStorage.getItem('ActiveFileName') !== ActionView.getTitle()){
