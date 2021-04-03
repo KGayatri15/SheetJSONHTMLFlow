@@ -1,3 +1,34 @@
+var getData = {
+    'flowRequest':[{
+       objectModel:SpreadsheetApp,
+          method:"getActiveSpreadsheet",
+          callBack:{
+               method:"getSheetByName",
+               arguments:["registeredActorDatabase"]
+          },
+    },{
+      objectModel:"fromPrevious[0]",
+          method:'getRange',
+          arguments:[1,1,{objectModel:"fromPrevious[0]",method:'getLastRow',}],//example arguments:["A1:C10"]
+           callBack:{
+              method:'getValues', 
+          }
+    }]
+  }
+var setData = {
+    'flowRequest':[{
+       objectModel:SpreadsheetApp,
+          method:"getActiveSpreadsheet",
+          callBack:{
+               method:"getSheetByName",
+               arguments:["registeredActorDatabase"]
+          },
+    },{
+      objectModel:"fromPrevious[0]",
+       method:'appendRow',
+       arguments:[[1,2,3]]//include data in the inside array
+    }]
+  }
 var SignUpRequestModel = {
     'flowRequest':[
     {
