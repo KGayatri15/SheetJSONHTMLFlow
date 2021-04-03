@@ -4,7 +4,7 @@ var getData = {
           method:"getActiveSpreadsheet",
           callBack:{
                method:"getSheetByName",
-               arguments:["registeredActorDatabase"]
+               arguments:["SheetName"]
           },
     },{
       objectModel:"fromPrevious[0]",
@@ -21,7 +21,7 @@ var setData = {
           method:"getActiveSpreadsheet",
           callBack:{
                method:"getSheetByName",
-               arguments:["registeredActorDatabase"]
+               arguments:["SheetName"]
           },
     },{
       objectModel:"fromPrevious[0]",
