@@ -4,33 +4,26 @@ var invoiceJSON = {
         'class':'invoice',
     'header':{
         'name':'header',
+        'h1':{
+            'name':'h1',
+            'textContent':'Invoice'
+        },
         'address':{
             'name':'address',
             'contenteditable':'',
             'Name':{
                 'name':'p',
-                'textContent':'Jonathan Neal'
+                'textContent':'Geeta Baweja'
             }, 
             'Place':{
                 'name':'p',
-                'textContent':'101 E. Chapman Ave',
-                'br':{
-                    'name':'br'
-                },
-                'textContent':'Orange, CA 92866',
+                'innerHTML':'Connaught Place, Delhi<br> India',
             },
             'pincode':{
                 'name':'p',
-                'textContent':'(800) 555-1234'
+                'textContent':'110001'
             },
         },
-        // 'span':{
-        //     'name':'span',
-        //     'img':{
-        //         'name':'img',
-        //         'src':'http://www.jonathantneal.com/examples/invoice/logo.png'
-        //     }
-        // }
     },
     'article':{
         'name':'article',
@@ -43,11 +36,7 @@ var invoiceJSON = {
             'contenteditable':'',
                 'p':{
                     'name':'p',
-                    'textContent':'Some Company',
-                    'br':{
-                        'name':'br'
-                    },
-                    'textContent':'c/o Some Guy',
+                    'innerHTML':'Flat,House No.,Building,Company<br>Colony,Street,Sector<br>Town/City, State<br>Pincode',
                 }
             },
             'meta':{
@@ -58,16 +47,16 @@ var invoiceJSON = {
                         'name':'th',
                         'span':{
                             'name':'span',
-                            'contenteditable':'true',
-                            'textContent':'Invoice #'
+                            'contenteditable':'',
+                            'textContent':'Due Date'
                         }
                     },
                     'td':{
                         'name':'td',
                         'span':{
                             'name':'span',
-                            'contenteditable':'true',
-                            'textContent':'101138'
+                            'contenteditable':'',
+                            'textContent':'9th April 2021'
                         }
                     }
                 },
@@ -76,16 +65,21 @@ var invoiceJSON = {
                         'name':'th',
                         'span':{
                             'name':'span',
-                            'contenteditable':'true',
-                            'textContent':'Date'
+                            'contenteditable':'',
+                            'textContent':'Balance'
                         }
                     },
                     'td':{
                         'name':'td',
-                        'span':{
+                        'span1':{
                             'name':'span',
+                            'id':'prefix',
                             'contenteditable':'true',
-                            'textContent':'January 1, 2012'
+                            'textContent':'Rs. ',
+                        },
+                        'span2':{
+                            'name':'span',
+                            'textContent':'600.00'
                         }
                     }
                 },
@@ -94,21 +88,34 @@ var invoiceJSON = {
                         'name':'th',
                         'span':{
                             'name':'span',
-                            'contenteditable':'true',
-                            'textContent':'Amount Due'
+                            'contenteditable':'',
+                            'textContent':'Doc Number'
                         }
                     },
                     'td':{
                         'name':'td',
                         'span':{
                             'name':'span',
-                            'id':'prefix',
-                            'contenteditable':'true',
-                            'textContent':'Rs. ',
-                            'span2':{
-                                'name':'span',
-                                'textContent':'600.00'
-                            }
+                            'contenteditable':'',
+                            'textContent':'101138'
+                        }
+                    }
+                },
+                'tr4':{
+                    'th':{
+                        'name':'th',
+                        'span':{
+                            'name':'span',
+                            'contenteditable':'',
+                            'textContent':'Status'
+                        }
+                    },
+                    'td':{
+                        'name':'td',
+                        'span':{
+                            'name':'span',
+                            'contenteditable':'',
+                            'textContent':'String'
                         }
                     }
                 },
@@ -119,15 +126,8 @@ var invoiceJSON = {
                 'thead':{
                     'name':'thead',
                     'tr':{
+                        'name':'tr',
                         'th1':{
-                            'name':'th',
-                            'span':{
-                                'name':'span',
-                                'contenteditable':'',
-                                'textContent':'Item',
-                            } 
-                        },
-                        'th2':{
                             'name':'th',
                             'span':{
                                 'name':'span',
@@ -135,12 +135,20 @@ var invoiceJSON = {
                                 'textContent':'Description',
                             } 
                         },
+                        'th2':{
+                            'name':'th',
+                            'span':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'Amount',
+                            } 
+                        },
                         'th3':{
                             'name':'th',
                             'span':{
                                 'name':'span',
                                 'contenteditable':'',
-                                'textContent':'Rate',
+                                'textContent':'Detail Type',
                             } 
                         },
                         'th4':{
@@ -148,7 +156,7 @@ var invoiceJSON = {
                             'span':{
                                 'name':'span',
                                 'contenteditable':'',
-                                'textContent':'Quantity',
+                                'textContent':'Ref',
                             } 
                         },
                         'th5':{
@@ -156,7 +164,15 @@ var invoiceJSON = {
                             'span':{
                                 'name':'span',
                                 'contenteditable':'',
-                                'textContent':'Price',
+                                'textContent':'Account',
+                            } 
+                        },
+                        'th6':{
+                            'name':'th',
+                            'span':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'Line Status',
                             } 
                         },
                     }
@@ -175,39 +191,10 @@ var invoiceJSON = {
                             'span':{
                                 'name':'span',
                                 'contenteditable':'',
-                                'textContent':'Front End Consultation'
+                                'textContent':'Sample Expense'
                             }
                         },
                         'td2':{
-                            'name':'td',
-                            'span':{
-                                'name':'span',
-                                'contenteditable':'',
-                                'textContent':'Experience'
-                            }
-                        },
-                        'td3':{
-                            'name':'td',
-                            'span1':{
-                                'name':'span',
-                                'data-prefix':'',
-                                'textContent':'Rs. '
-                            },
-                            'span2':{
-                                'name':'span',
-                                'contenteditable':'',
-                                'textContent':'150.00'
-                            }
-                        },
-                        'td4':{
-                            'name':'td',
-                            'span':{
-                                'name':'span',
-                                'contenteditable':'',
-                                'textContent':'4'
-                            }
-                        },
-                        'td5':{
                             'name':'td',
                             'span1':{
                                 'name':'span',
@@ -218,6 +205,38 @@ var invoiceJSON = {
                                 'name':'span',
                                 'contenteditable':'',
                                 'textContent':'600.00'
+                            }
+                        },
+                        'td3':{
+                            'name':'td',
+                            'span2':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'Expense Detail'
+                            }
+                        },
+                        'td4':{
+                            'name':'td',
+                            'span2':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'DEF234'
+                            }
+                        },
+                        'td5':{
+                            'name':'td',
+                            'span':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'EFG345'
+                            }
+                        },
+                        'td6':{
+                            'name':'td',
+                            'span2':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'Billable'
                             }
                         }
                     }
@@ -238,7 +257,7 @@ var invoiceJSON = {
                         'span':{
                             'name':'span',
                             'contenteditable':'',
-                            'textContent':'Total'
+                            'textContent':'Total Amount'
                         }
                     },
                     'td':{
@@ -254,53 +273,7 @@ var invoiceJSON = {
                         }
                     }
                 },
-                'tr2':{
-                    'name':'tr',
-                    'th':{
-                        'name':'th',
-                        'span':{
-                            'name':'span',
-                            'contenteditable':'',
-                            'textContent':'Amount Paid'
-                        }
-                    },
-                    'td':{
-                        'name':'td',
-                        'span1':{
-                            'name':'span',
-                            'data-prefix':'',
-                            'textContent':'Rs. '
-                        },
-                        'span2':{
-                            'name':'span',
-                            'textContent':'0.00'
-                        }
-                    }
-                }
             },
-            'tr3':{
-                'name':'tr',
-                'th':{
-                    'name':'th',
-                    'span':{
-                        'name':'span',
-                        'contenteditable':'',
-                        'textContent':'Balance Due'
-                    }
-                },
-                'td':{
-                    'name':'td',
-                    'span1':{
-                        'name':'span',
-                        'data-prefix':'',
-                        'textContent':'Rs. '
-                    },
-                    'span2':{
-                        'name':'span',
-                        'textContent':'600.00'
-                    }
-                }
-            }
         }
     }
 }
