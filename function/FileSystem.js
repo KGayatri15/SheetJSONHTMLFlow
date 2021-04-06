@@ -98,7 +98,7 @@ class processFS{
         event.preventDefault();
         const dirHandle = await window.showDirectoryPicker();
         ActionView.preLoader();
-        var dirID = processFS.uid();
+        var dirID = uid();
         await indexDB.set(dirID, dirHandle);
         var input = JSON.parse(JSON.stringify(directoryJSON));
         input['li']['span']['innerText'] = dirHandle.name;input['li']['list']['id'] = dirID;
@@ -122,7 +122,7 @@ class processFS{
         var parentHandle =await indexDB.get(parentID);
         console.log(parentHandle);
         for await(var entry of parentHandle.values()){
-            var id = processFS.uid();
+            var id = uid();
             if(entry.kind == 'directory'){
                 var directory = JSON.parse(JSON.stringify(directoryJSON));
                 directory['li']['span']['innerText'] = entry.name;directory['li']['list']['id'] = id;
@@ -142,13 +142,7 @@ class processFS{
             }
         }
         return obj;
-    }
-    static uid() {
-        let timmy = Date.now().toString(36).toLocaleUpperCase();
-        let randy = parseInt(Math.random() * Number.MAX_SAFE_INTEGER);
-        randy = randy.toString(36).slice(0, 12).padStart(12, '0').toLocaleUpperCase();
-        return ''.concat(timmy, '-', randy);
-    }    
+    }  
 }
 class indexDB{
     static promisifyRequest(request) {

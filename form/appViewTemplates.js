@@ -47,7 +47,7 @@ var invoiceJSON = {
                         'name':'th',
                         'span':{
                             'name':'span',
-                            'contenteditable':'',
+                            // 'contenteditable':'',
                             'textContent':'Due Date'
                         }
                     },
@@ -55,7 +55,7 @@ var invoiceJSON = {
                         'name':'td',
                         'span':{
                             'name':'span',
-                            'contenteditable':'',
+                            // 'contenteditable':'',
                             'textContent':'9th April 2021'
                         }
                     }
@@ -65,7 +65,7 @@ var invoiceJSON = {
                         'name':'th',
                         'span':{
                             'name':'span',
-                            'contenteditable':'',
+                            // 'contenteditable':'',
                             'textContent':'Balance'
                         }
                     },
@@ -74,7 +74,7 @@ var invoiceJSON = {
                         'span1':{
                             'name':'span',
                             'id':'prefix',
-                            'contenteditable':'true',
+                            // 'contenteditable':'true',
                             'textContent':'Rs. ',
                         },
                         'span2':{
@@ -88,7 +88,7 @@ var invoiceJSON = {
                         'name':'th',
                         'span':{
                             'name':'span',
-                            'contenteditable':'',
+                            // 'contenteditable':'',
                             'textContent':'Doc Number'
                         }
                     },
@@ -96,7 +96,7 @@ var invoiceJSON = {
                         'name':'td',
                         'span':{
                             'name':'span',
-                            'contenteditable':'',
+                            // 'contenteditable':'',
                             'textContent':'101138'
                         }
                     }
@@ -106,7 +106,7 @@ var invoiceJSON = {
                         'name':'th',
                         'span':{
                             'name':'span',
-                            'contenteditable':'',
+                            // 'contenteditable':'',
                             'textContent':'Status'
                         }
                     },
@@ -114,8 +114,8 @@ var invoiceJSON = {
                         'name':'td',
                         'span':{
                             'name':'span',
-                            'contenteditable':'',
-                            'textContent':'String'
+                            // 'contenteditable':'',
+                            'textContent':'Payable'
                         }
                     }
                 },
@@ -179,14 +179,18 @@ var invoiceJSON = {
                 },
                 'tbody':{
                     'name':'tbody',
-                    'tr':{
+                    'id':'tbody',
+                    'trCustom':{
                         'name':'tr',
+                        'id':'trCustom',
                         'td1':{
                             'name':'td',
                             'a':{
                                 'name':'a',
+                                'id':'Custom',
                                 'class':'cut',
-                                'textContent':'-'
+                                'textContent':'-',
+                                'data-command': `[{"command":"RemoveItem"}]`,
                             },
                             'span':{
                                 'name':'span',
@@ -245,7 +249,8 @@ var invoiceJSON = {
             'add':{
                 'name':'a',
                 'class':'add',
-                'textContent':'+'
+                'textContent':'+',
+                'data-command': `[{"command":"NewItem"}]`,
             },
             'balance':{
                 'name':'table',
@@ -276,6 +281,69 @@ var invoiceJSON = {
             },
         }
     }
+}
+var newItemJSON ={
+        'name':'tr',
+        'id':'',
+        'td1':{
+            'name':'td',
+            'a':{
+                'name':'a',
+                'class':'cut',
+                'textContent':'-',
+                'data-command': `[{"command":"RemoveItem"}]`,
+            },
+            'span':{
+                'name':'span',
+                'contenteditable':'',
+                'textContent':''
+            }
+        },
+        'td2':{
+            'name':'td',
+            'span1':{
+                'name':'span',
+                'data-prefix':'',
+                'textContent':'Rs. '
+            },
+            'span2':{
+                'name':'span',
+                'contenteditable':'',
+                'textContent':''
+            }
+        },
+        'td3':{
+            'name':'td',
+            'span2':{
+                'name':'span',
+                'contenteditable':'',
+                'textContent':''
+            }
+        },
+        'td4':{
+            'name':'td',
+            'span2':{
+                'name':'span',
+                'contenteditable':'',
+                'textContent':''
+            }
+        },
+        'td5':{
+            'name':'td',
+            'span':{
+                'name':'span',
+                'contenteditable':'',
+                'textContent':''
+            }
+        },
+        'td6':{
+            'name':'td',
+            'span2':{
+                'name':'span',
+                'contenteditable':'',
+                'textContent':''
+            }
+        }
 }
 var GetDataFromSheet = {
     'form':{

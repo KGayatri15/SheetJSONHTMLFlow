@@ -285,6 +285,11 @@ class ActionController extends ActionEvent {
             var commandJSOn = JSON.parse(dataCommandT);
  //           console.log( "Command "+ JSON.stringify(commandJSOn));
             switch (commandJSOn[0].command) {
+//invoice sheet
+                case 'NewItem':
+                    this.NewItem(event);break;
+                case 'RemoveItem':
+                    this.RemoveItem(event);break;
 //home page
                 case 'signup':
                     window.location.href='./html/signup.html';break;
@@ -346,11 +351,6 @@ class ActionController extends ActionEvent {
         }
 
     }
-    async file(event){
-        event.preventDefault();
-        var handleDirFile = await indexDB.get(event.target.getAttribute('id'));
-        processFS.Open(event,handleDirFile);
-    }
     // async caret(event){
     //     event.preventDefault();
     //     console.log('In caret' + event.target.classList);
@@ -366,6 +366,24 @@ class ActionController extends ActionEvent {
             event.target.previousElementSibling.style = 'visibility:visible';         
             console.log(event.target.previousElementSibling.innerHTML);
         }
+    }
+    RemoveItem(event){
+        event.preventDefault();
+        var Id = 'tr' + event.target.getAttribute('id');console.log(Id);
+        var element = document.getElementById(Id);
+        element.parentNode.removeChild(element);
+    }
+    NewItem(event){
+        event.preventDefault();
+        var ItemId = uid();
+        newItemJSON['td1']['a']['id'] = ItemId;newItemJSON['id'] = 'tr'+ ItemId;
+        var json = {};json[ItemId] = newItemJSON;
+        var newItem = new Entity(json,document.getElementById('tbody'));
+    }
+    async file(event){
+        event.preventDefault();
+        var handleDirFile = await indexDB.get(event.target.getAttribute('id'));
+        processFS.Open(event,handleDirFile);
     }
     new1(event) { 
         console.log("New One");
