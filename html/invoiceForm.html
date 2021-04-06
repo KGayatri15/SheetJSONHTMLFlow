@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>Invoice Form</title>
+<link rel="stylesheet" href="../beauty/invoiceForm.css"/>
+<script type="text/javascript" src="../form/sysAppUserDataSet.js"></script>
+<script type="text/javascript" src="../form/appViewTemplates.js"></script>
+<script type="text/javascript" src="../function/actionHelpers.js"></script>
+<script type="text/javascript" src="../function/allMerged_V5.js"></script>
+</head>
+<body onload="load(event);">
+</body>
+<script>
+function load(event){
+    event.preventDefault();
+    var form = new Entity(invoiceJSON,document.getElementsByTagName('body')[0]);
+}
+</script>
+</html>

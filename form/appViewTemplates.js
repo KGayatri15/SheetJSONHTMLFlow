@@ -1,3 +1,309 @@
+var invoiceJSON = {
+    'invoice':{
+        'name':'div',
+        'class':'invoice',
+    'header':{
+        'name':'header',
+        'address':{
+            'name':'address',
+            'contenteditable':'',
+            'Name':{
+                'name':'p',
+                'textContent':'Jonathan Neal'
+            }, 
+            'Place':{
+                'name':'p',
+                'textContent':'101 E. Chapman Ave',
+                'br':{
+                    'name':'br'
+                },
+                'textContent':'Orange, CA 92866',
+            },
+            'pincode':{
+                'name':'p',
+                'textContent':'(800) 555-1234'
+            },
+        },
+        // 'span':{
+        //     'name':'span',
+        //     'img':{
+        //         'name':'img',
+        //         'src':'http://www.jonathantneal.com/examples/invoice/logo.png'
+        //     }
+        // }
+    },
+    'article':{
+        'name':'article',
+            'h1':{
+             'name':'h1',
+             'textContent':'Recipient',
+            },
+            'address':{
+            'name':'address',
+            'contenteditable':'',
+                'p':{
+                    'name':'p',
+                    'textContent':'Some Company',
+                    'br':{
+                        'name':'br'
+                    },
+                    'textContent':'c/o Some Guy',
+                }
+            },
+            'meta':{
+                'name':'table',
+                'class':'meta',
+                'tr1':{
+                    'th':{
+                        'name':'th',
+                        'span':{
+                            'name':'span',
+                            'contenteditable':'true',
+                            'textContent':'Invoice #'
+                        }
+                    },
+                    'td':{
+                        'name':'td',
+                        'span':{
+                            'name':'span',
+                            'contenteditable':'true',
+                            'textContent':'101138'
+                        }
+                    }
+                },
+                'tr2':{
+                    'th':{
+                        'name':'th',
+                        'span':{
+                            'name':'span',
+                            'contenteditable':'true',
+                            'textContent':'Date'
+                        }
+                    },
+                    'td':{
+                        'name':'td',
+                        'span':{
+                            'name':'span',
+                            'contenteditable':'true',
+                            'textContent':'January 1, 2012'
+                        }
+                    }
+                },
+                'tr3':{
+                    'th':{
+                        'name':'th',
+                        'span':{
+                            'name':'span',
+                            'contenteditable':'true',
+                            'textContent':'Amount Due'
+                        }
+                    },
+                    'td':{
+                        'name':'td',
+                        'span':{
+                            'name':'span',
+                            'id':'prefix',
+                            'contenteditable':'true',
+                            'textContent':'Rs. ',
+                            'span2':{
+                                'name':'span',
+                                'textContent':'600.00'
+                            }
+                        }
+                    }
+                },
+            },
+            'inventory':{
+                'name':'table',
+                'class':'inventory',
+                'thead':{
+                    'name':'thead',
+                    'tr':{
+                        'th1':{
+                            'name':'th',
+                            'span':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'Item',
+                            } 
+                        },
+                        'th2':{
+                            'name':'th',
+                            'span':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'Description',
+                            } 
+                        },
+                        'th3':{
+                            'name':'th',
+                            'span':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'Rate',
+                            } 
+                        },
+                        'th4':{
+                            'name':'th',
+                            'span':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'Quantity',
+                            } 
+                        },
+                        'th5':{
+                            'name':'th',
+                            'span':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'Price',
+                            } 
+                        },
+                    }
+                },
+                'tbody':{
+                    'name':'tbody',
+                    'tr':{
+                        'name':'tr',
+                        'td1':{
+                            'name':'td',
+                            'a':{
+                                'name':'a',
+                                'class':'cut',
+                                'textContent':'-'
+                            },
+                            'span':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'Front End Consultation'
+                            }
+                        },
+                        'td2':{
+                            'name':'td',
+                            'span':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'Experience'
+                            }
+                        },
+                        'td3':{
+                            'name':'td',
+                            'span1':{
+                                'name':'span',
+                                'data-prefix':'',
+                                'textContent':'Rs. '
+                            },
+                            'span2':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'150.00'
+                            }
+                        },
+                        'td4':{
+                            'name':'td',
+                            'span':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'4'
+                            }
+                        },
+                        'td5':{
+                            'name':'td',
+                            'span1':{
+                                'name':'span',
+                                'data-prefix':'',
+                                'textContent':'Rs. '
+                            },
+                            'span2':{
+                                'name':'span',
+                                'contenteditable':'',
+                                'textContent':'600.00'
+                            }
+                        }
+                    }
+                }
+            },
+            'add':{
+                'name':'a',
+                'class':'add',
+                'textContent':'+'
+            },
+            'balance':{
+                'name':'table',
+                'class':'balance',
+                'tr1':{
+                    'name':'tr',
+                    'th':{
+                        'name':'th',
+                        'span':{
+                            'name':'span',
+                            'contenteditable':'',
+                            'textContent':'Total'
+                        }
+                    },
+                    'td':{
+                        'name':'td',
+                        'span1':{
+                            'name':'span',
+                            'data-prefix':'',
+                            'textContent':'Rs. '
+                        },
+                        'span2':{
+                            'name':'span',
+                            'textContent':'600.00'
+                        }
+                    }
+                },
+                'tr2':{
+                    'name':'tr',
+                    'th':{
+                        'name':'th',
+                        'span':{
+                            'name':'span',
+                            'contenteditable':'',
+                            'textContent':'Amount Paid'
+                        }
+                    },
+                    'td':{
+                        'name':'td',
+                        'span1':{
+                            'name':'span',
+                            'data-prefix':'',
+                            'textContent':'Rs. '
+                        },
+                        'span2':{
+                            'name':'span',
+                            'textContent':'0.00'
+                        }
+                    }
+                }
+            },
+            'tr3':{
+                'name':'tr',
+                'th':{
+                    'name':'th',
+                    'span':{
+                        'name':'span',
+                        'contenteditable':'',
+                        'textContent':'Balance Due'
+                    }
+                },
+                'td':{
+                    'name':'td',
+                    'span1':{
+                        'name':'span',
+                        'data-prefix':'',
+                        'textContent':'Rs. '
+                    },
+                    'span2':{
+                        'name':'span',
+                        'textContent':'600.00'
+                    }
+                }
+            }
+        }
+    }
+}
 var GetDataFromSheet = {
     'form':{
         'name':'form',
