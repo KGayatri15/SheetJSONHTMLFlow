@@ -290,6 +290,8 @@ class ActionController extends ActionEvent {
                     this.NewItem(event);break;
                 case 'RemoveItem':
                     this.RemoveItem(event);break;
+                case 'SubmitInvoice':
+                    this.SubmitInvoice(event);break;
 //home page
                 case 'signup':
                     window.location.href='./html/signup.html';break;
@@ -366,6 +368,24 @@ class ActionController extends ActionEvent {
             event.target.previousElementSibling.style = 'visibility:visible';         
             console.log(event.target.previousElementSibling.innerHTML);
         }
+    }
+    async SubmitInvoice(event){
+        event.preventDefault();
+        var scriptURL = 'https://script.google.com/macros/s/AKfycbyOIui5vCTPoBWqGM7iFXH54XHJUyW4-7eKVUpV_ljyntW00uEYYNkqtD5CVsjtDoT8cQ/exec';
+        var children = document.getElementById('tbody').childNodes;
+        var InvoiceItems = [];
+        var DocNumber = document.getElementById('DocNumber').textContent;
+        for(var i = 0;i < children.length ; i++){
+            var item = [DocNumber,document.getElementsByClassName('Description')[i].textContent,document.getElementsByClassName('Amount')[i].textContent,
+                        document.getElementsByClassName('DetailType')[i].textContent,document.getElementsByClassName('Ref')[i].textContent,
+                        document.getElementsByClassName('Account')[i].textContent,document.getElementsByClassName('LineStatus')[i].textContent,];
+            InvoiceItems.push(item);
+        }
+        var json = {'array':InvoiceItems};
+        
+        var response = await HttpService.fetchRequest(scriptURL,HttpService.requestBuilder("POST",undefined,JSON.stringify(json)));
+        alert(response.output);
+        console.log(InvoiceItems);
     }
     RemoveItem(event){
         event.preventDefault();

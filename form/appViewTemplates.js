@@ -96,7 +96,8 @@ var invoiceJSON = {
                         'name':'td',
                         'span':{
                             'name':'span',
-                            // 'contenteditable':'',
+                            'id':'DocNumber',
+                             'contenteditable':'',
                             'textContent':'101138'
                         }
                     }
@@ -194,6 +195,7 @@ var invoiceJSON = {
                             },
                             'span':{
                                 'name':'span',
+                                'class':'Description',
                                 'contenteditable':'',
                                 'textContent':'Sample Expense'
                             }
@@ -207,6 +209,7 @@ var invoiceJSON = {
                             },
                             'span2':{
                                 'name':'span',
+                                'class':'Amount',
                                 'contenteditable':'',
                                 'textContent':'600.00'
                             }
@@ -215,6 +218,7 @@ var invoiceJSON = {
                             'name':'td',
                             'span2':{
                                 'name':'span',
+                                'class':'DetailType',
                                 'contenteditable':'',
                                 'textContent':'Expense Detail'
                             }
@@ -223,6 +227,7 @@ var invoiceJSON = {
                             'name':'td',
                             'span2':{
                                 'name':'span',
+                                'class':'Ref',
                                 'contenteditable':'',
                                 'textContent':'DEF234'
                             }
@@ -231,6 +236,7 @@ var invoiceJSON = {
                             'name':'td',
                             'span':{
                                 'name':'span',
+                                'class':'Account',
                                 'contenteditable':'',
                                 'textContent':'EFG345'
                             }
@@ -239,6 +245,7 @@ var invoiceJSON = {
                             'name':'td',
                             'span2':{
                                 'name':'span',
+                                'class':'LineStatus',
                                 'contenteditable':'',
                                 'textContent':'Billable'
                             }
@@ -279,6 +286,13 @@ var invoiceJSON = {
                     }
                 },
             },
+           
+        },
+        'submit':{
+            'name':'button',
+            'full-width':'',
+            'textContent':"Submit Invoice",
+            'data-command': `[{"command":"SubmitInvoice"}]`,
         }
     }
 }
@@ -295,6 +309,7 @@ var newItemJSON ={
             },
             'span':{
                 'name':'span',
+                'class':'Description',
                 'contenteditable':'',
                 'textContent':''
             }
@@ -308,6 +323,7 @@ var newItemJSON ={
             },
             'span2':{
                 'name':'span',
+                'class':'Amount',
                 'contenteditable':'',
                 'textContent':''
             }
@@ -316,6 +332,7 @@ var newItemJSON ={
             'name':'td',
             'span2':{
                 'name':'span',
+                'class':'DetailType',
                 'contenteditable':'',
                 'textContent':''
             }
@@ -324,6 +341,7 @@ var newItemJSON ={
             'name':'td',
             'span2':{
                 'name':'span',
+                'class':'Ref',
                 'contenteditable':'',
                 'textContent':''
             }
@@ -332,6 +350,7 @@ var newItemJSON ={
             'name':'td',
             'span':{
                 'name':'span',
+                'class':'Account',
                 'contenteditable':'',
                 'textContent':''
             }
@@ -340,6 +359,7 @@ var newItemJSON ={
             'name':'td',
             'span2':{
                 'name':'span',
+                'class':'LineStatus',
                 'contenteditable':'',
                 'textContent':''
             }
