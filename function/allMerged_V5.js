@@ -386,6 +386,7 @@ class ActionController extends ActionEvent {
         var response = await HttpService.fetchRequest(scriptURL,HttpService.requestBuilder("POST",undefined,JSON.stringify(json)));
         alert(response.output);
         console.log(InvoiceItems);
+        DocNumber.textContent = uid();
     }
     RemoveItem(event){
         event.preventDefault();

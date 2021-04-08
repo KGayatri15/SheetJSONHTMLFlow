@@ -60,29 +60,6 @@ var invoiceJSON = {
                         }
                     }
                 },
-                'tr2':{
-                    'th':{
-                        'name':'th',
-                        'span':{
-                            'name':'span',
-                            // 'contenteditable':'',
-                            'textContent':'Balance'
-                        }
-                    },
-                    'td':{
-                        'name':'td',
-                        'span1':{
-                            'name':'span',
-                            'id':'prefix',
-                            // 'contenteditable':'true',
-                            'textContent':'Rs. ',
-                        },
-                        'span2':{
-                            'name':'span',
-                            'textContent':'600.00'
-                        }
-                    }
-                },
                 'tr3':{
                     'th':{
                         'name':'th',
@@ -98,7 +75,7 @@ var invoiceJSON = {
                             'name':'span',
                             'id':'DocNumber',
                              'contenteditable':'',
-                            'textContent':'101138'
+                            'textContent':''
                         }
                     }
                 },

@@ -14,6 +14,7 @@
 function load(event){
     event.preventDefault();
     var body = document.getElementsByTagName('body')[0];
+    invoiceJSON['invoice']['article']['meta']['tr3']['td']['textContent'] = uid();
     var invoiceForm = new Entity(invoiceJSON,{});
     var invoiceViewInstance = new ActionView(invoiceJSON,body);
     var invoiceEventInstance = new ActionEvent(body,window);
