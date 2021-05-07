@@ -258,6 +258,7 @@ var invoiceJSON = {
                         },
                         'span2':{
                             'name':'span',
+                            'id':'TotalAmount',
                             'textContent':'600.00'
                         }
                     }

@@ -493,6 +493,10 @@ class ActionView {
     static showModal(id){
         document.getElementById(id).style.display = 'block';
     }
+    static show(){
+        document.querySelector('.loader').style.visibility = "hidden";
+        document.querySelector('actionSpaceHolderElement').style.visibility = "visible";
+    }
     static modal(event){
         event.preventDefault();
         var modal1 = document.getElementById('getForm');
@@ -503,10 +507,7 @@ class ActionView {
             modal2.style.display = "none";
         }
     }
-    static show(){
-        document.querySelector('.loader').style.visibility = "hidden";
-        document.querySelector('actionSpaceHolderElement').style.visibility = "visible";
-    }
+   
     static updateTitle(name){
         document.getElementById('loadedRouteTitle').innerText = name;  
     }
