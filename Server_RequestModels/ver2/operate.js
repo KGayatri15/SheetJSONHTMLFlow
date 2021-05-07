@@ -12,7 +12,6 @@ class operate {
       return (argA + argB);
     }
     static isEqual(argA,argB){return argA == argB ? true : false ;}
-      static isEqual(argA,argB){return argA == argB ? true : false ;}
     static isInside(entity2SearchIn, string2Search, options) {
         console.log(Object.values(entity2SearchIn), string2Search)
     }
