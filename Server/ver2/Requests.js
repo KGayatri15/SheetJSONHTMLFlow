@@ -166,11 +166,11 @@ var SignInRequestModel = {
     },
     //if result[2] is greater than -1 else Email Id doesn't exist
     {//4
-        validator:{
-            method:'isGreaterThan',
-            arguments:["fromPrevious[2]",-1],
-            output:true,
-        },
+        // validator:{
+        //     method:'isGreaterThan',
+        //     arguments:["fromPrevious[2]",-1],
+        //     output:true,
+        // },
         objectModel:"fromPrevious[0]",
         method:"getRange",
         arguments:[{objectModel:operate,method:'add',arguments:["fromPrevious[2]", 1]} ,2],
